@@ -23,5 +23,3 @@ ehthumbs_vista.db
 # Build outputs (safe to ignore; always regenerated)
 **/bin/
 **/obj/
-/notes/stories/*.txt
-/notes/questions/*.txt
