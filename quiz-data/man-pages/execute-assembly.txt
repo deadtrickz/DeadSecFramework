@@ -1,0 +1,28 @@
+﻿TOOL: execute-assembly
+SOURCE_TYPE: cobalt_doc_curated
+SOURCE_URL: https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/post-exploitation_running-commands.htm
+FETCHED_UTC: 2026-03-12 17:00:00Z
+
+------------------------------------------------------------
+NAME
+    execute-assembly - run a local .NET assembly as a Beacon job
+
+SYNOPSIS
+    execute-assembly [path_to_exe] [arguments]
+
+DESCRIPTION
+    Launches a .NET executable from Beacon and passes command-line arguments.
+    Commonly used for AD/credential tooling packaged as .NET binaries.
+
+ARGUMENTS
+    [path_to_exe]   Local path to .NET executable on operator side (as used by Beacon tasking).
+    [arguments]     Arguments passed to the assembly main entry point.
+
+NOTES
+    - Quote paths/arguments containing spaces.
+    - Output and behavior depend on the assembly.
+
+EXAMPLES
+    execute-assembly [PathToExe]
+    execute-assembly [PathToExe] [Argument1] [Argument2]
+    execute-assembly [PathToExe] "[Argument String]"

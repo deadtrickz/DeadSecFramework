@@ -1,0 +1,22 @@
+﻿TOOL: glyphprobe
+SOURCE_TYPE: fantasy_man
+SOURCE_URL: 
+FETCHED_UTC: 2026-03-11 15:30:34Z
+
+------------------------------------------------------------
+NAME
+    glyphprobe - enumerate linked sigils from arcane endpoints
+
+SYNOPSIS
+    glyphprobe --url <target_url> --transport <glyph_uri> --enum-sigils
+
+DESCRIPTION
+    glyphprobe connects to a glyph transport URI and requests linked sigil metadata.
+
+OPTIONS
+    --url <target_url>           Target API endpoint.
+    --transport <glyph_uri>      Glyph transport profile.
+    --enum-sigils                Enumerate linked sigils.
+
+EXAMPLE
+    glyphprobe --url https://[IP|Hostname] --transport [GlyphURI] --enum-sigils

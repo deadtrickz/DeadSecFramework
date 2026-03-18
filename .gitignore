@@ -1,0 +1,27 @@
+﻿# Subversion
+.svn/
+
+# Obsidian
+.obsidian/
+
+# Local compiled releases
+/release/
+/releases/
+
+# OS junk
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+.DS_Store
+
+# Visual Studio machine-local files
+.vs/
+*.user
+*.suo
+
+# Build outputs (safe to ignore; always regenerated)
+**/bin/
+**/obj/
+/notes/stories/*.txt
+/notes/questions/*.txt

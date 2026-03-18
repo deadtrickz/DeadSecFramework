@@ -1,0 +1,20 @@
+﻿TOOL: iptables
+SOURCE_TYPE: linux_help
+SOURCE_URL: local_curated
+FETCHED_UTC: 2026-03-17 23:20:00Z
+
+NAME
+    iptables - administration tool for IPv4 packet filtering and NAT
+
+SYNOPSIS
+    iptables -L -n -v
+    iptables-save
+    iptables -t nat -D OUTPUT -p tcp --dport [Port] -j DNAT --to-destination [IP]:[Port]
+
+DESCRIPTION
+    iptables manages filter/nat/mangle chains in legacy netfilter systems.
+
+EXAMPLES
+    iptables -L -n -v
+    iptables-save
+    iptables -t nat -D OUTPUT -p tcp --dport 22 -j DNAT --to-destination 127.0.0.1:1

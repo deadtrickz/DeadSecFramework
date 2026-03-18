@@ -1,0 +1,79 @@
+﻿[
+  {
+    "question": [
+      "Recon: Your team breached the outer wall of the Ember March and found relay-gates hidden across one internal range. You need a fast sweep before defenders rotate keys.",
+      "Reference \"wyrmscan\" tool manpage for info.",
+      "Task:",
+      "Subnet: <cidr>",
+      "Output Name: gate-map",
+      "Perform host discovery and save all output formats for later analysis."
+    ],
+    "answer": "wyrmscan -sn <cidr> -oA gate-map"
+  },
+  {
+    "question": [
+      "Recon: You intercepted a courier sigil that points to a single control API. Command needs linked sigils enumerated before the channel is burned.",
+      "Reference \"glyphprobe\" tool manpage for info.",
+      "Task:",
+      "Target URL: https://<fhost>",
+      "Transport Glyph: <glyph>",
+      "Enumerate linked sigils over the provided transport."
+    ],
+    "answer": "glyphprobe --url https://<fhost> --transport <glyph> --enum-sigils",
+    "alternate_answers": [
+      "glyphprobe --transport <glyph> --url https://<fhost> --enum-sigils"
+    ]
+  },
+  {
+    "question": [
+      "Recon: A captured archivist gave you one valid rune token and warned you there is only one clean authentication attempt before lockout wards trigger.",
+      "Reference \"runecast\" tool manpage for info.",
+      "Task:",
+      "Host: <fhost>",
+      "Rune Token: <rune>",
+      "Authenticate and enumerate available vaults only."
+    ],
+    "answer": "runecast smb <fhost> -r <rune> --vaults",
+    "alternate_answers": [
+      "runecast smb -r <rune> --vaults <fhost>"
+    ]
+  },
+  {
+    "question": [
+      "Recon: You landed a drake beacon on an internal jump node, but privilege level is unknown. Validate execution context before running anything noisy.",
+      "Reference \"beacondrake\" tool manpage for info.",
+      "Task:",
+      "Host: <fhost>",
+      "Port: <fport>",
+      "Run Command: <command>",
+      "Execute a single command to verify identity or host context."
+    ],
+    "answer": "beacondrake <fhost>:<fport> -x <command>"
+  },
+  {
+    "question": [
+      "Recon: The operations lead says one maintenance node still accepts remote process calls. You need to trigger a phase plugin quietly for persistence validation.",
+      "Reference \"moonwmic\" tool manpage for info.",
+      "Task:",
+      "Host: <fhost>",
+      "Program: phasecast",
+      "Arguments: --plugin moon.phase --entry awaken",
+      "Launch the process remotely using the tool's process-create pattern."
+    ],
+    "answer": "moonwmic /node:<fhost> process call create phasecast --plugin moon.phase --entry awaken"
+  },
+  {
+    "question": [
+      "Recon: Final objective before exfil is to retrieve the ledger and stage it for offline review. Team policy requires explicit destination paths.",
+      "Reference \"vaultpull\" tool manpage for info.",
+      "Task:",
+      "Artifact Path: <artifact>",
+      "Output Directory: ./loot/",
+      "Pull the artifact to local staging."
+    ],
+    "answer": "vaultpull --get <artifact> --out ./loot/",
+    "alternate_answers": [
+      "vaultpull --out ./loot/ --get <artifact>"
+    ]
+  }
+]

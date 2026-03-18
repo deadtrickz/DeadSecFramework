@@ -1,0 +1,21 @@
+﻿TOOL: moonwmic
+SOURCE_TYPE: fantasy_man
+SOURCE_URL: 
+FETCHED_UTC: 2026-03-11 15:30:37Z
+
+------------------------------------------------------------
+NAME
+    moonwmic - remote process launcher for moonwell nodes
+
+SYNOPSIS
+    moonwmic /node:<host> process call create <program_and_args>
+
+DESCRIPTION
+    moonwmic issues remote WMI-style process creation commands to compatible nodes.
+
+OPTIONS
+    /node:<host>            Remote node to target.
+    process call create     Invoke remote process creation.
+
+EXAMPLE
+    moonwmic /node:[IP|Hostname] process call create [ProgramAndArgs]

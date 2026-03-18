@@ -1,0 +1,74 @@
+﻿TOOL: whois
+SOURCE_TYPE: ubuntu_man
+SOURCE_URL: https://manpages.ubuntu.com/manpages/focal/man1/whois.1.html
+FETCHED_UTC: 2026-03-11 15:30:44Z
+
+------------------------------------------------------------
+-h      HOST, --host=HOST Connect to HOST.
+
+       -H      Do not display the legal disclaimers that some registries like to show you.
+
+       -p      PORT, --port=PORT Connect to PORT.
+
+       -I      First query whois.iana.org and then follow its referral to the  whois  server  authoritative  for
+               that request. This works for IP addresses, AS numbers and domains.  BEWARE: this implies that the
+               IANA server will receive your complete query.
+
+       --verbose
+               Be verbose.
+
+       --help  Display online help.
+
+       --version
+               Display the program version.
+
+       Other options are flags understood by whois.ripe.net and some other RIPE-like servers:
+
+       -a      Also search all the mirrored databases.
+
+       -b      Return brief IP address ranges with abuse contact.
+
+       -B      Disable objects filtering. (Show the e-mail addresses.)
+
+       -c      Return the smallest IP address range with a reference to an irt object.
+
+       -d      Return the reverse DNS delegation object too.
+
+       -g      SOURCE:FIRST-LAST  Search  updates  from  SOURCE  database  between  FIRST and LAST update serial
+               number. It is useful to obtain Near Real Time Mirroring stream.
+
+       -G      Disable grouping of associated objects.
+
+       -i      ATTR[,ATTR]...  Inverse-search objects having associated attributes.  ATTR is the attribute name,
+               while the positional OBJECT argument is the attribute value.
+
+       -K      Return primary key attributes only. An exception is the members attribute of set  objects,  which
+               is  always returned. Another exception are all attributes of the objects organisation, person and
+               role, that are never returned.
+
+       -l      Return the one level less specific object.
+
+       -L      Return all levels of less specific objects.
+
+       -m      Return all one level more specific objects.
+
+       -M      Return all levels of more specific objects.
+
+       -q      KEYWORD Return information about the server.  KEYWORD can be  version  for  the  server  version,
+               sources for the list of database sources or types for the list of supported object types.
+
+       -r      Disable recursive lookups for contact information.
+
+       -R      Disable following referrals and force showing the object from the local copy in the server.
+
+       -s      SOURCE[,SOURCE]...   Request  the server to search for objects mirrored from SOURCE.  Sources are
+               delimited by comma, and the order is significant.  Use the -q sources parameter to obtain a  list
+               of valid sources.
+
+       -t      TYPE Return the template for a object of TYPE.
+
+       -T      TYPE[,TYPE]...  Restrict the search to objects of TYPE.  Multiple types are separated by a comma.
+
+       -v      TYPE Return the verbose template for a object of TYPE.
+
+       -x      Search for only exact match on network address prefix.

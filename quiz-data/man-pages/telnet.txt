@@ -1,0 +1,17 @@
+﻿TOOL: telnet
+SOURCE_TYPE: linux_help
+SOURCE_URL: local_curated
+FETCHED_UTC: 2026-03-17 23:20:00Z
+
+NAME
+    telnet - user interface to the TELNET protocol
+
+SYNOPSIS
+    telnet [Host] [Port]
+
+DESCRIPTION
+    Commonly used in security labs for simple banner grabs and raw TCP testing.
+
+EXAMPLES
+    telnet [IP] [Port]
+    telnet 192.168.1.200 22

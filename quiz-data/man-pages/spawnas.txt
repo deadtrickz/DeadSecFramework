@@ -1,0 +1,29 @@
+﻿TOOL: spawnas
+SOURCE_TYPE: cobalt_doc_curated
+SOURCE_URL: https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/post-exploitation_running-commands.htm
+FETCHED_UTC: 2026-03-12 17:00:00Z
+
+------------------------------------------------------------
+NAME
+    spawnas - run a command as another user from Beacon
+
+SYNOPSIS
+    spawnas [domain\user] [password] [command]
+
+DESCRIPTION
+    Runs a command using supplied credentials and creates a new process in that security context.
+    Use when you have valid creds and need to test access or execute one command as that user.
+
+ARGUMENTS
+    [domain\user]   Account to run as.
+    [password]      Password for the account.
+    [command]       Command to execute.
+
+NOTES
+    - Use quotes when command contains spaces.
+    - This is a credentialed execution action; OPSEC and logging risk apply.
+
+EXAMPLES
+    spawnas [Domain]\\[User] [Password] whoami
+    spawnas [Domain]\\[User] [Password] "cmd /c hostname"
+    spawnas [Domain]\\[User] [Password] "powershell -c Get-Process"

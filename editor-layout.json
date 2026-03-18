@@ -1,0 +1,15 @@
+{
+    "window":  {
+                   "x":  343,
+                   "y":  228,
+                   "width":  1500,
+                   "height":  900,
+                   "state":  "Normal"
+               },
+    "splitters":  {
+                      "questions":  390,
+                      "stories":  390,
+                      "man_pages":  390
+                  },
+    "selected_tab":  "Stories"
+}

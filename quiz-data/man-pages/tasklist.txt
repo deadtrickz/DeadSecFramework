@@ -1,0 +1,27 @@
+﻿TOOL: tasklist
+SOURCE_TYPE: manual_curated
+SOURCE_URL: https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/tasklist
+FETCHED_UTC: 2026-03-12 17:20:00Z
+
+------------------------------------------------------------
+NAME
+    tasklist - list running processes and task details
+
+SYNOPSIS
+    tasklist
+    tasklist /fi "[Filter]"
+    tasklist /s [Target] /u [Domain]\\[User] /p [Password]
+
+DESCRIPTION
+    Enumerates running processes locally or remotely with optional filters.
+
+COMMON OPTIONS
+    /fi "[Filter]"              Apply a filter (PID, IMAGENAME, STATUS, etc.).
+    /svc                         Show services hosted in each process.
+    /v                           Verbose details.
+    /s [Target]                  Query remote host.
+
+EXAMPLES
+    tasklist
+    tasklist /fi "IMAGENAME eq lsass.exe"
+    tasklist /s [IP] /u [Domain]\\[User] /p [Password]

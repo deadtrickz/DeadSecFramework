@@ -1,0 +1,85 @@
+{
+    "id":  "vivid_citadel_001",
+    "name":  "Vivid Citadel",
+    "description":  "Example custom story that uses tools not built into man pages.",
+    "steps":  [
+                  {
+                      "question":  [
+                                       "Recon: Custom telemetry framework is available on edge probe. Use censuscan with set subnet target and set operation mode.",
+                                       "Reference docs/STORIES.md for custom tool usage.",
+                                       "Host: 10.88.14.21",
+                                       "Build the command for this target."
+                                   ],
+                      "answer":  "censuscan --host 10.88.14.21 --subnet 10.88.14.0/24 --mode fast",
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Telemetry link established."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "vivid_citadel_001",
+                                                                "ip":  "10.88.14.21",
+                                                                "hostname":  "probe-21",
+                                                                "username":  "ops\\collector",
+                                                                "mac_address":  "00:CC:88:14:21:01"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Pull endpoint profile from discovered target. Use hostforge with set output mode/path.",
+                                       "Reference docs/STORIES.md for custom tool usage.",
+                                       "Target IP: 10.88.14.44",
+                                       "Collect host profile."
+                                   ],
+                      "answer":  "hostforge profile --target 10.88.14.44 --output brief"
+                  },
+                  {
+                      "question":  [
+                                       "Pivot: Open remote task channel using custom relay. Use relaymint with set relay gateway, set relay endpoint, and set relay channel.",
+                                       "Reference docs/STORIES.md for custom tool usage.",
+                                       "Gateway: 10.88.14.21",
+                                       "Endpoint: 10.88.14.44",
+                                       "Create channel named ops44."
+                                   ],
+                      "answer":  "relaymint open --gateway 10.88.14.21 --endpoint 10.88.14.44 --channel ops44",
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Custom relay channel opened."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "vivid_citadel_001",
+                                                                "ip":  "10.88.14.44",
+                                                                "hostname":  "ops-node-44",
+                                                                "username":  "ops\\runner",
+                                                                "mac_address":  "00:CC:88:14:44:02"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Collection: Run command through opened relay channel. Use relaymint with set relay channel and set command to execute.",
+                                       "Reference docs/STORIES.md for custom tool usage.",
+                                       "Channel: ops44",
+                                       "Command: whoami"
+                                   ],
+                      "answer":  "relaymint exec --channel ops44 --cmd whoami"
+                  },
+                  {
+                      "question":  [
+                                       "Objective: Export beacon report for handoff. Use hostforge with set session identifier and set output format.",
+                                       "Reference docs/STORIES.md for custom tool usage.",
+                                       "Generate report from session ops44."
+                                   ],
+                      "answer":  "hostforge report --session ops44 --format json",
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Custom-tool story complete."
+                                                      ]
+                                     }
+                  }
+              ]
+}

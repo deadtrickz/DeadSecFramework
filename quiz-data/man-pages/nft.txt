@@ -1,0 +1,18 @@
+﻿TOOL: nft
+SOURCE_TYPE: linux_help
+SOURCE_URL: local_curated
+FETCHED_UTC: 2026-03-17 23:20:00Z
+
+NAME
+    nft - administration tool for nftables packet filtering framework
+
+SYNOPSIS
+    nft list ruleset
+    nft flush chain [Family] [Table] [Chain]
+
+DESCRIPTION
+    nft is the modern packet filtering CLI used on many Linux systems.
+
+EXAMPLES
+    nft list ruleset
+    nft flush chain ip filter output

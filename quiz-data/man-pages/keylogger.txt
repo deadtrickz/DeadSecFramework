@@ -1,0 +1,27 @@
+﻿TOOL: keylogger
+SOURCE_TYPE: cobalt_doc_curated
+SOURCE_URL: https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/post-exploitation_running-commands.htm
+FETCHED_UTC: 2026-03-12 17:20:00Z
+
+------------------------------------------------------------
+NAME
+    keylogger - capture keystrokes via Beacon post-ex job
+
+SYNOPSIS
+    keylogger
+    keylogger [pid] [x86|x64]
+
+DESCRIPTION
+    Starts a keystroke logger either in a spawned temporary process or injected into a chosen PID.
+
+ARGUMENTS
+    [pid]         Optional process ID for injection mode.
+    [x86|x64]     Optional architecture hint when pid is supplied.
+
+RELATED
+    jobs          List running jobs.
+    jobkill       Stop a running job.
+
+EXAMPLES
+    keylogger
+    keylogger [PID] x64

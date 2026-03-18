@@ -1,0 +1,19 @@
+﻿TOOL: nc
+SOURCE_TYPE: linux_help
+SOURCE_URL: local_curated
+FETCHED_UTC: 2026-03-17 23:20:00Z
+
+NAME
+    nc - netcat utility for TCP/UDP read/write and banner checks
+
+SYNOPSIS
+    nc [Host] [Port]
+    nc -w [Seconds] [Host] [Port]
+
+DESCRIPTION
+    nc is often used for quick service checks and banner enumeration.
+
+EXAMPLES
+    nc [IP] [Port]
+    proxychains nc [IP] [Port]
+    proxychains nc -w 3 [IP] [Port]

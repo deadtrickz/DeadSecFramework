@@ -1,0 +1,152 @@
+﻿TOOL: netstat
+SOURCE_TYPE: ubuntu_man
+SOURCE_URL: https://manpages.ubuntu.com/manpages/focal/man8/netstat.8.html
+FETCHED_UTC: 2026-03-11 15:30:38Z
+
+------------------------------------------------------------
+Active Internet connections (TCP, UDP, UDPLite, raw)
+   Proto
+       The protocol (tcp, udp, udpl, raw) used by the socket.
+
+   Recv-Q
+       Established: The count of bytes not copied by the user program  connected  to  this  socket.   Listening:
+       Since Kernel 2.6.18 this column contains the current syn backlog.
+
+   Send-Q
+       Established: The count of bytes not acknowledged by the remote host.  Listening: Since Kernel 2.6.18 this
+       column contains the maximum size of the syn backlog.
+
+   Local Address
+       Address  and  port number of the local end of the socket.  Unless the --numeric (-n) option is specified,
+       the socket address is resolved to its canonical host name (FQDN), and the port number is translated  into
+       the corresponding service name.
+
+   Foreign Address
+       Address and port number of the remote end of the socket.  Analogous to "Local Address".
+
+   State
+       The  state  of  the  socket.  Since there are no states in raw mode and usually no states used in UDP and
+       UDPLite, this column may be left blank. Normally this can be one of several values:
+
+       ESTABLISHED
+              The socket has an established connection.
+
+       SYN_SENT
+              The socket is actively attempting to establish a connection.
+
+       SYN_RECV
+              A connection request has been received from the network.
+
+       FIN_WAIT1
+              The socket is closed, and the connection is shutting down.
+
+       FIN_WAIT2
+              Connection is closed, and the socket is waiting for a shutdown from the remote end.
+
+       TIME_WAIT
+              The socket is waiting after close to handle packets still in the network.
+
+       CLOSE  The socket is not being used.
+
+       CLOSE_WAIT
+              The remote end has shut down, waiting for the socket to close.
+
+       LAST_ACK
+              The remote end has shut down, and the socket is closed. Waiting for acknowledgement.
+
+       LISTEN The socket is listening for incoming connections.  Such sockets are not  included  in  the  output
+              unless you specify the --listening (-l) or --all (-a) option.
+
+       CLOSING
+              Both sockets are shut down but we still don't have all our data sent.
+
+       UNKNOWN
+              The state of the socket is unknown.
+
+   User
+       The username or the user id (UID) of the owner of the socket.
+
+   PID/Program name
+       Slash-separated  pair  of  the  process  id  (PID)  and process name of the process that owns the socket.
+       --program causes this column to be included.  You  will  also  need  superuser  privileges  to  see  this
+       information  on  sockets  you  don't  own.   This identification information is not yet available for IPX
+       sockets.
+
+   Timer
+       (this needs to be written)
+
+   Active UNIX domain Sockets
+   Proto
+       The protocol (usually unix) used by the socket.
+
+   RefCnt
+       The reference count (i.e. attached processes via this socket).
+
+   Flags
+       The flags displayed is SO_ACCEPTON (displayed as ACC), SO_WAITDATA (W) or SO_NOSPACE  (N).   SO_ACCECPTON
+       is  used  on  unconnected sockets if their corresponding processes are waiting for a connect request. The
+       other flags are not of normal interest.
+
+   Type
+       There are several types of socket access:
+
+       SOCK_DGRAM
+              The socket is used in Datagram (connectionless) mode.
+
+       SOCK_STREAM
+              This is a stream (connection) socket.
+
+       SOCK_RAW
+              The socket is used as a raw socket.
+
+       SOCK_RDM
+              This one serves reliably-delivered messages.
+
+       SOCK_SEQPACKET
+              This is a sequential packet socket.
+
+       SOCK_PACKET
+              Raw interface access socket.
+
+       UNKNOWN
+              Who ever knows what the future will bring us - just fill in here :-)
+
+   State
+       This field will contain one of the following Keywords:
+
+       FREE   The socket is not allocated
+
+       LISTENING
+              The socket is listening for a connection request.  Such sockets are only included in the output if
+              you specify the --listening (-l) or --all (-a) option.
+
+       CONNECTING
+              The socket is about to establish a connection.
+
+       CONNECTED
+              The socket is connected.
+
+       DISCONNECTING
+              The socket is disconnecting.
+
+       (empty)
+              The socket is not connected to another one.
+
+       UNKNOWN
+              This state should never happen.
+
+   PID/Program name
+       Process ID (PID) and process name of the process that has the socket open.  More info available in Active
+       Internet connections section written above.
+
+   Path
+       This is the path name as which the corresponding processes attached to the socket.
+
+   Active IPX sockets
+       (this needs to be done by somebody who knows it)
+
+   Active NET/ROM sockets
+       (this needs to be done by somebody who knows it)
+
+   Active AX.25 sockets
+       (this needs to be done by somebody who knows it)

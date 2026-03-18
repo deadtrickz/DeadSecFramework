@@ -1,0 +1,26 @@
+﻿TOOL: download
+SOURCE_TYPE: cobalt_doc_curated
+SOURCE_URL: https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/post-exploitation_running-commands.htm
+FETCHED_UTC: 2026-03-12 17:20:00Z
+
+------------------------------------------------------------
+NAME
+    download - pull a remote file from target to operator
+
+SYNOPSIS
+    download [remote_path]
+
+DESCRIPTION
+    Starts a file download job from the current Beacon host.
+    Use `downloads` to view active transfers and `cancel` to stop one.
+
+ARGUMENTS
+    [remote_path]   File path on the target host.
+
+RELATED
+    downloads       Show active downloads.
+    cancel [file]   Cancel a download in progress.
+
+EXAMPLES
+    download [FilePath]
+    download C:\\Windows\\Temp\\loot.zip

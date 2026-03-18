@@ -1,0 +1,273 @@
+﻿{
+    "beacondrake":  {
+                        "source_type":  "fantasy_man"
+                    },
+    "bloodhound-python":  {
+                              "url":  "https://www.kali.org/tools/bloodhound.py/",
+                              "source_type":  "kali_help"
+                          },
+    "cat":  {
+                "url":  "https://manpages.ubuntu.com/manpages/focal/man1/cat.1.html",
+                "source_type":  "ubuntu_man"
+            },
+    "chisel":  {
+                   "url":  "https://www.kali.org/tools/chisel/",
+                   "source_type":  "kali_help"
+               },
+    "crackmapexec":  {
+                         "url":  "https://www.kali.org/tools/crackmapexec/",
+                         "source_type":  "kali_help"
+                     },
+    "curl":  {
+                 "source_type":  "ubuntu_man",
+                 "url":  "https://manpages.ubuntu.com/manpages/focal/man1/curl.1.html"
+             },
+    "dig":  {
+                "url":  "https://manpages.ubuntu.com/manpages/focal/man1/dig.1.html",
+                "source_type":  "ubuntu_man"
+            },
+    "docker":  {
+                   "url":  "https://manpages.ubuntu.com/manpages/focal/man1/docker.1.html",
+                   "source_type":  "ubuntu_man"
+               },
+    "download":  {
+                     "keyword":  "download",
+                     "url":  "https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/post-exploitation_running-commands.htm?Highlight=spawnas",
+                     "source_type":  "cobalt_doc"
+                 },
+    "evil-winrm":  {
+                       "url":  "https://www.kali.org/tools/evil-winrm/",
+                       "source_type":  "kali_help"
+                   },
+    "execute-assembly":  {
+                             "keyword":  "execute-assembly",
+                             "url":  "https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/post-exploitation_running-commands.htm?Highlight=spawnas",
+                             "source_type":  "cobalt_doc"
+                         },
+    "feroxbuster":  {
+                        "url":  "https://www.kali.org/tools/feroxbuster/",
+                        "source_type":  "kali_help"
+                    },
+    "ffuf":  {
+                 "url":  "https://www.kali.org/tools/ffuf/",
+                 "source_type":  "kali_help"
+             },
+    "find":  {
+                 "url":  "https://manpages.ubuntu.com/manpages/focal/man1/find.1.html",
+                 "source_type":  "ubuntu_man"
+             },
+    "getnpusers.py":  {
+                          "url":  "https://www.kali.org/tools/impacket-scripts/",
+                          "script_pattern":  "GetNPUsers\\.py|impacket-GetNPUsers",
+                          "source_type":  "kali_impacket_script"
+                      },
+    "gettgt.py":  {
+                      "url":  "https://www.kali.org/tools/impacket-scripts/",
+                      "script_pattern":  "getTGT\\.py|impacket-getTGT",
+                      "source_type":  "kali_impacket_script"
+                  },
+    "getuserspns.py":  {
+                           "url":  "https://www.kali.org/tools/impacket-scripts/",
+                           "script_pattern":  "GetUserSPNs\\.py|impacket-GetUserSPNs",
+                           "source_type":  "kali_impacket_script"
+                       },
+    "glyphprobe":  {
+                       "source_type":  "fantasy_man"
+                   },
+    "gobuster":  {
+                     "url":  "https://www.kali.org/tools/gobuster/",
+                     "source_type":  "kali_help"
+                 },
+    "hashcat":  {
+                    "url":  "https://www.kali.org/tools/hashcat/",
+                    "source_type":  "kali_help"
+                },
+    "hydra":  {
+                  "url":  "https://www.kali.org/tools/hydra/",
+                  "source_type":  "kali_help"
+              },
+    "inject":  {
+                   "keyword":  "inject",
+                   "url":  "https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/post-exploitation_running-commands.htm?Highlight=spawnas",
+                   "source_type":  "cobalt_doc"
+               },
+    "john":  {
+                 "url":  "https://www.kali.org/tools/john/",
+                 "source_type":  "kali_help"
+             },
+    "kerbrute":  {
+                     "url":  "https://raw.githubusercontent.com/ropnop/kerbrute/master/README.md",
+                     "source_type":  "web_text"
+                 },
+    "keylogger":  {
+                      "keyword":  "keylogger",
+                      "url":  "https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/post-exploitation_running-commands.htm?Highlight=spawnas",
+                      "source_type":  "cobalt_doc"
+                  },
+    "klist":  {
+                  "source_type":  "ubuntu_man",
+                  "url":  "https://manpages.ubuntu.com/manpages/focal/man1/klist.1.html"
+              },
+    "kubectl":  {
+                    "url":  "https://man.archlinux.org/man/kubectl.1.en",
+                    "source_type":  "web_text"
+                },
+    "ldapsearch":  {
+                       "url":  "https://manpages.ubuntu.com/manpages/focal/man1/ldapsearch.1.html",
+                       "source_type":  "ubuntu_man"
+                   },
+    "less":  {
+                 "url":  "https://manpages.ubuntu.com/manpages/focal/man1/less.1.html",
+                 "source_type":  "ubuntu_man"
+             },
+    "link":  {
+                 "keyword":  "link",
+                 "url":  "https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/post-exploitation_running-commands.htm?Highlight=spawnas",
+                 "source_type":  "cobalt_doc"
+             },
+    "lookupsid.py":  {
+                         "url":  "https://www.kali.org/tools/impacket-scripts/",
+                         "script_pattern":  "lookupsid\\.py|impacket-lookupsid",
+                         "source_type":  "kali_impacket_script"
+                     },
+    "medusa":  {
+                   "url":  "https://www.kali.org/tools/medusa/",
+                   "source_type":  "kali_help"
+               },
+    "mofcomp":  {
+                    "url":  "https://learn.microsoft.com/en-us/windows/win32/wmisdk/mofcomp",
+                    "source_type":  "web_text"
+                },
+    "moonwmic":  {
+                     "source_type":  "fantasy_man"
+                 },
+    "mount":  {
+                  "url":  "https://manpages.ubuntu.com/manpages/focal/man8/mount.8.html",
+                  "source_type":  "ubuntu_man"
+              },
+    "net":  {
+                "source_type":  "ubuntu_man",
+                "url":  "https://manpages.ubuntu.com/manpages/focal/man8/net.8.html"
+            },
+    "netsession":  {
+                       "url":  "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc754051(v=ws.11)",
+                       "source_type":  "web_text"
+                   },
+    "netstat":  {
+                    "url":  "https://manpages.ubuntu.com/manpages/focal/man8/netstat.8.html",
+                    "source_type":  "ubuntu_man"
+                },
+    "nikto":  {
+                  "url":  "https://www.kali.org/tools/nikto/",
+                  "source_type":  "kali_help"
+              },
+    "nmap":  {
+                 "url":  "https://manpages.ubuntu.com/manpages/focal/man1/nmap.1.html",
+                 "source_type":  "ubuntu_man"
+             },
+    "note":  {
+                 "keyword":  "note",
+                 "url":  "https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/post-exploitation_running-commands.htm?Highlight=spawnas",
+                 "source_type":  "cobalt_doc"
+             },
+    "nslookup":  {
+                     "url":  "https://manpages.ubuntu.com/manpages/focal/man1/nslookup.1.html",
+                     "source_type":  "ubuntu_man"
+                 },
+    "proxychains":  {
+                        "url":  "https://www.kali.org/tools/proxychains-ng/",
+                        "source_type":  "kali_help"
+                    },
+    "ps":  {
+               "url":  "https://manpages.ubuntu.com/manpages/focal/man1/ps.1.html",
+               "source_type":  "ubuntu_man"
+           },
+    "psexec":  {
+                   "url":  "https://learn.microsoft.com/en-us/sysinternals/downloads/psexec",
+                   "source_type":  "web_text"
+               },
+    "psexec.py":  {
+                      "url":  "https://www.kali.org/tools/impacket-scripts/",
+                      "script_pattern":  "psexec\\.py|impacket-psexec",
+                      "source_type":  "kali_impacket_script"
+                  },
+    "rpcclient":  {
+                      "source_type":  "ubuntu_man",
+                      "url":  "https://manpages.ubuntu.com/manpages/focal/man1/rpcclient.1.html"
+                  },
+    "rubeus.exe":  {
+                       "url":  "https://github.com/GhostPack/Rubeus",
+                       "source_type":  "web_text"
+                   },
+    "runecast":  {
+                     "source_type":  "fantasy_man"
+                 },
+    "secretsdump.py":  {
+                           "url":  "https://www.kali.org/tools/impacket-scripts/",
+                           "script_pattern":  "secretsdump\\.py|impacket-secretsdump",
+                           "source_type":  "kali_impacket_script"
+                       },
+    "sleep":  {
+                  "keyword":  "sleep",
+                  "url":  "https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/post-exploitation_running-commands.htm?Highlight=spawnas",
+                  "source_type":  "cobalt_doc"
+              },
+    "smbexec.py":  {
+                       "url":  "https://www.kali.org/tools/impacket-scripts/",
+                       "script_pattern":  "smbexec\\.py|impacket-smbexec",
+                       "source_type":  "kali_impacket_script"
+                   },
+    "spawnas":  {
+                    "keyword":  "spawnas",
+                    "url":  "https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/post-exploitation_running-commands.htm?Highlight=spawnas",
+                    "source_type":  "cobalt_doc"
+                },
+    "ssh":  {
+                "url":  "https://manpages.ubuntu.com/manpages/focal/man1/ssh.1.html",
+                "source_type":  "ubuntu_man"
+            },
+    "sudo":  {
+                 "url":  "https://manpages.ubuntu.com/manpages/focal/man8/sudo.8.html",
+                 "source_type":  "ubuntu_man"
+             },
+    "systeminfo":  {
+                       "url":  "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/systeminfo",
+                       "source_type":  "web_text"
+                   },
+    "tasklist":  {
+                     "url":  "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/tasklist",
+                     "source_type":  "web_text"
+                 },
+    "upload":  {
+                   "keyword":  "upload",
+                   "url":  "https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/post-exploitation_running-commands.htm?Highlight=spawnas",
+                   "source_type":  "cobalt_doc"
+               },
+    "vaultpull":  {
+                      "source_type":  "fantasy_man"
+                  },
+    "whatweb":  {
+                    "url":  "https://www.kali.org/tools/whatweb/",
+                    "source_type":  "kali_help"
+                },
+    "whoami":  {
+                   "url":  "https://manpages.ubuntu.com/manpages/focal/man1/whoami.1.html",
+                   "source_type":  "ubuntu_man"
+               },
+    "whois":  {
+                  "url":  "https://manpages.ubuntu.com/manpages/focal/man1/whois.1.html",
+                  "source_type":  "ubuntu_man"
+              },
+    "wmic":  {
+                 "url":  "https://www.kali.org/tools/wmi/",
+                 "source_type":  "kali_help"
+             },
+    "wmiexec.py":  {
+                       "url":  "https://www.kali.org/tools/impacket-scripts/",
+                       "script_pattern":  "wmiexec\\.py|impacket-wmiexec",
+                       "source_type":  "kali_impacket_script"
+                   },
+    "wyrmscan":  {
+                     "source_type":  "fantasy_man"
+                 }
+}

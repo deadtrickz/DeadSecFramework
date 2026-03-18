@@ -1,0 +1,29 @@
+﻿TOOL: inject
+SOURCE_TYPE: cobalt_doc_curated
+SOURCE_URL: https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/post-exploitation_running-commands.htm
+FETCHED_UTC: 2026-03-12 17:20:00Z
+
+------------------------------------------------------------
+NAME
+    inject - inject Beacon payload into an existing process
+
+SYNOPSIS
+    inject [pid] [listener]
+    inject [pid] [x86|x64] [listener]
+
+DESCRIPTION
+    Injects payload into a target process by PID.
+    Useful for migration or changing execution context.
+
+ARGUMENTS
+    [pid]         Target process ID.
+    [x86|x64]     Optional architecture hint.
+    [listener]    Listener/payload profile to inject.
+
+NOTES
+    - Pick stable processes appropriate for your OPSEC profile.
+    - Ensure architecture compatibility when specifying x86/x64.
+
+EXAMPLES
+    inject [PID] [Listener]
+    inject [PID] x64 [Listener]

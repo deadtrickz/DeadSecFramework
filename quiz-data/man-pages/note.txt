@@ -1,0 +1,21 @@
+﻿TOOL: note
+SOURCE_TYPE: cobalt_doc_curated
+SOURCE_URL: https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/post-exploitation_running-commands.htm
+FETCHED_UTC: 2026-03-12 17:20:00Z
+
+------------------------------------------------------------
+NAME
+    note - assign operator note/tag text to a Beacon
+
+SYNOPSIS
+    note [text]
+
+DESCRIPTION
+    Adds or updates a descriptive note for the current Beacon (owner, role, purpose, status, etc.).
+
+ARGUMENTS
+    [text]    Free-form note text.
+
+EXAMPLES
+    note [Text]
+    note [Username] on [Hostname] - local admin

@@ -1,0 +1,24 @@
+﻿TOOL: upload
+SOURCE_TYPE: cobalt_doc_curated
+SOURCE_URL: https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/post-exploitation_running-commands.htm
+FETCHED_UTC: 2026-03-12 17:20:00Z
+
+------------------------------------------------------------
+NAME
+    upload - send a local file from operator to target host
+
+SYNOPSIS
+    upload [local_path]
+    upload [local_path] [remote_path]
+
+DESCRIPTION
+    Uploads files to the current Beacon host.
+    If remote path is omitted, destination is current working directory on target.
+
+ARGUMENTS
+    [local_path]    File path on operator side.
+    [remote_path]   Optional destination path on target side.
+
+EXAMPLES
+    upload [FilePath]
+    upload [FilePath] C:\\ProgramData\\[FileName]

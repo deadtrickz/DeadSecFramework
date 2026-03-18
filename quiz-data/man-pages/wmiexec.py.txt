@@ -1,0 +1,48 @@
+﻿TOOL: wmiexec.py
+SOURCE_TYPE: kali_impacket_script
+SOURCE_URL: https://www.kali.org/tools/impacket-scripts/
+FETCHED_UTC: 2026-03-11 15:30:44Z
+
+------------------------------------------------------------
+root@kali:~# impacket-atexec -h
+Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies 
+
+usage: atexec.py [-h] [-session-id SESSION_ID] [-ts] [-silentcommand] [-debug]
+                 [-codec CODEC] [-hashes LMHASH:NTHASH] [-no-pass] [-k]
+                 [-aesKey hex key] [-dc-ip ip address] [-keytab KEYTAB]
+                 target [command ...]
+
+positional arguments:
+  target                [[domain/]username[:password]@]<targetName or address>
+  command               command to execute at the target
+
+options:
+  -h, --help            show this help message and exit
+  -session-id SESSION_ID
+                        an existed logon session to use (no output, no
+                        cmd.exe)
+  -ts                   adds timestamp to every logging output
+  -silentcommand        does not execute cmd.exe to run given command (no
+                        output)
+  -debug                Turn DEBUG output ON
+  -codec CODEC          Sets encoding used (codec) from the target's output
+                        (default "utf-8"). If errors are detected, run
+                        chcp.com at the target, map the result with https://do
+                        cs.python.org/3/library/codecs.html#standard-encodings
+                        and then execute wmiexec.py again with -codec and the
+                        corresponding codec
+
+authentication:
+  -hashes LMHASH:NTHASH
+                        NTLM hashes, format is LMHASH:NTHASH
+  -no-pass              don't ask for password (useful for -k)
+  -k                    Use Kerberos authentication. Grabs credentials from
+                        ccache file (KRB5CCNAME) based on target parameters.
+                        If valid credentials cannot be found, it will use the
+                        ones specified in the command line
+  -aesKey hex key       AES key to use for Kerberos Authentication (128 or 256
+                        bits)
+  -dc-ip ip address     IP Address of the domain controller. If omitted it
+                        will use the domain part (FQDN) specified in the
+                        target parameter
+  -keytab KEYTAB        Read keys for SPN from keytab file

@@ -1,0 +1,52 @@
+﻿TOOL: getnpusers.py
+SOURCE_TYPE: kali_impacket_script
+SOURCE_URL: https://www.kali.org/tools/impacket-scripts/
+FETCHED_UTC: 2026-03-11 15:30:33Z
+
+------------------------------------------------------------
+root@kali:~# impacket-GetNPUsers -h
+Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies 
+
+usage: GetNPUsers.py [-h] [-request] [-outputfile OUTPUTFILE]
+                     [-format {hashcat,john}] [-usersfile USERSFILE] [-ts]
+                     [-debug] [-hashes LMHASH:NTHASH] [-no-pass] [-k]
+                     [-aesKey hex key] [-dc-ip ip address] [-dc-host hostname]
+                     target
+
+Queries target domain for users with 'Do not require Kerberos
+preauthentication' set and export their TGTs for cracking
+
+positional arguments:
+  target                [[domain/]username[:password]]
+
+options:
+  -h, --help            show this help message and exit
+  -request              Requests TGT for users and output them in JtR/hashcat
+                        format (default False)
+  -outputfile OUTPUTFILE
+                        Output filename to write ciphers in JtR/hashcat format
+  -format {hashcat,john}
+                        format to save the AS_REQ of users without pre-
+                        authentication. Default is hashcat
+  -usersfile USERSFILE  File with user per line to test
+  -ts                   Adds timestamp to every logging output
+  -debug                Turn DEBUG output ON
+
+authentication:
+  -hashes LMHASH:NTHASH
+                        NTLM hashes, format is LMHASH:NTHASH
+  -no-pass              don't ask for password (useful for -k)
+  -k                    Use Kerberos authentication. Grabs credentials from
+                        ccache file (KRB5CCNAME) based on target parameters.
+                        If valid credentials cannot be found, it will use the
+                        ones specified in the command line
+  -aesKey hex key       AES key to use for Kerberos Authentication (128 or 256
+                        bits)
+
+connection:
+  -dc-ip ip address     IP Address of the domain controller. If ommited it use
+                        the domain part (FQDN) specified in the target
+                        parameter
+  -dc-host hostname     Hostname of the domain controller to use. If ommited,
+                        the domain part (FQDN) specified in the account
+                        parameter will be used

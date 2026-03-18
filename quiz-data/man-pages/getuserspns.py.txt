@@ -1,0 +1,74 @@
+﻿TOOL: getuserspns.py
+SOURCE_TYPE: kali_impacket_script
+SOURCE_URL: https://www.kali.org/tools/impacket-scripts/
+FETCHED_UTC: 2026-03-11 15:30:34Z
+
+------------------------------------------------------------
+root@kali:~# impacket-GetUserSPNs -h
+Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies 
+
+usage: GetUserSPNs.py [-h] [-target-domain TARGET_DOMAIN]
+                      [-no-preauth NO_PREAUTH] [-stealth] [-machine-only]
+                      [-usersfile USERSFILE] [-request]
+                      [-request-user username | -request-machine machinename]
+                      [-save] [-outputfile OUTPUTFILE] [-ts] [-debug]
+                      [-hashes LMHASH:NTHASH] [-no-pass] [-k]
+                      [-aesKey hex key] [-dc-ip ip address]
+                      [-dc-host hostname]
+                      target
+
+Queries target domain for SPNs that are running under a user account
+
+positional arguments:
+  target                domain[/username[:password]]
+
+options:
+  -h, --help            show this help message and exit
+  -target-domain TARGET_DOMAIN
+                        Domain to query/request if different than the domain
+                        of the user. Allows for Kerberoasting across trusts.
+  -no-preauth NO_PREAUTH
+                        account that does not require preauth, to obtain
+                        Service Ticket through the AS
+  -stealth              Removes the (servicePrincipalName=*) filter from the
+                        LDAP query for added stealth. May cause huge memory
+                        consumption / errors on large domains.
+  -machine-only         Queries for machine accounts only, by adjusting
+                        `objectCategory=person` to `objectCategory=computer`.
+                        Active Directory may limit results to 1,000 objects by
+                        default. LDAP paging is required to retrieve more.
+  -usersfile USERSFILE  File with user per line to test
+  -request              Requests TGS for users and output them in JtR/hashcat
+                        format (default False)
+  -request-user username
+                        Requests TGS for the SPN associated to the user
+                        specified (just the username, no domain needed)
+  -request-machine machinename
+                        Requests TGS for the SPN associated to the machine
+                        specified. Example: `workstation01$`
+  -save                 Saves TGS requested to disk. Format is
+                        <username>.ccache. Auto selects -request
+  -outputfile OUTPUTFILE
+                        Output filename to write ciphers in JtR/hashcat
+                        format. Auto selects -request
+  -ts                   Adds timestamp to every logging output.
+  -debug                Turn DEBUG output ON
+
+authentication:
+  -hashes LMHASH:NTHASH
+                        NTLM hashes, format is LMHASH:NTHASH
+  -no-pass              don't ask for password (useful for -k)
+  -k                    Use Kerberos authentication. Grabs credentials from
+                        ccache file (KRB5CCNAME) based on target parameters.
+                        If valid credentials cannot be found, it will use the
+                        ones specified in the command line
+  -aesKey hex key       AES key to use for Kerberos Authentication (128 or 256
+                        bits)
+
+connection:
+  -dc-ip ip address     IP Address of the domain controller. If ommited it use
+                        the domain part (FQDN) specified in the target
+                        parameter. Ignoredif -target-domain is specified.
+  -dc-host hostname     Hostname of the domain controller to use. If ommited,
+                        the domain part (FQDN) specified in the account
+                        parameter will be used

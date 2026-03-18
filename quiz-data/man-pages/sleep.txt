@@ -1,0 +1,31 @@
+﻿TOOL: sleep
+SOURCE_TYPE: cobalt_doc_curated
+SOURCE_URL: https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/post-exploitation_running-commands.htm
+FETCHED_UTC: 2026-03-12 17:00:00Z
+
+------------------------------------------------------------
+NAME
+    sleep - set Beacon callback interval and optional jitter
+
+SYNOPSIS
+    sleep [seconds]
+    sleep [seconds] [jitter]
+    sleep [Nd Nh Nm Ns] [Nj]
+
+DESCRIPTION
+    Controls how often Beacon checks in.
+    Jitter randomizes callback timing to reduce predictability.
+
+ARGUMENTS
+    [seconds]   Base sleep interval in seconds.
+    [jitter]    Optional jitter percentage (0-99).
+    Nd/Nh/Nm/Ns Time format for long intervals (days/hours/minutes/seconds).
+    Nj          Jitter in suffix form for time-format mode.
+
+NOTES
+    sleep 0 causes very frequent callbacks and is noisy.
+
+EXAMPLES
+    sleep [Seconds]
+    sleep [Seconds] [JitterPercent]
+    sleep [Hours]h [Minutes]m [JitterPercent]j

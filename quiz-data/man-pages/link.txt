@@ -1,0 +1,28 @@
+﻿TOOL: link
+SOURCE_TYPE: cobalt_doc_curated
+SOURCE_URL: https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/post-exploitation_running-commands.htm
+FETCHED_UTC: 2026-03-12 17:00:00Z
+
+------------------------------------------------------------
+NAME
+    link - connect this Beacon to another Beacon over SMB/TCP pivoting channel
+
+SYNOPSIS
+    link [target]
+    link [target] [port]
+
+DESCRIPTION
+    Establishes a pivot link to another reachable Beacon. Traffic for the linked Beacon can route
+    through the current session.
+
+ARGUMENTS
+    [target]    Target host (IP or hostname) where pivot beacon is reachable.
+    [port]      Optional listener/transport port when required by the channel.
+
+RELATED
+    unlink      Remove the pivot link.
+
+EXAMPLES
+    link [IP]
+    link [Hostname]
+    link [IP] [Port]

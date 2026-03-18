@@ -1,0 +1,27 @@
+﻿TOOL: systeminfo
+SOURCE_TYPE: manual_curated
+SOURCE_URL: https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/systeminfo
+FETCHED_UTC: 2026-03-12 17:20:00Z
+
+------------------------------------------------------------
+NAME
+    systeminfo - display detailed system configuration information
+
+SYNOPSIS
+    systeminfo
+    systeminfo /s [Target]
+    systeminfo /s [Target] /u [Domain]\\[User] /p [Password]
+
+DESCRIPTION
+    Prints OS build, patch level, boot time, hardware, domain/workgroup, and hotfix summary.
+
+COMMON OPTIONS
+    /s [Target]                  Query remote host.
+    /u [Domain]\\[User]           Alternate credentials.
+    /p [Password]               Password for /u.
+    /fo [TABLE|LIST|CSV]        Output format.
+
+EXAMPLES
+    systeminfo
+    systeminfo /s [IP]
+    systeminfo /s [Hostname] /u [Domain]\\[User] /p [Password]

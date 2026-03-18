@@ -1,0 +1,83 @@
+{
+    "id":  "arcane_lantern_001",
+    "name":  "Arcane Lantern",
+    "description":  "Fantasy-only linear story with beacon progression.",
+    "steps":  [
+                  {
+                      "question":  [
+                                       "Recon: You accessed a relay node and need to validate operator context.",
+                                       "Reference \"beacondrake\" tool manpage for command structure.",
+                                       "Host: 10.77.13.44",
+                                       "Port: 55055",
+                                       "Run command: whoami"
+                                   ],
+                      "answer":  "beacondrake 10.77.13.44:55055 -x whoami",
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Session accepted. First fantasy beacon established."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "arcane_lantern_001",
+                                                                "ip":  "10.77.13.44",
+                                                                "hostname":  "node-rune-44",
+                                                                "username":  "arc\\\\initiator",
+                                                                "mac_address":  "00:FA:77:13:44:01"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Archive index points to linked sigils controlling lateral routes. Ensure behavior includes enumerate linked entries.",
+                                       "Reference \"glyphprobe\" tool manpage for option usage.",
+                                       "Target URL: https://10.77.13.90",
+                                       "Transport Glyph: glyph://north/star",
+                                       "Enumerate linked sigils."
+                                   ],
+                      "answer":  "glyphprobe --target https://10.77.13.90 --transport glyph://north/star --enum-linked",
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Linked sigils mapped. New control node appears."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "arcane_lantern_001",
+                                                                "ip":  "10.77.13.90",
+                                                                "hostname":  "sigil-core-90",
+                                                                "username":  "arc\\\\analyst",
+                                                                "mac_address":  "00:FA:77:13:90:02"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Archive warns there is one clean auth attempt before lockout wards trigger. Ensure behavior includes recursive search and enumerate vaults only.",
+                                       "Reference \"runecast\" tool manpage for parameters.",
+                                       "Host: 10.77.13.44",
+                                       "Rune token: rune-of-binding",
+                                       "Vault profile: vaults",
+                                       "Authenticate and enumerate vault entries."
+                                   ],
+                      "answer":  "runecast smb 10.77.13.44 -r rune-of-binding --vaults",
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Vault access complete. Legacy relay decommissioned."
+                                                      ],
+                                         "beacon_remove":  [
+                                                               "fb01"
+                                                           ],
+                                         "beacon_update":  [
+                                                               {
+                                                                   "id":  "arcane_lantern_001",
+                                                                   "ip":  "10.77.13.90",
+                                                                   "hostname":  "sigil-core-90",
+                                                                   "username":  "arc\\\\operator",
+                                                                   "mac_address":  "00:FA:77:13:90:02"
+                                                               }
+                                                           ]
+                                     }
+                  }
+              ]
+}

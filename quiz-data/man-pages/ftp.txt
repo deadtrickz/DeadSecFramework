@@ -1,0 +1,17 @@
+﻿TOOL: ftp
+SOURCE_TYPE: linux_help
+SOURCE_URL: local_curated
+FETCHED_UTC: 2026-03-17 23:20:00Z
+
+NAME
+    ftp - file transfer protocol client
+
+SYNOPSIS
+    ftp [Host]
+
+DESCRIPTION
+    Basic FTP client used for testing anonymous access or credentialed login.
+
+EXAMPLES
+    ftp [IP]
+    proxychains ftp [IP]

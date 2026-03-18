@@ -1,0 +1,732 @@
+﻿TOOL: mount
+SOURCE_TYPE: ubuntu_man
+SOURCE_URL: https://manpages.ubuntu.com/manpages/focal/man8/mount.8.html
+FETCHED_UTC: 2026-03-11 15:30:37Z
+
+------------------------------------------------------------
+You  should  consult  the respective man page for the filesystem first.  If you want to know what options
+       the ext4 filesystem supports, then check the ext4(5) man page.  If that doesn't exist, you can also check
+       the corresponding mount page like mount.cifs(8).  Note that you might  have  to  install  the  respective
+       userland tools.
+
+       The  following  options  apply only to certain filesystems.  We sort them by filesystem.  They all follow
+       the -o flag.
+
+       What options are supported depends a bit on the running kernel.  More info may be  found  in  the  kernel
+       source subdirectory Documentation/filesystems.
+
+   Mount options for adfs
+       uid=value and gid=value
+              Set the owner and group of the files in the filesystem (default: uid=gid=0).
+
+       ownmask=value and othmask=value
+              Set  the  permission  mask  for  ADFS  'owner'  permissions  and 'other' permissions, respectively
+              (default:         0700         and         0077,         respectively).          See          also
+              /usr/src/linux/Documentation/filesystems/adfs.txt.
+
+   Mount options for affs
+       uid=value and gid=value
+              Set  the owner and group of the root of the filesystem (default: uid=gid=0, but with option uid or
+              gid without specified value, the UID and GID of the current process are taken).
+
+       setuid=value and setgid=value
+              Set the owner and group of all files.
+
+       mode=value
+              Set the mode of all files to value & 0777  disregarding  the  original  permissions.   Add  search
+              permission to directories that have read permission.  The value is given in octal.
+
+       protect
+              Do not allow any changes to the protection bits on the filesystem.
+
+       usemp  Set UID and GID of the root of the filesystem to the UID and GID of the mount point upon the first
+              sync or umount, and then clear this option.  Strange...
+
+       verbose
+              Print an informational message for each successful mount.
+
+       prefix=string
+              Prefix used before volume name, when following a link.
+
+       volume=string
+              Prefix (of length at most 30) used before '/' when following a symbolic link.
+
+       reserved=value
+              (Default: 2.) Number of unused blocks at the start of the device.
+
+       root=value
+              Give explicitly the location of the root block.
+
+       bs=value
+              Give blocksize.  Allowed values are 512, 1024, 2048, 4096.
+
+       grpquota|noquota|quota|usrquota
+              These  options  are  accepted but ignored.  (However, quota utilities may react to such strings in
+              /etc/fstab.)
+
+   Mount options for debugfs
+       The debugfs filesystem is a pseudo filesystem, traditionally mounted on /sys/kernel/debug.  As of  kernel
+       version 3.4, debugfs has the following options:
+
+       uid=n, gid=n
+              Set the owner and group of the mountpoint.
+
+       mode=value
+              Sets the mode of the mountpoint.
+
+   Mount options for devpts
+       The  devpts  filesystem is a pseudo filesystem, traditionally mounted on /dev/pts.  In order to acquire a
+       pseudo terminal, a process opens /dev/ptmx; the number of the pseudo terminal is then made  available  to
+       the process and the pseudo terminal slave can be accessed as /dev/pts/<number>.
+
+       uid=value and gid=value
+              This  sets  the owner or the group of newly created PTYs to the specified values.  When nothing is
+              specified, they will be set to the UID and GID of the creating process.  For example, if there  is
+              a tty group with GID 5, then gid=5 will cause newly created PTYs to belong to the tty group.
+
+       mode=value
+              Set  the  mode  of  newly  created  PTYs to the specified value.  The default is 0600.  A value of
+              mode=620 and gid=5 makes "mesg y" the default on newly created PTYs.
+
+       newinstance
+              Create a private instance of devpts filesystem, such that indices of ptys allocated  in  this  new
+              instance are independent of indices created in other instances of devpts.
+
+              All  mounts  of  devpts  without  this  newinstance option share the same set of pty indices (i.e.
+              legacy mode).  Each mount of devpts with the newinstance option has a private set of pty indices.
+
+              This option is mainly used to support containers in the linux kernel.  It is implemented in  linux
+              kernel   versions   starting   with   2.6.29.   Further,  this  mount  option  is  valid  only  if
+              CONFIG_DEVPTS_MULTIPLE_INSTANCES is enabled in the kernel configuration.
+
+              To  use  this  option  effectively,  /dev/ptmx  must  be  a  symbolic  link  to   pts/ptmx.    See
+              Documentation/filesystems/devpts.txt in the linux kernel source tree for details.
+
+       ptmxmode=value
+
+              Set the mode for the new ptmx device node in the devpts filesystem.
+
+              With  the  support  for multiple instances of devpts (see newinstance option above), each instance
+              has a private ptmx node in the root of the devpts filesystem (typically /dev/pts/ptmx).
+
+              For compatibility with older versions of the kernel, the default mode of  the  new  ptmx  node  is
+              0000.   ptmxmode=value  specifies  a  more useful mode for the ptmx node and is highly recommended
+              when the newinstance option is specified.
+
+              This option is only implemented in linux kernel versions  starting  with  2.6.29.   Further,  this
+              option is valid only if CONFIG_DEVPTS_MULTIPLE_INSTANCES is enabled in the kernel configuration.
+
+   Mount options for fat
+       (Note: fat is not a separate filesystem, but a common part of the msdos, umsdos and vfat filesystems.)
+
+       blocksize={512|1024|2048}
+              Set blocksize (default 512).  This option is obsolete.
+
+       uid=value and gid=value
+              Set the owner and group of all files.  (Default: the UID and GID of the current process.)
+
+       umask=value
+              Set  the umask (the bitmask of the permissions that are not present).  The default is the umask of
+              the current process.  The value is given in octal.
+
+       dmask=value
+              Set the umask applied to directories only.  The default is the umask of the current process.   The
+              value is given in octal.
+
+       fmask=value
+              Set  the  umask  applied  to regular files only.  The default is the umask of the current process.
+              The value is given in octal.
+
+       allow_utime=value
+              This option controls the permission check of mtime/atime.
+
+              20     If current process is in group of file's group ID, you can change timestamp.
+
+              2      Other users can change timestamp.
+
+              The default is set from `dmask' option. (If the directory is writable, utime(2) is  also  allowed.
+              I.e. ~dmask & 022)
+
+              Normally  utime(2)  checks  current process is owner of the file, or it has CAP_FOWNER capability.
+              But FAT filesystem doesn't have UID/GID on disk, so normal check is  too  inflexible.   With  this
+              option you can relax it.
+
+       check=value
+              Three different levels of pickiness can be chosen:
+
+              r[elaxed]
+                     Upper  and  lower  case  are  accepted  and equivalent, long name parts are truncated (e.g.
+                     verylongname.foobar becomes verylong.foo), leading and embedded spaces are accepted in each
+                     name part (name and extension).
+
+              n[ormal]
+                     Like "relaxed", but many special characters (*, ?, <, spaces, etc.) are rejected.  This  is
+                     the default.
+
+              s[trict]
+                     Like  "normal",  but names that contain long parts or special characters that are sometimes
+                     used on Linux but are not accepted by MS-DOS (+, =, etc.) are rejected.
+
+       codepage=value
+              Sets the codepage for converting to shortname characters on FAT and VFAT filesystems.  By default,
+              codepage 437 is used.
+
+       conv=mode
+              This option is obsolete and may fail or being ignored.
+
+       cvf_format=module
+              Forces the driver to use the CVF (Compressed Volume  File)  module  cvf_module  instead  of  auto-
+              detection.   If  the  kernel  supports kmod, the cvf_format=xxx option also controls on-demand CVF
+              module loading.  This option is obsolete.
+
+       cvf_option=option
+              Option passed to the CVF module.  This option is obsolete.
+
+       debug  Turn on the debug flag.  A version string and a list of  filesystem  parameters  will  be  printed
+              (these data are also printed if the parameters appear to be inconsistent).
+
+       discard
+              If set, causes discard/TRIM commands to be issued to the block device when blocks are freed.  This
+              is useful for SSD devices and sparse/thinly-provisioned LUNs.
+
+       dos1xfloppy
+              If  set,  use  a fallback default BIOS Parameter Block configuration, determined by backing device
+              size.  These static parameters match defaults assumed by DOS 1.x for 160 kiB, 180  kiB,  320  kiB,
+              and 360 kiB floppies and floppy images.
+
+       errors={panic|continue|remount-ro}
+              Specify  FAT  behavior  on critical errors: panic, continue without doing anything, or remount the
+              partition in read-only mode (default behavior).
+
+       fat={12|16|32}
+              Specify a 12, 16 or 32 bit fat.  This overrides the automatic FAT  type  detection  routine.   Use
+              with caution!
+
+       iocharset=value
+              Character  set  to use for converting between 8 bit characters and 16 bit Unicode characters.  The
+              default is iso8859-1.  Long filenames are stored on disk in Unicode format.
+
+       nfs={stale_rw|nostale_ro}
+              Enable this only if you want to export the FAT filesystem over NFS.
+
+              stale_rw: This option maintains an index (cache) of directory inodes which is  used  by  the  nfs-
+              related  code  to  improve look-ups.  Full file operations (read/write) over NFS are supported but
+              with cache eviction at NFS server, this could result in spurious ESTALE errors.
+
+              nostale_ro: This option bases the inode number and file handle on the on-disk location of  a  file
+              in the FAT directory entry.  This ensures that ESTALE will not be returned after a file is evicted
+              from  the  inode cache.  However, it means that operations such as rename, create and unlink could
+              cause file handles that previously pointed at one file to point at a different  file,  potentially
+              causing data corruption.  For this reason, this option also mounts the filesystem readonly.
+
+              To maintain backward compatibility, '-o nfs' is also accepted, defaulting to stale_rw.
+
+       tz=UTC This  option  disables the conversion of timestamps between local time (as used by Windows on FAT)
+              and UTC (which Linux uses internally).  This is particularly useful when  mounting  devices  (like
+              digital cameras) that are set to UTC in order to avoid the pitfalls of local time.
+
+       time_offset=minutes
+              Set offset for conversion of timestamps from local time used by FAT to UTC.  I.e., minutes will be
+              subtracted from each timestamp to convert it to UTC used internally by Linux.  This is useful when
+              the  time  zone set in the kernel via settimeofday(2) is not the time zone used by the filesystem.
+              Note that this option still does not provide correct time stamps in all cases in presence of DST -
+              time stamps in a different DST setting will be off by one hour.
+
+       quiet  Turn on the quiet flag.  Attempts to chown or chmod files do  not  return  errors,  although  they
+              fail.  Use with caution!
+
+       rodir  FAT  has the ATTR_RO (read-only) attribute.  On Windows, the ATTR_RO of the directory will just be
+              ignored, and is used only by applications as a flag (e.g. it's set for the customized folder).
+
+              If you want to use ATTR_RO as read-only flag even for the directory, set this option.
+
+       showexec
+              If set, the execute permission bits of the file will be allowed only if the extension part of  the
+              name is .EXE, .COM, or .BAT.  Not set by default.
+
+       sys_immutable
+              If set, ATTR_SYS attribute on FAT is handled as IMMUTABLE flag on Linux.  Not set by default.
+
+       flush  If set, the filesystem will try to flush to disk more early than normal.  Not set by default.
+
+       usefree
+              Use  the  "free  clusters"  value  stored  on  FSINFO.   It'll be used to determine number of free
+              clusters without scanning disk.  But it's not used by default, because recent Windows don't update
+              it correctly in some case.  If you are sure the "free clusters" on  FSINFO  is  correct,  by  this
+              option you can avoid scanning disk.
+
+       dots, nodots, dotsOK=[yes|no]
+              Various misguided attempts to force Unix or DOS conventions onto a FAT filesystem.
+
+   Mount options for hfs
+       creator=cccc, type=cccc
+              Set  the  creator/type  values  as shown by the MacOS finder used for creating new files.  Default
+              values: '????'.
+
+       uid=n, gid=n
+              Set the owner and group of all files.  (Default: the UID and GID of the current process.)
+
+       dir_umask=n, file_umask=n, umask=n
+              Set the umask used for all directories, all regular files, or all files and directories.  Defaults
+              to the umask of the current process.
+
+       session=n
+              Select the CDROM session to mount.  Defaults to leaving that decision to the CDROM  driver.   This
+              option will fail with anything but a CDROM as underlying device.
+
+       part=n Select  partition number n from the device.  Only makes sense for CDROMs.  Defaults to not parsing
+              the partition table at all.
+
+       quiet  Don't complain about invalid mount options.
+
+   Mount options for hpfs
+       uid=value and gid=value
+              Set the owner and group of all files. (Default: the UID and GID of the current process.)
+
+       umask=value
+              Set the umask (the bitmask of the permissions that are not present).  The default is the umask  of
+              the current process.  The value is given in octal.
+
+       case={lower|asis}
+              Convert all files names to lower case, or leave them.  (Default: case=lower.)
+
+       conv=mode
+              This option is obsolete and may fail or being ignored.
+
+       nocheck
+              Do not abort mounting when certain consistency checks fail.
+
+   Mount options for iso9660
+       ISO  9660 is a standard describing a filesystem structure to be used on CD-ROMs. (This filesystem type is
+       also seen on some DVDs.  See also the udf filesystem.)
+
+       Normal iso9660 filenames appear in an 8.3 format (i.e., DOS-like restrictions on filename length), and in
+       addition all characters are in upper case.  Also there is no field for file ownership, protection, number
+       of links, provision for block/character devices, etc.
+
+       Rock Ridge is an extension to iso9660 that provides all of these UNIX-like features.  Basically there are
+       extensions to each directory record that supply all of the additional information, and when Rock Ridge is
+       in use, the filesystem is indistinguishable from a normal UNIX filesystem (except that it  is  read-only,
+       of course).
+
+       norock Disable the use of Rock Ridge extensions, even if available.  Cf. map.
+
+       nojoliet
+              Disable the use of Microsoft Joliet extensions, even if available.  Cf. map.
+
+       check={r[elaxed]|s[trict]}
+              With  check=relaxed, a filename is first converted to lower case before doing the lookup.  This is
+              probably only meaningful together with norock and map=normal.  (Default: check=strict.)
+
+       uid=value and gid=value
+              Give all files in the  filesystem  the  indicated  user  or  group  id,  possibly  overriding  the
+              information found in the Rock Ridge extensions.  (Default: uid=0,gid=0.)
+
+       map={n[ormal]|o[ff]|a[corn]}
+              For  non-Rock  Ridge  volumes,  normal  name  translation  maps upper to lower case ASCII, drops a
+              trailing `;1', and converts `;' to `.'.  With map=off no name translation is  done.   See  norock.
+              (Default: map=normal.)  map=acorn is like map=normal but also apply Acorn extensions if present.
+
+       mode=value
+              For  non-Rock  Ridge  volumes,  give  all  files  the  indicated mode.  (Default: read and execute
+              permission for everybody.)  Octal mode values require a leading 0.
+
+       unhide Also show hidden and associated files.  (If the ordinary files and the associated or hidden  files
+              have the same filenames, this may make the ordinary files inaccessible.)
+
+       block={512|1024|2048}
+              Set the block size to the indicated value.  (Default: block=1024.)
+
+       conv=mode
+              This option is obsolete and may fail or being ignored.
+
+       cruft  If  the  high  byte of the file length contains other garbage, set this mount option to ignore the
+              high order bits of the file length.  This implies that a file cannot be larger than 16 MB.
+
+       session=x
+              Select number of session on multisession CD.
+
+       sbsector=xxx
+              Session begins from sector xxx.
+
+       The following options are the same as for vfat and specifying them only  makes  sense  when  using  discs
+       encoded using Microsoft's Joliet extensions.
+
+       iocharset=value
+              Character  set  to  use  for  converting 16 bit Unicode characters on CD to 8 bit characters.  The
+              default is iso8859-1.
+
+       utf8   Convert 16 bit Unicode characters on CD to UTF-8.
+
+   Mount options for jfs
+       iocharset=name
+              Character set to use for converting from Unicode to ASCII.  The default is to  do  no  conversion.
+              Use  iocharset=utf8  for UTF8 translations.  This requires CONFIG_NLS_UTF8 to be set in the kernel
+              .config file.
+
+       resize=value
+              Resize the volume to value blocks.  JFS only supports growing a volume, not  shrinking  it.   This
+              option  is only valid during a remount, when the volume is mounted read-write.  The resize keyword
+              with no value will grow the volume to the full size of the partition.
+
+       nointegrity
+              Do not write to the journal.  The primary use of this option is to allow  for  higher  performance
+              when  restoring  a volume from backup media.  The integrity of the volume is not guaranteed if the
+              system abnormally ends.
+
+       integrity
+              Default.  Commit metadata changes to the journal.  Use this option to remount a volume  where  the
+              nointegrity option was previously specified in order to restore normal behavior.
+
+       errors={continue|remount-ro|panic}
+              Define  the  behavior  when  an  error  is  encountered.   (Either ignore errors and just mark the
+              filesystem erroneous and continue, or remount the filesystem read-only,  or  panic  and  halt  the
+              system.)
+
+       noquota|quota|usrquota|grpquota
+              These options are accepted but ignored.
+
+   Mount options for msdos
+       See  mount  options  for  fat.  If the msdos filesystem detects an inconsistency, it reports an error and
+       sets the file system read-only.  The filesystem can be made writable again by remounting it.
+
+   Mount options for ncpfs
+       Just like nfs, the ncpfs implementation expects a binary argument (a struct ncp_mount_data) to the  mount
+       system  call.   This  argument is constructed by ncpmount(8) and the current version of mount (2.12) does
+       not know anything about ncpfs.
+
+   Mount options for ntfs
+       iocharset=name
+              Character set to use when returning file names.  Unlike VFAT, NTFS suppresses names  that  contain
+              nonconvertible characters.  Deprecated.
+
+       nls=name
+              New name for the option earlier called iocharset.
+
+       utf8   Use UTF-8 for converting file names.
+
+       uni_xlate={0|1|2}
+              For 0 (or `no' or `false'), do not use escape sequences for unknown Unicode characters.  For 1 (or
+              `yes'  or  `true')  or 2, use vfat-style 4-byte escape sequences starting with ":".  Here 2 give a
+              little-endian encoding and 1 a byteswapped bigendian encoding.
+
+       posix=[0|1]
+              If enabled (posix=1), the filesystem distinguishes between upper and lower case.   The  8.3  alias
+              names are presented as hard links instead of being suppressed.  This option is obsolete.
+
+       uid=value, gid=value and umask=value
+              Set  the  file  permission on the filesystem.  The umask value is given in octal.  By default, the
+              files are owned by root and not readable by somebody else.
+
+   Mount options for overlay
+       Since Linux 3.18 the overlay pseudo filesystem implements a union mount for other filesystems.
+
+       An overlay filesystem combines two filesystems - an upper filesystem and a lower filesystem.  When a name
+       exists in both filesystems, the object in the upper filesystem is visible while the object in  the  lower
+       filesystem is either hidden or, in the case of directories, merged with the upper object.
+
+       The  lower  filesystem  can  be  any filesystem supported by Linux and does not need to be writable.  The
+       lower filesystem can even be another overlayfs.  The upper filesystem will normally be writable and if it
+       is it must support the creation of trusted.* extended attributes, and must  provide  a  valid  d_type  in
+       readdir responses, so NFS is not suitable.
+
+       A  read-only  overlay of two read-only filesystems may use any filesystem type.  The options lowerdir and
+       upperdir are combined into a merged directory by using:
+
+              mount -t overlay  overlay  \
+                -olowerdir=/lower,upperdir=/upper,workdir=/work  /merged
+
+       lowerdir=directory
+              Any filesystem, does not need to be on a writable filesystem.
+
+       upperdir=directory
+              The upperdir is normally on a writable filesystem.
+
+       workdir=directory
+              The workdir needs to be an empty directory on the same filesystem as upperdir.
+
+   Mount options for reiserfs
+       Reiserfs is a journaling filesystem.
+
+       conv   Instructs version 3.6 reiserfs software to mount a version 3.5 filesystem, using  the  3.6  format
+              for newly created objects.  This filesystem will no longer be compatible with reiserfs 3.5 tools.
+
+       hash={rupasov|tea|r5|detect}
+              Choose which hash function reiserfs will use to find files within directories.
+
+              rupasov
+                     A  hash  invented  by  Yury  Yu.  Rupasov.   It  is  fast  and  preserves locality, mapping
+                     lexicographically close file names to close hash values.  This option should not  be  used,
+                     as it causes a high probability of hash collisions.
+
+              tea    A  Davis-Meyer function implemented by Jeremy Fitzhardinge.  It uses hash permuting bits in
+                     the name.  It gets high randomness and, therefore, low probability of  hash  collisions  at
+                     some CPU cost.  This may be used if EHASHCOLLISION errors are experienced with the r5 hash.
+
+              r5     A  modified  version  of  the  rupasov  hash.  It is used by default and is the best choice
+                     unless the filesystem has huge directories and unusual file-name patterns.
+
+              detect Instructs mount to detect which hash function is in use by examining the  filesystem  being
+                     mounted,  and  to write this information into the reiserfs superblock.  This is only useful
+                     on the first mount of an old format filesystem.
+
+       hashed_relocation
+              Tunes the block allocator.  This may provide performance improvements in some situations.
+
+       no_unhashed_relocation
+              Tunes the block allocator.  This may provide performance improvements in some situations.
+
+       noborder
+              Disable the border allocator algorithm invented by Yury Yu. Rupasov.  This may provide performance
+              improvements in some situations.
+
+       nolog  Disable journaling.  This will provide slight performance improvements in some situations  at  the
+              cost  of  losing reiserfs's fast recovery from crashes.  Even with this option turned on, reiserfs
+              still performs all journaling operations,  save  for  actual  writes  into  its  journaling  area.
+              Implementation of nolog is a work in progress.
+
+       notail By  default,  reiserfs  stores small files and `file tails' directly into its tree.  This confuses
+              some utilities such as LILO(8).  This option is used to disable packing of files into the tree.
+
+       replayonly
+              Replay the transactions which are in the journal,  but  do  not  actually  mount  the  filesystem.
+              Mainly used by reiserfsck.
+
+       resize=number
+              A  remount  option  which  permits online expansion of reiserfs partitions.  Instructs reiserfs to
+              assume that the device has number blocks.  This option is designed for use with devices which  are
+              under  logical  volume management (LVM).  There is a special resizer utility which can be obtained
+              from ftp://ftp.namesys.com/pub/reiserfsprogs.
+
+       user_xattr
+              Enable Extended User Attributes.  See the attr(5) manual page.
+
+       acl    Enable POSIX Access Control Lists.  See the acl(5) manual page.
+
+       barrier=none / barrier=flush
+              This disables / enables the use of write barriers in the journaling code.  barrier=none  disables,
+              barrier=flush  enables  (default).  This also requires an IO stack which can support barriers, and
+              if reiserfs gets an error on a barrier write, it will  disable  barriers  again  with  a  warning.
+              Write  barriers  enforce  proper  on-disk  ordering of journal commits, making volatile disk write
+              caches safe to use, at some performance penalty.  If your disks are battery-backed in one  way  or
+              another, disabling barriers may safely improve performance.
+
+   Mount options for ubifs
+       UBIFS  is  a flash filesystem which works on top of UBI volumes.  Note that atime is not supported and is
+       always turned off.
+
+       The device name may be specified as
+              ubiX_Y UBI device number X, volume number Y
+
+              ubiY   UBI device number 0, volume number Y
+
+              ubiX:NAME
+                     UBI device number X, volume with name NAME
+
+              ubi:NAME
+                     UBI device number 0, volume with name NAME
+       Alternative !  separator may be used instead of :.
+
+       The following mount options are available:
+
+       bulk_read
+              Enable bulk-read.  VFS read-ahead is disabled because it slows down the file system.  Bulk-Read is
+              an internal optimization.  Some flashes may read faster if the data are read  at  one  go,  rather
+              than  at  several  read  requests.  For example, OneNAND can do "read-while-load" if it reads more
+              than one NAND page.
+
+       no_bulk_read
+              Do not bulk-read.  This is the default.
+
+       chk_data_crc
+              Check data CRC-32 checksums.  This is the default.
+
+       no_chk_data_crc.
+              Do not check data CRC-32 checksums.  With this  option,  the  filesystem  does  not  check  CRC-32
+              checksum  for  data, but it does check it for the internal indexing information.  This option only
+              affects reading, not writing.  CRC-32 is always calculated when writing the data.
+
+       compr={none|lzo|zlib}
+              Select the default compressor which is used when new files are written.  It is still  possible  to
+              read compressed files if mounted with the none option.
+
+   Mount options for udf
+       UDF  is  the  "Universal  Disk  Format"  filesystem  defined  by  OSTA,  the  Optical  Storage Technology
+       Association, and is often used for DVD-ROM, frequently in the form of a hybrid  UDF/ISO-9660  filesystem.
+       It  is,  however,  perfectly  usable by itself on disk drives, flash drives and other block devices.  See
+       also iso9660.
+
+       uid=   Make all files in  the  filesystem  belong  to  the  given  user.   uid=forget  can  be  specified
+              independently of (or usually in addition to) uid=<user> and results in UDF not storing uids to the
+              media. In fact the recorded uid is the 32-bit overflow uid -1 as defined by the UDF standard.  The
+              value  is  given as either <user> which is a valid user name or the corresponding decimal user id,
+              or the special string "forget".
+
+       gid=   Make all files in the  filesystem  belong  to  the  given  group.   gid=forget  can  be  specified
+              independently  of  (or  usually in addition to) gid=<group> and results in UDF not storing gids to
+              the media. In fact the recorded gid is the 32-bit overflow gid -1 as defined by the UDF  standard.
+              The  value  is  given  as  either <group> which is a valid group name or the corresponding decimal
+              group id, or the special string "forget".
+
+       umask= Mask out the given permissions from all inodes read from the filesystem.  The value  is  given  in
+              octal.
+
+       mode=  If  mode=  is set the permissions of all non-directory inodes read from the filesystem will be set
+              to the given mode. The value is given in octal.
+
+       dmode= If dmode= is set the permissions of all directory inodes read from the filesystem will be  set  to
+              the given dmode. The value is given in octal.
+
+       bs=    Set  the block size. Default value prior to kernel version 2.6.30 was 2048. Since 2.6.30 and prior
+              to 4.11 it was logical device block size with fallback to 2048. Since 4.11  it  is  logical  block
+              size with fallback to any valid block size between logical device block size and 4096.
+
+              For other details see the mkudffs(8) 2.0+ manpage, sections COMPATIBILITY and BLOCK SIZE.
+
+       unhide Show otherwise hidden files.
+
+       undelete
+              Show deleted files in lists.
+
+       adinicb
+              Embed data in the inode. (default)
+
+       noadinicb
+              Don't embed data in the inode.
+
+       shortad
+              Use short UDF address descriptors.
+
+       longad Use long UDF address descriptors. (default)
+
+       nostrict
+              Unset strict conformance.
+
+       iocharset=
+              Set the NLS character set. This requires kernel compiled with CONFIG_UDF_NLS option.
+
+       utf8   Set the UTF-8 character set.
+
+   Mount options for debugging and disaster recovery
+       novrs  Ignore the Volume Recognition Sequence and attempt to mount anyway.
+
+       session=
+              Select the session number for multi-session recorded optical media. (default= last session)
+
+       anchor=
+              Override standard anchor location. (default= 256)
+
+       lastblock=
+              Set the last block of the filesystem.
+
+   Unused historical mount options that may be encountered and should be removed
+       uid=ignore
+              Ignored, use uid=<user> instead.
+
+       gid=ignore
+              Ignored, use gid=<group> instead.
+
+       volume=
+              Unimplemented and ignored.
+
+       partition=
+              Unimplemented and ignored.
+
+       fileset=
+              Unimplemented and ignored.
+
+       rootdir=
+              Unimplemented and ignored.
+
+   Mount options for ufs
+       ufstype=value
+              UFS is a filesystem widely used in different operating systems.  The problem are differences among
+              implementations.   Features of some implementations are undocumented, so its hard to recognize the
+              type of ufs automatically.  That's why the user must specify the type  of  ufs  by  mount  option.
+              Possible values are:
+
+              old    Old format of ufs, this is the default, read only.  (Don't forget to give the -r option.)
+
+              44bsd  For filesystems created by a BSD-like system (NetBSD, FreeBSD, OpenBSD).
+
+              ufs2   Used in FreeBSD 5.x supported as read-write.
+
+              5xbsd  Synonym for ufs2.
+
+              sun    For filesystems created by SunOS or Solaris on Sparc.
+
+              sunx86 For filesystems created by Solaris on x86.
+
+              hp     For filesystems created by HP-UX, read-only.
+
+              nextstep
+                     For filesystems created by NeXTStep (on NeXT station) (currently read only).
+
+              nextstep-cd
+                     For NextStep CDROMs (block_size == 2048), read-only.
+
+              openstep
+                     For  filesystems  created  by  OpenStep (currently read only).  The same filesystem type is
+                     also used by Mac OS X.
+
+       onerror=value
+              Set behavior on error:
+
+              panic  If an error is encountered, cause a kernel panic.
+
+              [lock|umount|repair]
+                     These mount options don't do anything at present; when  an  error  is  encountered  only  a
+                     console message is printed.
+
+   Mount options for umsdos
+       See mount options for msdos.  The dotsOK option is explicitly killed by umsdos.
+
+   Mount options for vfat
+       First  of all, the mount options for fat are recognized.  The dotsOK option is explicitly killed by vfat.
+       Furthermore, there are
+
+       uni_xlate
+              Translate unhandled Unicode characters to special escaped sequences.  This  lets  you  backup  and
+              restore  filenames  that  are  created with any Unicode characters.  Without this option, a '?' is
+              used when no translation is possible.  The escape character is ':' because it is otherwise invalid
+              on the vfat filesystem.  The escape sequence that gets used, where u is the Unicode character, is:
+              ':', (u & 0x3f), ((u>>6) & 0x3f), (u>>12).
+
+       posix  Allow two files with names that only differ in case.  This option is obsolete.
+
+       nonumtail
+              First try to make a short name without sequence number, before trying name~num.ext.
+
+       utf8   UTF8 is the filesystem safe 8-bit encoding of Unicode that is used by  the  console.   It  can  be
+              enabled  for  the  filesystem with this option or disabled with utf8=0, utf8=no or utf8=false.  If
+              `uni_xlate' gets set, UTF8 gets disabled.
+
+       shortname=mode
+              Defines the behavior for creation and display of filenames which fit into 8.3  characters.   If  a
+              long  name  for  a  file  exists, it will always be the preferred one for display.  There are four
+              modes:
+
+              lower  Force the short name to lower case upon display; store a long name when the short  name  is
+                     not all upper case.
+
+              win95  Force  the  short name to upper case upon display; store a long name when the short name is
+                     not all upper case.
+
+              winnt  Display the short name as is; store a long name when the short name is not all  lower  case
+                     or all upper case.
+
+              mixed  Display  the short name as is; store a long name when the short name is not all upper case.
+                     This mode is the default since Linux 2.6.32.
+
+   Mount options for usbfs
+       devuid=uid and devgid=gid and devmode=mode
+              Set the owner and group and mode of the device files in the usbfs filesystem (default:  uid=gid=0,
+              mode=0644).  The mode is given in octal.
+
+       busuid=uid and busgid=gid and busmode=mode
+              Set  the  owner  and  group  and  mode  of  the  bus directories in the usbfs filesystem (default:
+              uid=gid=0, mode=0555).  The mode is given in octal.
+
+       listuid=uid and listgid=gid and listmode=mode
+              Set the owner and group and mode of the file devices (default: uid=gid=0, mode=0444).  The mode is
+              given in octal.

@@ -1,0 +1,26 @@
+﻿TOOL: netsession
+SOURCE_TYPE: manual_curated
+SOURCE_URL: https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc754051(v=ws.11)
+FETCHED_UTC: 2026-03-12 17:20:00Z
+
+------------------------------------------------------------
+NAME
+    netsession - display or manage SMB sessions on a server
+
+SYNOPSIS
+    net session
+    net session \\[Client]
+    net session \\[Client] /delete
+
+DESCRIPTION
+    Shows active sessions connected to local server service (LanmanServer).
+    Can also terminate a specific client session.
+
+ARGUMENTS
+    \\[Client]   Client machine name/IP with active session.
+    /delete      Ends the selected session.
+
+EXAMPLES
+    net session
+    net session \\[IP]
+    net session \\[Hostname] /delete

@@ -1,0 +1,734 @@
+{
+    "id":  "dantes_inferno_001",
+    "name":  "Dante\u0027s Inferno",
+    "description":  "Dante-style multi-hop operation from Limbo through Treachery with SSH pivoting, service recon, privilege checks, and Salvation prep.",
+    "steps":  [
+                  {
+                      "question":  [
+                                       "Recon: Identify live hosts in the 192.168.1.0/24 segment using an nmap ping sweep.",
+                                       "Target CIDR: 192.168.1.0/24",
+                                       "Build the exact ping-scan command."
+                                   ],
+                      "answer":  "nmap -sn 192.168.1.0/24",
+                      "alternate_answers":  [
+                                                "nmap 192.168.1.0/24 -sn"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Perform deep nmap profiling on Limbo using OS/service detection and traceroute behavior from the aggressive profile.",
+                                       "Target IP: 192.168.1.200"
+                                   ],
+                      "answer":  "nmap -A 192.168.1.200",
+                      "alternate_answers":  [
+                                                "nmap 192.168.1.200 -A"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Grab the SSH banner from Limbo without authenticating.",
+                                       "Host: 192.168.1.200",
+                                       "Port: 22",
+                                       "Use telnet for the banner check."
+                                   ],
+                      "answer":  "telnet 192.168.1.200 22",
+                      "alternate_answers":  [
+                                                "telnet 192.168.1.200 22"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Credentials known: virgil:ignorance.",
+                                       "Initial access: log in over SSH with the discovered user.",
+                                       "Target: 192.168.1.200"
+                                   ],
+                      "answer":  "ssh virgil@192.168.1.200"
+                  },
+                  {
+                      "question":  [
+                                       "SSH password prompt:",
+                                       "Enter SSH Password"
+                                   ],
+                      "answer":  "ignorance",
+                      "show_previous_question":  true,
+                      "on_incorrect":  {
+                                           "messages":  [
+                                                            "Authentication failed. Restarting SSH attempt from previous step."
+                                                        ],
+                                           "rewind_steps":  1
+                                       },
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Limbo access established."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "limbo_001",
+                                                                "ip":  "192.168.1.200",
+                                                                "hostname":  "01-limbo",
+                                                                "username":  "virgil",
+                                                                "mac_address":  "00:11:22:33:44:01"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Local recon: verify the current account context on Limbo."
+                                   ],
+                      "answer":  "whoami"
+                  },
+                  {
+                      "question":  [
+                                       "Local recon: enumerate interfaces and routes from Limbo.",
+                                       "Use Linux ip command output format."
+                                   ],
+                      "answer":  "ip a"
+                  },
+                  {
+                      "question":  [
+                                       "Privilege recon: list sudo rights for the current user."
+                                   ],
+                      "answer":  "sudo -l"
+                  },
+                  {
+                      "question":  [
+                                       "Artifact hunt: find text files under /home recursively.",
+                                       "Match only files ending in .txt."
+                                   ],
+                      "answer":  "find /home/ -type f -name *.txt",
+                      "alternate_answers":  [
+                                                "find /home/ -name *.txt -type f"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Read the discovered hop note file for next-stage targets.",
+                                       "File: /home/virgil/things/welcome.txt"
+                                   ],
+                      "answer":  "cat /home/virgil/things/welcome.txt"
+                  },
+                  {
+                      "question":  [
+                                       "Pivot to Lust using discovered user and known host.",
+                                       "User: cleopatra",
+                                       "Target IP: 172.1.98.15",
+                                       "Use SSH from current foothold."
+                                   ],
+                      "answer":  "ssh cleopatra@172.1.98.15"
+                  },
+                  {
+                      "question":  [
+                                       "Proxy setup: if /etc/proxychains.conf is missing, create it from the proxychains4 default file.",
+                                       "Build the copy command with sudo."
+                                   ],
+                      "answer":  "sudo cp /etc/proxychains4.conf /etc/proxychains.conf"
+                  },
+                  {
+                      "question":  [
+                                       "Tunnel prep on attacker: create a dynamic SOCKS tunnel into Limbo for proxychains traffic.",
+                                       "Listen port: 1080",
+                                       "Jump account: virgil@192.168.1.200"
+                                   ],
+                      "answer":  "ssh -N -D 1080 virgil@192.168.1.200"
+                  },
+                  {
+                      "question":  [
+                                       "Through proxychains, scan Lust from Kali using TCP connect scan and no host discovery assumptions.",
+                                       "Target: 172.1.98.15",
+                                       "Requirement: run as sudo with proxychains + nmap."
+                                   ],
+                      "answer":  "sudo proxychains nmap -sT -Pn 172.1.98.15",
+                      "alternate_answers":  [
+                                                "sudo proxychains nmap 172.1.98.15 -sT -Pn"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Web testing on Lust: connect to HTTP service via proxychains and telnet.",
+                                       "Target: 172.1.98.15",
+                                       "Port: 80"
+                                   ],
+                      "answer":  "proxychains telnet 172.1.98.15 80",
+                      "alternate_answers":  [
+                                                "proxychains telnet 172.1.98.15 80"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Hash cracking task: crack yescrypt-compatible hash with john using rockyou and custom pot path.",
+                                       "Hash file: 1.hash",
+                                       "Wordlist: /usr/share/wordlists/rockyou.txt",
+                                       "Pot file: 123123"
+                                   ],
+                      "answer":  "john --format=crypt --wordlist=/usr/share/wordlists/rockyou.txt --pot=123123 1.hash",
+                      "alternate_answers":  [
+                                                "john --wordlist=/usr/share/wordlists/rockyou.txt --format=crypt --pot=123123 1.hash"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Credentials recovered: cleopatra:desire.",
+                                       "Authenticate to Lust over SSH through proxychains.",
+                                       "Target: 172.1.98.15"
+                                   ],
+                      "answer":  "proxychains ssh cleopatra@172.1.98.15"
+                  },
+                  {
+                      "question":  [
+                                       "SSH password prompt:",
+                                       "Enter SSH Password"
+                                   ],
+                      "answer":  "desire",
+                      "show_previous_question":  true,
+                      "on_incorrect":  {
+                                           "messages":  [
+                                                            "Authentication failed. Restarting SSH attempt from previous step."
+                                                        ],
+                                           "rewind_steps":  1
+                                       },
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Lust foothold confirmed."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "lust_001",
+                                                                "ip":  "172.1.98.15",
+                                                                "hostname":  "02-lust",
+                                                                "username":  "cleopatra",
+                                                                "mac_address":  "00:11:22:33:44:02"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "New pivot tunnel: build a multi-hop dynamic tunnel to reach Gluttony.",
+                                       "SOCKS port: 1080",
+                                       "Jump chain: virgil@192.168.1.200",
+                                       "Final hop user/host: cleopatra@172.1.98.15"
+                                   ],
+                      "answer":  "ssh -N -D 1080 -J virgil@192.168.1.200 cleopatra@172.1.98.15"
+                  },
+                  {
+                      "question":  [
+                                       "Gluttony recon via proxychains: perform TCP connect scan with host discovery disabled.",
+                                       "Target: 10.1.10.3",
+                                       "Use sudo proxychains nmap."
+                                   ],
+                      "answer":  "sudo proxychains nmap -sT -Pn 10.1.10.3",
+                      "alternate_answers":  [
+                                                "sudo proxychains nmap 10.1.10.3 -sT -Pn"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Service test on Gluttony: check FTP interaction through proxychains.",
+                                       "Target: 10.1.10.3"
+                                   ],
+                      "answer":  "proxychains ftp 10.1.10.3"
+                  },
+                  {
+                      "question":  [
+                                       "Credentials known: cerberus:excess.",
+                                       "SSH to Gluttony through proxychains.",
+                                       "Target: 10.1.10.3"
+                                   ],
+                      "answer":  "proxychains ssh cerberus@10.1.10.3"
+                  },
+                  {
+                      "question":  [
+                                       "SSH password prompt:",
+                                       "Enter SSH Password"
+                                   ],
+                      "answer":  "excess",
+                      "show_previous_question":  true,
+                      "on_incorrect":  {
+                                           "messages":  [
+                                                            "Authentication failed. Restarting SSH attempt from previous step."
+                                                        ],
+                                           "rewind_steps":  1
+                                       },
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Gluttony foothold established."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "gluttony_001",
+                                                                "ip":  "10.1.10.3",
+                                                                "hostname":  "03-gluttony",
+                                                                "username":  "cerberus",
+                                                                "mac_address":  "00:11:22:33:44:03"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Create next dynamic tunnel to reach Greed.",
+                                       "SOCKS port: 1080",
+                                       "Jump chain: virgil@192.168.1.200,cleopatra@172.1.98.15",
+                                       "Final hop: cerberus@10.1.10.3"
+                                   ],
+                      "answer":  "ssh -N -D 1080 -J virgil@192.168.1.200,cleopatra@172.1.98.15 cerberus@10.1.10.3"
+                  },
+                  {
+                      "question":  [
+                                       "Credentials known: pluto:mammon.",
+                                       "Connect to Greed over SSH through proxychains.",
+                                       "Target: 10.0.0.254"
+                                   ],
+                      "answer":  "proxychains ssh pluto@10.0.0.254"
+                  },
+                  {
+                      "question":  [
+                                       "SSH password prompt:",
+                                       "Enter SSH Password"
+                                   ],
+                      "answer":  "mammon",
+                      "show_previous_question":  true,
+                      "on_incorrect":  {
+                                           "messages":  [
+                                                            "Authentication failed. Restarting SSH attempt from previous step."
+                                                        ],
+                                           "rewind_steps":  1
+                                       },
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Greed foothold established."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "greed_001",
+                                                                "ip":  "10.0.0.254",
+                                                                "hostname":  "04-greed",
+                                                                "username":  "pluto",
+                                                                "mac_address":  "00:11:22:33:44:04"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Privilege recon on Greed: enumerate SUID binaries across the filesystem and suppress errors.",
+                                       "Build the exact find command."
+                                   ],
+                      "answer":  "find / -type f -perm -4000 2\u003e/dev/null"
+                  },
+                  {
+                      "question":  [
+                                       "Escalation attempt from Greed challenge binary.",
+                                       "Execute the local binary at /opt/greed/.gold"
+                                   ],
+                      "answer":  "/opt/greed/.gold",
+                      "alternate_answers":  [
+                                                "/opt/greed/.gold"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Firewall bypass on Greed: clear outbound nft rules in filter/output chain to restore SSH pivoting.",
+                                       "Use nft flush command."
+                                   ],
+                      "answer":  "nft flush chain ip filter output"
+                  },
+                  {
+                      "question":  [
+                                       "Build dynamic tunnel to Anger through Greed.",
+                                       "SOCKS port: 1080",
+                                       "Jump chain: virgil@192.168.1.200,cleopatra@172.1.98.15,cerberus@10.1.10.3",
+                                       "Final hop: pluto@10.0.0.254"
+                                   ],
+                      "answer":  "ssh -N -D 1080 -J virgil@192.168.1.200,cleopatra@172.1.98.15,cerberus@10.1.10.3 pluto@10.0.0.254"
+                  },
+                  {
+                      "question":  [
+                                       "Anger recon: run proxychains nmap with TCP connect, no DNS lookup, and no host discovery.",
+                                       "Target: 255.255.255.9",
+                                       "Use sudo."
+                                   ],
+                      "answer":  "sudo proxychains nmap -sT -Pn -n 255.255.255.9",
+                      "alternate_answers":  [
+                                                "sudo proxychains nmap 255.255.255.9 -sT -Pn -n"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Hint channel discovery: connect to the high hint port on Anger using netcat through proxychains.",
+                                       "Target: 255.255.255.9",
+                                       "Port: 65535"
+                                   ],
+                      "answer":  "proxychains nc 255.255.255.9 65535",
+                      "alternate_answers":  [
+                                                "proxychains nc 255.255.255.9 65535"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Credentials known from Anger clues: phlegyas:wrath.",
+                                       "Authenticate to Anger over SSH through proxychains.",
+                                       "Target: 255.255.255.9"
+                                   ],
+                      "answer":  "proxychains ssh phlegyas@255.255.255.9"
+                  },
+                  {
+                      "question":  [
+                                       "SSH password prompt:",
+                                       "Enter SSH Password"
+                                   ],
+                      "answer":  "wrath",
+                      "show_previous_question":  true,
+                      "on_incorrect":  {
+                                           "messages":  [
+                                                            "Authentication failed. Restarting SSH attempt from previous step."
+                                                        ],
+                                           "rewind_steps":  1
+                                       },
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Anger foothold established."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "anger_001",
+                                                                "ip":  "255.255.255.9",
+                                                                "hostname":  "05-anger",
+                                                                "username":  "phlegyas",
+                                                                "mac_address":  "00:11:22:33:44:05"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Build dynamic tunnel to Heresy from current chain.",
+                                       "SOCKS port: 1080",
+                                       "Jump chain: virgil@192.168.1.200,cleopatra@172.1.98.15,cerberus@10.1.10.3,pluto@10.0.0.254",
+                                       "Final hop: phlegyas@255.255.255.9"
+                                   ],
+                      "answer":  "ssh -N -D 1080 -J virgil@192.168.1.200,cleopatra@172.1.98.15,cerberus@10.1.10.3,pluto@10.0.0.254 phlegyas@255.255.255.9"
+                  },
+                  {
+                      "question":  [
+                                       "Heresy login test with known credentials.",
+                                       "User: epicurus",
+                                       "Target: 9.9.9.8",
+                                       "Use proxychains SSH on default port first."
+                                   ],
+                      "answer":  "proxychains ssh epicurus@9.9.9.8"
+                  },
+                  {
+                      "question":  [
+                                       "Heresy recon: run nmap through proxychains with no DNS and no host discovery.",
+                                       "Target: 9.9.9.8",
+                                       "Use sudo and TCP connect scan."
+                                   ],
+                      "answer":  "sudo proxychains nmap -sT -Pn -n 9.9.9.8",
+                      "alternate_answers":  [
+                                                "sudo proxychains nmap 9.9.9.8 -sT -Pn -n"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Credentials known: epicurus:denial.",
+                                       "Port-adjusted access: SSH to Heresy on non-standard port discovered during recon.",
+                                       "User: epicurus",
+                                       "Target: 9.9.9.8",
+                                       "Port: 1",
+                                       "Use proxychains."
+                                   ],
+                      "answer":  "proxychains ssh epicurus@9.9.9.8 -p 1",
+                      "alternate_answers":  [
+                                                "proxychains ssh -p 1 epicurus@9.9.9.8"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "SSH password prompt:",
+                                       "Enter SSH Password"
+                                   ],
+                      "answer":  "denial",
+                      "show_previous_question":  true,
+                      "on_incorrect":  {
+                                           "messages":  [
+                                                            "Authentication failed. Restarting SSH attempt from previous step."
+                                                        ],
+                                           "rewind_steps":  1
+                                       },
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Heresy foothold established via port 1."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "heresy_001",
+                                                                "ip":  "9.9.9.8",
+                                                                "hostname":  "06-heresy",
+                                                                "username":  "epicurus",
+                                                                "mac_address":  "00:11:22:33:44:06"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Fix loopback SSH redirection on Heresy by removing NAT OUTPUT DNAT rule for tcp/22 to 127.0.0.1:1.",
+                                       "Build the exact iptables delete command."
+                                   ],
+                      "answer":  "iptables -t nat -D OUTPUT -p tcp --dport 22 -j DNAT --to-destination 127.0.0.1:1",
+                      "alternate_answers":  [
+                                                "iptables -t nat -D OUTPUT --dport 22 -p tcp -j DNAT --to-destination 127.0.0.1:1"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "After Heresy firewall fix, test next-hop SSH to Violence.",
+                                       "Known credential context: minotaur:fury",
+                                       "User: minotaur",
+                                       "Target: 222.222.222.187"
+                                   ],
+                      "answer":  "ssh minotaur@222.222.222.187"
+                  },
+                  {
+                      "question":  [
+                                       "Build dynamic tunnel to Violence from Kali with Heresy on port 1 in the chain.",
+                                       "SOCKS port: 1080",
+                                       "Jump chain users/hosts: virgil@192.168.1.200,cleopatra@172.1.98.15,cerberus@10.1.10.3,pluto@10.0.0.254,phlegyas@255.255.255.9",
+                                       "Final hop: epicurus@9.9.9.8 on port 1"
+                                   ],
+                      "answer":  "ssh -N -D 1080 -J virgil@192.168.1.200,cleopatra@172.1.98.15,cerberus@10.1.10.3,pluto@10.0.0.254,phlegyas@255.255.255.9 epicurus@9.9.9.8 -p 1"
+                  },
+                  {
+                      "question":  [
+                                       "Credentials known: minotaur:fury.",
+                                       "Violence access through proxychains.",
+                                       "User: minotaur",
+                                       "Target: 222.222.222.187"
+                                   ],
+                      "answer":  "proxychains ssh minotaur@222.222.222.187"
+                  },
+                  {
+                      "question":  [
+                                       "SSH password prompt:",
+                                       "Enter SSH Password"
+                                   ],
+                      "answer":  "fury",
+                      "show_previous_question":  true,
+                      "on_incorrect":  {
+                                           "messages":  [
+                                                            "Authentication failed. Restarting SSH attempt from previous step."
+                                                        ],
+                                           "rewind_steps":  1
+                                       },
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Violence foothold established."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "violence_001",
+                                                                "ip":  "222.222.222.187",
+                                                                "hostname":  "07-violence",
+                                                                "username":  "minotaur",
+                                                                "mac_address":  "00:11:22:33:44:07"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Stability recon on Violence: list root crontab entries to find forced SSH-kill jobs.",
+                                       "Use sudo."
+                                   ],
+                      "answer":  "sudo crontab -l"
+                  },
+                  {
+                      "question":  [
+                                       "Inspect the process killer script referenced by cron.",
+                                       "File: /usr/local/bin/killer.sh"
+                                   ],
+                      "answer":  "cat /usr/local/bin/killer.sh"
+                  },
+                  {
+                      "question":  [
+                                       "From Violence, test next-hop SSH to Fraud host.",
+                                       "User: geryon",
+                                       "Target: 3.3.3.3"
+                                   ],
+                      "answer":  "ssh geryon@3.3.3.3"
+                  },
+                  {
+                      "question":  [
+                                       "Build dynamic tunnel to Fraud from Kali.",
+                                       "SOCKS port: 1080",
+                                       "Jump chain: virgil@192.168.1.200,cleopatra@172.1.98.15,cerberus@10.1.10.3,pluto@10.0.0.254,phlegyas@255.255.255.9,epicurus@9.9.9.8:1",
+                                       "Final hop: minotaur@222.222.222.187"
+                                   ],
+                      "answer":  "ssh -N -D 1080 -J virgil@192.168.1.200,cleopatra@172.1.98.15,cerberus@10.1.10.3,pluto@10.0.0.254,phlegyas@255.255.255.9,epicurus@9.9.9.8:1 minotaur@222.222.222.187",
+                      "alternate_answers":  [
+                                                "ssh -N -D 1080 -J virgil@192.168.1.200,cleopatra@172.1.98.15,cerberus@10.1.10.3,pluto@10.0.0.254,phlegyas@255.255.255.9,epicurus@9.9.9.8:1 minotaur@222.222.222.187"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Credentials known: geryon:deception.",
+                                       "Fraud access via proxychains.",
+                                       "User: geryon",
+                                       "Target: 3.3.3.3"
+                                   ],
+                      "answer":  "proxychains ssh geryon@3.3.3.3"
+                  },
+                  {
+                      "question":  [
+                                       "SSH password prompt:",
+                                       "Enter SSH Password"
+                                   ],
+                      "answer":  "deception",
+                      "show_previous_question":  true,
+                      "on_incorrect":  {
+                                           "messages":  [
+                                                            "Authentication failed. Restarting SSH attempt from previous step."
+                                                        ],
+                                           "rewind_steps":  1
+                                       },
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Fraud foothold established."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "fraud_001",
+                                                                "ip":  "3.3.3.3",
+                                                                "hostname":  "08-fraud",
+                                                                "username":  "geryon",
+                                                                "mac_address":  "00:11:22:33:44:08"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Reality check on Fraud host where userland binaries are spoofed.",
+                                       "Run the command that shows true active sessions and source hosts."
+                                   ],
+                      "answer":  "w"
+                  },
+                  {
+                      "question":  [
+                                       "Privilege check before final pivot from Fraud."
+                                   ],
+                      "answer":  "sudo -l"
+                  },
+                  {
+                      "question":  [
+                                       "Escalate on Fraud after sudoers adjustment workflow.",
+                                       "Spawn root shell with sudo interactive mode."
+                                   ],
+                      "answer":  "sudo -i",
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Fraud privilege escalation complete."
+                                                      ],
+                                         "beacon_update":  [
+                                                               {
+                                                                   "id":  "fraud_001",
+                                                                   "ip":  "3.3.3.3",
+                                                                   "hostname":  "08-fraud",
+                                                                   "username":  "root",
+                                                                   "mac_address":  "00:11:22:33:44:08"
+                                                               }
+                                                           ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Credentials known: satan:treason.",
+                                       "Treachery login test over nonstandard SSH port.",
+                                       "User: satan",
+                                       "Target: 6.6.6.6",
+                                       "Port: 666",
+                                       "Use proxychains SSH with explicit -p."
+                                   ],
+                      "answer":  "proxychains ssh satan@6.6.6.6 -p 666"
+                  },
+                  {
+                      "question":  [
+                                       "SSH password prompt:",
+                                       "Enter SSH Password"
+                                   ],
+                      "answer":  "treason",
+                      "show_previous_question":  true,
+                      "on_incorrect":  {
+                                           "messages":  [
+                                                            "Authentication failed. Restarting SSH attempt from previous step."
+                                                        ],
+                                           "rewind_steps":  1
+                                       }
+                  },
+                  {
+                      "question":  [
+                                       "Build final deep dynamic tunnel to Treachery from Kali.",
+                                       "SOCKS port: 1080",
+                                       "Jump chain: virgil@192.168.1.200,cleopatra@172.1.98.15,cerberus@10.1.10.3,pluto@10.0.0.254,phlegyas@255.255.255.9,epicurus@9.9.9.8:1,minotaur@222.222.222.187,geryon@3.3.3.3",
+                                       "Final hop: satan@6.6.6.6 on port 666"
+                                   ],
+                      "answer":  "ssh -N -D 1080 -J virgil@192.168.1.200,cleopatra@172.1.98.15,cerberus@10.1.10.3,pluto@10.0.0.254,phlegyas@255.255.255.9,epicurus@9.9.9.8:1,minotaur@222.222.222.187,geryon@3.3.3.3 satan@6.6.6.6 -p 666",
+                      "alternate_answers":  [
+                                                "ssh -N -D 1080 -J virgil@192.168.1.200,cleopatra@172.1.98.15,cerberus@10.1.10.3,pluto@10.0.0.254,phlegyas@255.255.255.9,epicurus@9.9.9.8:1,minotaur@222.222.222.187,geryon@3.3.3.3 satan@6.6.6.6 -p 666"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Treachery recon: scan target through proxychains with TCP connect mode, no DNS, and no host discovery.",
+                                       "Target: 6.6.6.6",
+                                       "Use sudo nmap command."
+                                   ],
+                      "answer":  "sudo proxychains nmap -sT -Pn -n 6.6.6.6",
+                      "alternate_answers":  [
+                                                "sudo proxychains nmap 6.6.6.6 -sT -Pn -n"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Hydra tasking: brute-force SSH on Treachery custom port using known username and local password list.",
+                                       "Target: 6.6.6.6",
+                                       "Port: 666",
+                                       "Username: satan",
+                                       "Password list: password_list.txt",
+                                       "Use proxychains hydra with -t 4 -V -f."
+                                   ],
+                      "answer":  "proxychains hydra -s 666 -t 4 -V -f -l satan -P password_list.txt ssh://6.6.6.6",
+                      "alternate_answers":  [
+                                                "proxychains hydra -l satan -P password_list.txt -s 666 -t 4 -V -f ssh://6.6.6.6"
+                                            ]
+                  },
+                  {
+                      "question":  [
+                                       "Final objective prep: build the Salvation recon scan through the full tunnel chain.",
+                                       "Target: 72.69.76.3",
+                                       "Use service/version detection with TCP connect scan, no host discovery, and no DNS via sudo proxychains nmap."
+                                   ],
+                      "answer":  "sudo proxychains nmap -sV -sT -Pn -n 72.69.76.3",
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Treachery complete. Salvation recon path established.",
+                                                          "You can now launch follow-on exploitation from this tunnel context."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "treachery_001",
+                                                                "ip":  "6.6.6.6",
+                                                                "hostname":  "09-treachery",
+                                                                "username":  "satan",
+                                                                "mac_address":  "00:11:22:33:44:09"
+                                                            }
+                                                        ]
+                                     },
+                      "alternate_answers":  [
+                                                "sudo proxychains nmap 72.69.76.3 -sV -sT -Pn -n"
+                                            ]
+                  }
+              ]
+}

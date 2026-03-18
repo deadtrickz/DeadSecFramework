@@ -1,0 +1,46 @@
+﻿TOOL: crackmapexec
+SOURCE_TYPE: kali_help
+SOURCE_URL: https://www.kali.org/tools/crackmapexec/
+FETCHED_UTC: 2026-03-11 15:30:31Z
+
+------------------------------------------------------------
+root@kali:~# crackmapexec -h
+usage: crackmapexec [-h] [-t THREADS] [--timeout TIMEOUT] [--jitter INTERVAL]
+                    [--darrell] [--verbose]
+                    {ldap,ftp,mssql,smb,winrm,rdp,ssh} ...
+
+      ______ .______           ___        ______  __  ___ .___  ___.      ___      .______    _______ ___   ___  _______   ______
+     /      ||   _  \         /   \      /      ||  |/  / |   \/   |     /   \     |   _  \  |   ____|\  \ /  / |   ____| /      |
+    |  ,----'|  |_)  |       /  ^  \    |  ,----'|  '  /  |  \  /  |    /  ^  \    |  |_)  | |  |__    \  V  /  |  |__   |  ,----'
+    |  |     |      /       /  /_\  \   |  |     |    <   |  |\/|  |   /  /_\  \   |   ___/  |   __|    >   <   |   __|  |  |
+    |  `----.|  |\  \----. /  _____  \  |  `----.|  .  \  |  |  |  |  /  _____  \  |  |      |  |____  /  .  \  |  |____ |  `----.
+     \______|| _| `._____|/__/     \__\  \______||__|\__\ |__|  |__| /__/     \__\ | _|      |_______|/__/ \__\ |_______| \______|
+
+                                                A swiss army knife for pentesting networks
+                                    Forged by @byt3bl33d3r and @mpgn_x64 using the powah of dank memes
+
+                                           Exclusive release for Porchetta Industries users
+                                                       https://porchetta.industries/
+
+                                                   Version : 5.4.0
+                                                   Codename: Indestructible G0thm0g
+
+options:
+  -h, --help            show this help message and exit
+  -t THREADS            set how many concurrent threads to use (default: 100)
+  --timeout TIMEOUT     max timeout in seconds of each thread (default: None)
+  --jitter INTERVAL     sets a random delay between each connection (default: None)
+  --darrell             give Darrell a hand
+  --verbose             enable verbose output
+
+protocols:
+  available protocols
+
+  {ldap,ftp,mssql,smb,winrm,rdp,ssh}
+    ldap                own stuff using LDAP
+    ftp                 own stuff using FTP
+    mssql               own stuff using MSSQL
+    smb                 own stuff using SMB
+    winrm               own stuff using WINRM
+    rdp                 own stuff using RDP
+    ssh                 own stuff using SSH

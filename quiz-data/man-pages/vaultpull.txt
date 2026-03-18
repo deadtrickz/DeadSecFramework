@@ -1,0 +1,21 @@
+﻿TOOL: vaultpull
+SOURCE_TYPE: fantasy_man
+SOURCE_URL: 
+FETCHED_UTC: 2026-03-11 15:30:43Z
+
+------------------------------------------------------------
+NAME
+    vaultpull - retrieve protected artifacts from remote vault storage
+
+SYNOPSIS
+    vaultpull --get <artifact_path> --out <local_directory>
+
+DESCRIPTION
+    vaultpull downloads a vault artifact and writes it to a local output directory.
+
+OPTIONS
+    --get <artifact_path>       Artifact path in vault storage.
+    --out <local_directory>     Local destination directory.
+
+EXAMPLE
+    vaultpull --get /vault/dragon-ledger.txt --out ./loot/

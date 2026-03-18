@@ -1,0 +1,43 @@
+﻿TOOL: lookupsid.py
+SOURCE_TYPE: kali_impacket_script
+SOURCE_URL: https://www.kali.org/tools/impacket-scripts/
+FETCHED_UTC: 2026-03-11 15:30:36Z
+
+------------------------------------------------------------
+root@kali:~# impacket-lookupsid -h
+Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies 
+
+usage: lookupsid.py [-h] [-debug] [-ts] [-target-ip ip address]
+                    [-port [destination port]] [-domain-sids]
+                    [-hashes LMHASH:NTHASH] [-no-pass] [-k]
+                    target [maxRid]
+
+positional arguments:
+  target                [[domain/]username[:password]@]<targetName or address>
+  maxRid                max Rid to check (default 4000)
+
+options:
+  -h, --help            show this help message and exit
+  -debug                Turn DEBUG output ON
+  -ts                   Adds timestamp to every logging output
+
+connection:
+  -target-ip ip address
+                        IP Address of the target machine. If omitted it will
+                        use whatever was specified as target. This is useful
+                        when target is the NetBIOS name and you cannot resolve
+                        it
+  -port [destination port]
+                        Destination port to connect to SMB Server
+  -domain-sids          Enumerate Domain SIDs (will likely forward requests to
+                        the DC)
+
+authentication:
+  -hashes LMHASH:NTHASH
+                        NTLM hashes, format is LMHASH:NTHASH
+  -no-pass              don't ask for password (useful when proxying through
+                        smbrelayx)
+  -k                    Use Kerberos authentication. Grabs credentials from
+                        ccache file (KRB5CCNAME) based on target parameters.
+                        If valid credentials cannot be found, it will use the
+                        ones specified in the command line

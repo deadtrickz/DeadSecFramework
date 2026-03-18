@@ -1,0 +1,266 @@
+﻿TOOL: kubectl
+SOURCE_TYPE: web_text
+SOURCE_URL: https://man.archlinux.org/man/kubectl.1.en
+FETCHED_UTC: 2026-03-11 15:30:36Z
+
+------------------------------------------------------------
+kubectl(1) — Arch manual pages
+        
+        
+        
+        
+        
+    
+    
+
+    
+    
+        
+            
+	Arch Linux
+
+	
+		
+			Home
+
+			Packages
+
+			Forums
+
+			Wiki
+
+			GitLab
+
+			Security
+
+			AUR
+
+			Download
+
+		
+	
+
+        
+        
+            
+            
+                
+
+    
+  
+    KUBERNETES(1)(kubernetes)
+
+    
+
+    KUBERNETES(1)(kubernetes)
+
+  
+
+Eric Paris Jan 2015
+
+NAME
+
+kubectl - kubectl controls the Kubernetes cluster manager
+
+SYNOPSIS
+
+kubectl [OPTIONS]
+
+DESCRIPTION
+
+kubectl controls the Kubernetes cluster manager.
+
+Find more information at:
+    https://kubernetes.io/docs/reference/kubectl/
+
+OPTIONS
+
+--as="" 	Username to impersonate for the
+    operation. User could be a regular user or a service account in a
+  namespace.
+
+--as-group=[] 	Group to impersonate for the operation, this
+    flag can be repeated to specify multiple groups.
+
+--as-uid="" 	UID to impersonate for the
+    operation.
+
+--as-user-extra=[] 	User extras to impersonate for the
+    operation, this flag can be repeated to specify multiple values for the same
+    key.
+
+--cache-dir="/home/username/.kube/cache" 	Default
+    cache directory
+
+--certificate-authority="" 	Path to a cert file
+    for the certificate authority
+
+--client-certificate="" 	Path to a client
+    certificate file for TLS
+
+--client-key="" 	Path to a client key file for
+    TLS
+
+--cluster="" 	The name of the kubeconfig cluster
+    to use
+
+--context="" 	The name of the kubeconfig context
+    to use
+
+--disable-compression=false 	If true, opt-out of response
+    compression for all requests to the server
+
+--insecure-skip-tls-verify=false 	If true, the server's
+    certificate will not be checked for validity. This will make your HTTPS
+    connections insecure
+
+--kubeconfig="" 	Path to the kubeconfig file to
+    use for CLI requests.
+
+--kuberc="" 	Path to the kuberc file to use for
+    preferences. This can be disabled by exporting KUBECTL_KUBERC=false feature
+    gate or turning off the feature KUBERC=off.
+
+--match-server-version=false 	Require server version to
+    match client version
+
+-n, --namespace="" 	If present, the
+    namespace scope for this CLI request
+
+--password="" 	Password for basic authentication
+    to the API server
+
+--profile="none" 	Name of profile to capture. One
+    of (none|cpu|heap|goroutine|threadcreate|block|mutex|trace)
+
+--profile-output="profile.pprof" 	Name of the
+    file to write the profile to
+
+--request-timeout="0" 	The length of time to wait
+    before giving up on a single server request. Non-zero values should contain
+    a corresponding time unit (e.g. 1s, 2m, 3h). A value of zero means don't
+    timeout requests.
+
+-s, --server="" 	The address and port of
+    the Kubernetes API server
+
+--tls-server-name="" 	Server name to use for
+    server certificate validation. If it is not provided, the hostname used to
+    contact the server is used
+
+--token="" 	Bearer token for authentication to
+    the API server
+
+--user="" 	The name of the kubeconfig user to
+  use
+
+--username="" 	Username for basic authentication
+    to the API server
+
+--version=false 	--version, --version=raw prints version
+    information and quits; --version=vX.Y.Z... sets the reported version
+
+--warnings-as-errors=false 	Treat warnings received from
+    the server as errors and exit with a non-zero exit code
+
+SEE   ALSO
+
+kubectl-alpha(1), kubectl-annotate(1),
+    kubectl-api-resources(1), kubectl-api-versions(1),
+    kubectl-apply(1), kubectl-attach(1), kubectl-auth(1),
+    kubectl-autoscale(1), kubectl-certificate(1),
+    kubectl-cluster-info(1), kubectl-completion(1),
+    kubectl-config(1), kubectl-cordon(1), kubectl-cp(1),
+    kubectl-create(1), kubectl-debug(1), kubectl-delete(1),
+    kubectl-describe(1), kubectl-diff(1), kubectl-drain(1),
+    kubectl-edit(1), kubectl-events(1), kubectl-exec(1),
+    kubectl-explain(1), kubectl-expose(1), kubectl-get(1),
+    kubectl-kustomize(1), kubectl-label(1),
+    kubectl-logs(1), kubectl-options(1), kubectl-patch(1),
+    kubectl-plugin(1), kubectl-port-forward(1),
+    kubectl-proxy(1), kubectl-replace(1),
+    kubectl-rollout(1), kubectl-run(1), kubectl-scale(1),
+    kubectl-set(1), kubectl-taint(1), kubectl-top(1),
+    kubectl-uncordon(1), kubectl-version(1),
+    kubectl-wait(1),
+
+HISTORY
+
+January 2015, Originally compiled by Eric Paris (eparis at redhat
+    dot com) based on the kubernetes source material, but hopefully they have
+    been automatically generated since!
+
+  
+    User
+
+    Manuals
+
+  
+
+            
+            
+                
+
+    
+    
+    
+
+    Package information:
+
+    
+        Package name:
+        extra/kubectl
+        Version:
+        1.35.2-1
+        Upstream:
+        https://kubernetes.io/
+        Licenses:
+        Apache-2.0
+        Manuals:
+        /listing/extra/kubectl/
+    
+
+    Table of contents
+    
+        
+        
+            NAME
+
+        
+            SYNOPSIS
+
+        
+            DESCRIPTION
+
+        
+            OPTIONS
+
+        
+            SEE ALSO
+
+        
+            HISTORY
+
+        
+        
+    
+
+    Other formats:
+        
+            txt, 
+        
+            raw
+        
+    
+
+            
+            
+        
+        
+            Powered by archmanweb,
+               using mandoc for the conversion of manual pages.
+            
+
+            The website is available under the terms of the GPL-3.0
+               license, except for the contents of the manual pages, which have their own license
+               specified in the corresponding Arch Linux package.

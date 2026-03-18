@@ -1,0 +1,22 @@
+﻿TOOL: runecast
+SOURCE_TYPE: fantasy_man
+SOURCE_URL: 
+FETCHED_UTC: 2026-03-11 15:30:42Z
+
+------------------------------------------------------------
+NAME
+    runecast - authenticate and enumerate remote vault services
+
+SYNOPSIS
+    runecast smb <host> -r <rune_token> --vaults
+
+DESCRIPTION
+    runecast uses rune-backed authentication to query remote SMB vault metadata.
+
+OPTIONS
+    smb                 SMB mode.
+    -r <rune_token>     Rune authentication token.
+    --vaults            Enumerate available vaults.
+
+EXAMPLE
+    runecast smb [IP|Hostname] -r [RuneToken] --vaults

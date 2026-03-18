@@ -1,0 +1,20 @@
+﻿TOOL: ip
+SOURCE_TYPE: linux_help
+SOURCE_URL: local_curated
+FETCHED_UTC: 2026-03-17 23:20:00Z
+
+NAME
+    ip - show or manipulate routing, network devices, policy routing and tunnels
+
+SYNOPSIS
+    ip a
+    ip addr show
+    ip route show
+
+DESCRIPTION
+    ip is the modern replacement for ifconfig/route for interface and routing tasks.
+
+EXAMPLES
+    ip a
+    ip addr show [Interface]
+    ip route show

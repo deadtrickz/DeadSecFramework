@@ -1,0 +1,22 @@
+﻿TOOL: wyrmscan
+SOURCE_TYPE: fantasy_man
+SOURCE_URL: 
+FETCHED_UTC: 2026-03-11 15:30:44Z
+
+------------------------------------------------------------
+NAME
+    wyrmscan - relay-gate network discovery scanner
+
+SYNOPSIS
+    wyrmscan -sn <subnet> -oA <output_name>
+
+DESCRIPTION
+    wyrmscan performs host discovery across a target subnet and writes normal,
+    grepable, and JSON output files.
+
+OPTIONS
+    -sn               Ping/host discovery mode.
+    -oA <name>        Write all output formats with basename <name>.
+
+EXAMPLE
+    wyrmscan -sn [IP]/[CIDR] -oA [OutputName]

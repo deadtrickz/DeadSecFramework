@@ -1,0 +1,27 @@
+﻿TOOL: psexec
+SOURCE_TYPE: manual_curated
+SOURCE_URL: https://learn.microsoft.com/en-us/sysinternals/downloads/psexec
+FETCHED_UTC: 2026-03-12 17:00:00Z
+
+------------------------------------------------------------
+NAME
+    PsExec - execute processes on remote Windows hosts
+
+SYNOPSIS
+    PsExec.exe \\[Target] [options] [command]
+
+DESCRIPTION
+    Runs a command remotely over SMB/service control style execution.
+
+COMMON OPTIONS
+    -u [User]        Username for remote auth.
+    -p [Password]    Password for remote auth.
+    -h               Run with elevated token when available.
+    -i               Run interactively (session context).
+    -s               Run as SYSTEM.
+    -d               Do not wait for process to terminate.
+
+EXAMPLES
+    PsExec.exe \\[IP] cmd /c whoami
+    PsExec.exe \\[Hostname] -u [Domain]\\[User] -p [Password] hostname
+    PsExec.exe \\[IP] -s cmd /c ipconfig

@@ -1,0 +1,25 @@
+﻿TOOL: mofcomp
+SOURCE_TYPE: manual_curated
+SOURCE_URL: https://learn.microsoft.com/en-us/windows/win32/wmisdk/mofcomp
+FETCHED_UTC: 2026-03-12 17:00:00Z
+
+------------------------------------------------------------
+NAME
+    mofcomp - compile a MOF file into the WMI repository
+
+SYNOPSIS
+    mofcomp [options] [mof_file]
+
+DESCRIPTION
+    Compiles Managed Object Format (.mof) definitions so classes/providers become available to WMI.
+
+COMMON OPTIONS
+    -N:[\\.\root\namespace]   Target namespace.
+    -check                      Syntax check only (no commit).
+    -class:createonly           Create classes only if they do not already exist.
+    -autorecover                Add file for autorecovery.
+
+EXAMPLES
+    mofcomp [PathToMof]
+    mofcomp -check [PathToMof]
+    mofcomp -N:[Namespace] [PathToMof]

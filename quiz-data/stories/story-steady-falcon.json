@@ -1,0 +1,93 @@
+{
+    "id":  "steady_falcon_001",
+    "name":  "Steady Falcon",
+    "description":  "Real-tool AD operation from foothold to lateral movement.",
+    "steps":  [
+                  {
+                      "question":  [
+                                       "Recon: Start from internal workstation and verify user context before any noisy actions.",
+                                       "Host: 10.50.24.19",
+                                       "Domain: EVIL",
+                                       "User: lab-user",
+                                       "Password: Passw0rd!",
+                                       "Run whoami with wmiexec.py."
+                                   ],
+                      "answer":  "wmiexec.py EVIL/lab-user:Passw0rd!@10.50.24.19 whoami",
+                      "alternate_answers":  [
+                                                "impacket-wmiexec EVIL/lab-user:Passw0rd!@10.50.24.19 whoami",
+                                                "wmiexec.py whoami EVIL/lab-user:Passw0rd!@10.50.24.19"
+                                            ],
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Initial AD foothold confirmed."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "steady_falcon_001",
+                                                                "ip":  "10.50.24.19",
+                                                                "hostname":  "ws-fin-19",
+                                                                "username":  "EVIL\\lab-user",
+                                                                "mac_address":  "00:50:56:50:24:19"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: You identified likely admin rights on a file server.",
+                                       "Target: 10.50.24.40",
+                                       "User: EVIL/ops-admin",
+                                       "Password: Winter2026!",
+                                       "Run hostname using psexec.py."
+                                   ],
+                      "answer":  "psexec.py EVIL/ops-admin:Winter2026!@10.50.24.40 hostname",
+                      "alternate_answers":  [
+                                                "impacket-psexec EVIL/ops-admin:Winter2026!@10.50.24.40 hostname",
+                                                "psexec.py hostname EVIL/ops-admin:Winter2026!@10.50.24.40"
+                                            ],
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Lateral move succeeded. Server beacon online."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "steady_falcon_001",
+                                                                "ip":  "10.50.24.40",
+                                                                "hostname":  "fs-app-40",
+                                                                "username":  "EVIL\\ops-admin",
+                                                                "mac_address":  "00:50:56:50:24:40"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: Validate SMB admin access scope from the new host. Ensure behavior includes authenticate against local SAM.",
+                                       "Run crackmapexec against 10.50.24.0/24",
+                                       "Use same credentials (EVIL/ops-admin:Winter2026!).",
+                                       "Enable local admin check."
+                                   ],
+                      "answer":  "crackmapexec smb 10.50.24.0/24 -u ops-admin -p Winter2026! -d EVIL --local-auth",
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Enumeration complete. Original user beacon is retired."
+                                                      ],
+                                         "beacon_remove":  [
+                                                               "ad01"
+                                                           ],
+                                         "beacon_update":  [
+                                                               {
+                                                                   "id":  "steady_falcon_001",
+                                                                   "ip":  "10.50.24.40",
+                                                                   "hostname":  "fs-app-40",
+                                                                   "username":  "EVIL\\ops-admin",
+                                                                   "mac_address":  "00:50:56:50:24:40"
+                                                               }
+                                                           ]
+                                     },
+                      "alternate_answers":  [
+                                                "crackmapexec smb 10.50.24.0/24 -u ops-admin -pWinter2026! -d EVIL --local-auth"
+                                            ]
+                  }
+              ]
+}

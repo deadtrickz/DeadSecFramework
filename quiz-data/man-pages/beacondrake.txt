@@ -1,0 +1,21 @@
+﻿TOOL: beacondrake
+SOURCE_TYPE: fantasy_man
+SOURCE_URL: 
+FETCHED_UTC: 2026-03-11 15:30:30Z
+
+------------------------------------------------------------
+NAME
+    beacondrake - drake agent command execution client
+
+SYNOPSIS
+    beacondrake <host>:<port> -x <command>
+
+DESCRIPTION
+    beacondrake connects to a drake relay and runs one command in the remote context.
+
+OPTIONS
+    <host>:<port>       Relay endpoint.
+    -x <command>        Command to execute remotely.
+
+EXAMPLE
+    beacondrake [IP]:[Port] -x [Command]

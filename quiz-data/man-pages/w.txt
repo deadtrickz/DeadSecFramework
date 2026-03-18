@@ -1,0 +1,16 @@
+﻿TOOL: w
+SOURCE_TYPE: linux_help
+SOURCE_URL: local_curated
+FETCHED_UTC: 2026-03-17 23:20:00Z
+
+NAME
+    w - show who is logged on and what they are doing
+
+SYNOPSIS
+    w
+
+DESCRIPTION
+    Displays logged-in users, source hosts, idle time, and active commands.
+
+EXAMPLES
+    w

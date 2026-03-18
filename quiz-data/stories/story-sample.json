@@ -1,0 +1,63 @@
+{
+    "id":  "sample_ops_001",
+    "name":  "Operation First Pivot",
+    "description":  "Linear intro story with beacon updates.",
+    "steps":  [
+                  {
+                      "question":  [
+                                       "Recon: Your first foothold is 10.40.8.12. Verify identity before moving lateral. Use smbexec.py.",
+                                       "Host: 10.40.8.12",
+                                       "Run whoami over smbexec using DOMAIN1/lab-user and pass P@ssw0rd123!"
+                                   ],
+                      "answer":  "smbexec.py DOMAIN1/lab-user:P@ssw0rd123!@10.40.8.12 whoami",
+                      "alternate_answers":  [
+                                                "impacket-smbexec DOMAIN1/lab-user:P@ssw0rd123!@10.40.8.12 whoami",
+                                                "smbexec.py whoami DOMAIN1/lab-user:P@ssw0rd123!@10.40.8.12"
+                                            ],
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Beacon established on initial foothold."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "b01",
+                                                                "ip":  "10.40.8.12",
+                                                                "hostname":  "ws-ops-12",
+                                                                "username":  "DOMAIN1\\\\lab-user",
+                                                                "mac_address":  "00:50:56:AA:10:12"
+                                                            }
+                                                        ]
+                                     }
+                  },
+                  {
+                      "question":  [
+                                       "Recon: You found admin creds in memory and can jump to a file server.",
+                                       "Target: 10.40.8.30",
+                                       "Run hostname via psexec.py with DOMAIN1/ops-admin and Winter2026!"
+                                   ],
+                      "answer":  "psexec.py DOMAIN1/ops-admin:Winter2026!@10.40.8.30 hostname",
+                      "on_correct":  {
+                                         "messages":  [
+                                                          "Lateral movement successful. New beacon online."
+                                                      ],
+                                         "beacon_add":  [
+                                                            {
+                                                                "id":  "b02",
+                                                                "ip":  "10.40.8.30",
+                                                                "hostname":  "fs-ops-30",
+                                                                "username":  "DOMAIN1\\\\ops-admin",
+                                                                "mac_address":  "00:50:56:AA:10:30"
+                                                            }
+                                                        ]
+                                     },
+                      "on_incorrect":  {
+                                           "messages":  [
+                                                            "Jump failed. Existing beacon remains active."
+                                                        ]
+                                       },
+                      "alternate_answers":  [
+                                                "psexec.py hostname DOMAIN1/ops-admin:Winter2026!@10.40.8.30"
+                                            ]
+                  }
+              ]
+}

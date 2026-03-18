@@ -1,0 +1,33 @@
+﻿TOOL: rubeus.exe
+SOURCE_TYPE: manual_curated
+SOURCE_URL: https://github.com/GhostPack/Rubeus
+FETCHED_UTC: 2026-03-12 17:00:00Z
+
+------------------------------------------------------------
+NAME
+    Rubeus - Kerberos abuse/interaction utility for Active Directory
+
+SYNOPSIS
+    Rubeus.exe [action] [options]
+
+DESCRIPTION
+    Executes Kerberos-focused actions such as ticket requests, roasting, monitor, and ticket import.
+
+COMMON ACTIONS
+    asktgt          Request a TGT.
+    kerberoast      Request service tickets for roasting.
+    asreproast      Request AS-REP roastable users.
+    ptt             Pass/import a ticket into current logon session.
+    purge           Purge tickets from current session.
+    triage          Show ticket summary.
+
+COMMON KERBEROAST OPTIONS
+    /outfile:[FilePath]    Write kerberoast output to file.
+    /rc4opsec              Use RC4-focused opsec mode for kerberoast workflow.
+                           This mode is commonly used when you explicitly want RC4 behavior.
+
+EXAMPLES
+    Rubeus.exe asktgt /user:[User] /domain:[Domain] /password:[Password]
+    Rubeus.exe kerberoast /domain:[Domain]
+    Rubeus.exe asreproast /domain:[Domain]
+    Rubeus.exe ptt /ticket:[Base64Kirbi]

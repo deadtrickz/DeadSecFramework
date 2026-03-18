@@ -1,0 +1,82 @@
+﻿{
+  "1": {
+    "ips": ["10.10.10.11", "10.10.10.12", "10.20.15.9", "172.16.10.15", "192.168.56.10"],
+    "domains": ["secret.local", "intra.local", "ad.lab", "hidden.local"],
+    "hostnames": ["dc01.secret.local", "web01.hidden.local", "sql01.secret.local"]
+  },
+  "2": {
+    "urls": ["http://10.10.10.11", "https://10.20.15.33", "http://172.16.10.23", "https://192.168.56.20", "http://intranet.secret.local"],
+    "dir_wordlists": ["/usr/share/wordlists/seclists/Discovery/Web-Content/dirsearch.txt", "/usr/share/seclists/Discovery/Web-Content/raft-small-directories.txt", "/usr/share/wordlists/dirb/common.txt"],
+    "ports": ["80", "443", "8080", "8443"]
+  },
+  "3": {
+    "users": ["svc-monitor", "svc-deploy", "ops-reader", "audit.svc", "svc-backup"],
+    "commands": ["whoami", "whoami /all", "systeminfo", "tasklist /svc", "netstat -ano"]
+  },
+  "4": {
+    "users": ["svc_sql", "svc-web", "svc-backup", "jane.doe-admin"],
+    "passwords": ["Winter2026!", "Spring2026!", "P@ssw0rd!2026", "N0tDefault!!"],
+    "ips": ["10.30.50.77", "10.40.60.88", "172.16.44.19", "192.168.88.34"]
+  },
+  "5": {
+    "domains": ["secret.local", "intra.local", "hq.internal", "ops.internal"],
+    "users": ["svc_sql", "svc-backup", "aaron.waters", "mike.ross"],
+    "ips": ["10.55.12.101", "172.20.9.44", "192.168.100.12"]
+  },
+  "6": {
+    "listener": ["https_443", "https_ops", "https_stage", "dns_beacon", "http_lownoise"],
+    "sleep": [2, 3, 5, 10, 15],
+    "jitter": ["20", "35", "45", "55", "70"],
+    "pipes": ["atlas.4455.9988.123456789012", "drake.8877.6655.443322110099", "mojo.1188.3322.998877665544"]
+  },
+  "7": {
+    "domains": ["secret.local", "intra.local", "ad.lab", "northwind.local"],
+    "users": ["svc_sql", "svc-build", "ops-reader", "jane.doe-admin"]
+  },
+  "8": {
+    "ips": ["10.10.224.88", "10.30.50.77", "172.16.10.23", "192.168.56.20"],
+    "hostnames": ["dc01.secret.local", "files01.ops.internal", "mail01.hq.internal"],
+    "service_name": ["winupdatehelper", "netdiagsvc", "adtelemetry", "dbsyncagent"]
+  },
+  "9": {
+    "linux_users": ["www-data", "backup", "jenkins", "redis", "gitlab-runner"],
+    "cron_paths": ["/etc/crontab", "/etc/cron.d/db-backup", "/var/spool/cron/root", "/etc/cron.d/monitoring"],
+    "mount_points": ["/mnt/backup", "/srv/backups", "/data", "/nfs"]
+  },
+  "10": {
+    "domains": ["secret.local", "ad.lab", "ops.internal"],
+    "realms": ["secret.LOCAL", "AD.LAB", "OPS.INTERNAL"],
+    "users": ["svc_sql", "svc-build", "aaron.waters", "samir.patel-admin"],
+    "ips": ["10.20.15.33", "172.16.44.19", "192.168.88.34"]
+  },
+  "11": {
+    "kube_namespaces": ["kube-system", "monitoring", "security", "platform", "payments"],
+    "pods": ["ingress-nginx-controller-5f8d9", "grafana-6f8c5d7f9b-p2lmn", "payments-worker-6db9f8d67f-tw4pj", "redis-master-0"],
+    "container_images": ["nginx:1.27", "busybox:1.36", "debian:12", "python:3.12-slim"]
+  },
+  "12": {
+    "users": ["svc-backup", "svc_sql", "svc-web", "ops-reader", "audit.svc"],
+    "passwords": ["Winter2026!", "Spring2026!", "BlueTeam123!", "S3rv1ce-Acc0unt!"],
+    "hashes": ["8846f7eaee8fb117ad06bdd830b7586c", "a906449d5769fa7361d7ecc6aa3f6d28", "31d6cfe0d16ae931b73c59d7e0c089c0"],
+    "dir_wordlists": ["/usr/share/wordlists/rockyou.txt", "/usr/share/wordlists/seclists/Passwords/Common-Credentials/10k-most-common.txt", "/usr/share/seclists/Usernames/top-usernames-shortlist.txt"]
+  },
+  "13": {
+    "ips": ["10.10.10.25", "10.40.60.88", "172.20.9.45", "192.168.120.8"],
+    "hostnames": ["jump01.hidden.local", "vpn01.hq.internal", "files01.ops.internal"],
+    "ports": ["1080", "443", "8443", "9001", "5985"]
+  },
+  "14": {
+    "domains": ["secret.local", "ad.lab", "hidden.local", "northwind.local"],
+    "realms": ["secret.LOCAL", "AD.LAB", "hidden.LOCAL", "NORTHWIND.LOCAL"],
+    "users": ["svc_sql", "svc-backup", "jane.doe-admin", "samir.patel-admin"],
+    "hashes": ["8846f7eaee8fb117ad06bdd830b7586c", "a906449d5769fa7361d7ecc6aa3f6d28", "bcbf5c759f17f6e39bd9f1c8b9f3972f"],
+    "ips": ["10.20.15.33", "10.55.12.101", "172.16.10.23", "192.168.88.34"]
+  },
+  "99": {
+    "fantasy_hosts": ["10.77.13.11", "10.77.13.28", "10.77.13.44", "10.77.13.61", "10.77.13.90", "10.88.5.19"],
+    "fantasy_ports": ["31337", "35555", "47000", "55055", "60222"],
+    "subnets": ["10.77.13.0/24", "10.77.20.0/24", "172.18.12.0/24", "192.168.77.0/24"],
+    "glyphs": ["glyph://north/star", "glyph://north/comet", "glyph://west/signal", "glyph://vault/obsidian"],
+    "runes": ["rune-of-binding", "rune-of-shadow", "rune-of-warding", "rune-of-veil"]
+  }
+}

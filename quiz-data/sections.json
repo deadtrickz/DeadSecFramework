@@ -1,0 +1,77 @@
+[
+  {
+    "id": "1",
+    "name": "Recon/Discovery",
+    "file": "questions/recon-discovery.json"
+  },
+  {
+    "id": "2",
+    "name": "Web Enumeration",
+    "file": "questions/web-enumeration.json"
+  },
+  {
+    "id": "3",
+    "name": "Situational Awareness",
+    "file": "questions/situational-awareness.json"
+  },
+  {
+    "id": "4",
+    "name": "Crackmapexec",
+    "file": "questions/crackmapexec.json"
+  },
+  {
+    "id": "5",
+    "name": "Psexec",
+    "file": "questions/psexec.json"
+  },
+  {
+    "id": "6",
+    "name": "Cobalt Strike",
+    "file": "questions/cobalt-strike.json"
+  },
+  {
+    "id": "7",
+    "name": "Ldapsearch",
+    "file": "questions/ldapsearch.json"
+  },
+  {
+    "id": "8",
+    "name": "WMIC",
+    "file": "questions/wmic.json"
+  },
+  {
+    "id": "9",
+    "name": "Linux PrivEsc",
+    "file": "questions/linux-privesc.json"
+  },
+  {
+    "id": "10",
+    "name": "AD Ops",
+    "file": "questions/ad-ops.json"
+  },
+  {
+    "id": "11",
+    "name": "Containers/K8s",
+    "file": "questions/containers-k8s.json"
+  },
+  {
+    "id": "12",
+    "name": "Password Attacks",
+    "file": "questions/password-attacks.json"
+  },
+  {
+    "id": "13",
+    "name": "Pivoting/Tunneling",
+    "file": "questions/pivoting-tunneling.json"
+  },
+  {
+    "id": "14",
+    "name": "AD/Kerberos Advanced",
+    "file": "questions/ad-kerberos-advanced.json"
+  },
+  {
+    "id": "99",
+    "name": "Fantasy",
+    "file": "questions/fantasy.json"
+  }
+]
