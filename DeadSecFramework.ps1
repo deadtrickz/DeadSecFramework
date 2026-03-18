@@ -32,12 +32,9 @@ $SectionsPath = Join-Path $QuizDataDir 'sections.json'
 $VariablesPath= Join-Path $QuizDataDir 'variables.json'
 $BiasPath     = Join-Path $QuizDataDir 'section-variable-bias.json'
 $StoriesDir   = Join-Path $QuizDataDir 'stories'
-if(-not (Test-Path $StoriesDir)){ $StoriesDir = Join-Path (Join-Path $ProjectRoot 'vs-exe-launcher') 'Stories' }
 $QuestionsDir = Join-Path $QuizDataDir 'questions'
-if(-not (Test-Path $QuestionsDir)){ $QuestionsDir = Join-Path $ProjectRoot 'Questions' }
 $ManPagesDir  = Join-Path $QuizDataDir 'man-pages'
-if(-not (Test-Path $ManPagesDir)){ $ManPagesDir = Join-Path $ProjectRoot 'Manpages' }
-$NotesRootDir = Join-Path $ProjectRoot 'notes'
+$NotesRootDir = Join-Path $QuizDataDir 'notes'
 $NotesQuestionsDir = Join-Path $NotesRootDir 'questions'
 $NotesStoriesDir = Join-Path $NotesRootDir 'stories'
 function Read-Json([string]$Path){
@@ -910,6 +907,8 @@ Write-Terminal -lines @(
 })
 
 [void]$form.ShowDialog()
+
+
 
 
 

@@ -5,8 +5,7 @@ $script:Root = Split-Path -Parent $MyInvocation.MyCommand.Path
 if (-not $script:Root) { $script:Root = (Get-Location).Path }
 $script:QDir = Join-Path $script:Root 'quiz-data\questions'
 $script:SDir = Join-Path $script:Root 'quiz-data\stories'
-if (-not (Test-Path -LiteralPath $script:SDir)) { $script:SDir = Join-Path $script:Root 'vs-exe-launcher\Stories' }
-$script:MDir = if (Test-Path -LiteralPath (Join-Path $script:Root 'Manpages')) { Join-Path $script:Root 'Manpages' } else { Join-Path $script:Root 'quiz-data\man-pages' }
+$script:MDir = Join-Path $script:Root 'quiz-data\man-pages'
 
 $script:QItems = @()
 $script:QFile = $null
