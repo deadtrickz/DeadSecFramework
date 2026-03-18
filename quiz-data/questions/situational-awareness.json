@@ -1,0 +1,33 @@
+[
+  {
+    "question": [
+      "List all running processes in verbose format on Windows."
+    ],
+    "answer": "tasklist /v"
+  },
+  {
+    "question": [
+      "Show active network connections with process IDs."
+    ],
+    "answer": "netstat -ano"
+  },
+  {
+    "question": [
+      "Display detailed local user and group membership for this user.",
+      "Username = <user>"
+    ],
+    "answer": "net user <user>"
+  },
+  {
+    "question": [
+      "Show host identity and privileges for the current context."
+    ],
+    "answer": "whoami /all"
+  },
+  {
+    "question": [
+      "Show system version and patch/build details."
+    ],
+    "answer": "systeminfo"
+  }
+]

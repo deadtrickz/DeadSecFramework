@@ -1,0 +1,56 @@
+[
+  {
+    "question": [
+      "what feroxbuster command will do a default scan of a target?",
+      "IP Address = <IP>"
+    ],
+    "answer": "feroxbuster <IP>"
+  },
+  {
+    "question": [
+      "Use Gobuster dir mode with a wordlist against a URL.",
+      "URL = <url>",
+      "Wordlist = <dirw>"
+    ],
+    "answer": "gobuster dir -u <url> -w <dirw>",
+    "alternate_answers": [
+      "gobuster dir -w <dirw> -u <url>"
+    ]
+  },
+  {
+    "question": [
+      "Run Nikto against a target URL.",
+      "URL = <url>"
+    ],
+    "answer": "nikto -h <url>",
+    "alternate_answers": [
+      "nikto -host <url>"
+    ]
+  },
+  {
+    "question": [
+      "Run WhatWeb against a target URL.",
+      "URL = <url>"
+    ],
+    "answer": "whatweb <url>"
+  },
+  {
+    "question": [
+      "Use ffuf for directory fuzzing with status code filtering.",
+      "URL = <url>",
+      "Wordlist = <dirw>",
+      "Filter code = 404"
+    ],
+    "answer": "ffuf -u <url>/FUZZ -w <dirw> -fc 404",
+    "alternate_answers": [
+      "ffuf -w <dirw> -u <url>/FUZZ -fc 404"
+    ]
+  },
+  {
+    "question": [
+      "Use curl to fetch only HTTP response headers.",
+      "URL = <url>"
+    ],
+    "answer": "curl -I <url>"
+  }
+]

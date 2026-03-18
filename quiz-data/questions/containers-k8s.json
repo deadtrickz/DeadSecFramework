@@ -1,0 +1,64 @@
+[
+  {
+    "question": [
+      "List pods in this namespace.",
+      "Namespace = <namespace>"
+    ],
+    "answer": "kubectl get pods -n <namespace>",
+    "alternate_answers": [
+      "kubectl -n <namespace> get pods"
+    ]
+  },
+  {
+    "question": [
+      "Describe this pod to inspect env vars, volumes, and events.",
+      "Namespace = <namespace>",
+      "Pod = <pod>"
+    ],
+    "answer": "kubectl describe pod <pod> -n <namespace>",
+    "alternate_answers": [
+      "kubectl -n <namespace> describe pod <pod>"
+    ]
+  },
+  {
+    "question": [
+      "Stream logs from this pod in this namespace.",
+      "Namespace = <namespace>",
+      "Pod = <pod>"
+    ],
+    "answer": "kubectl logs <pod> -n <namespace>",
+    "alternate_answers": [
+      "kubectl -n <namespace> logs <pod>"
+    ]
+  },
+  {
+    "question": [
+      "Open an interactive shell in this pod's first container.",
+      "Namespace = <namespace>",
+      "Pod = <pod>"
+    ],
+    "answer": "kubectl exec -it <pod> -n <namespace> -- /bin/sh",
+    "alternate_answers": [
+      "kubectl -n <namespace> exec -it <pod> -- /bin/sh"
+    ]
+  },
+  {
+    "question": [
+      "List all container images running in all namespaces."
+    ],
+    "answer": "kubectl get pods -A -o jsonpath=\"{..image}\"",
+    "alternate_answers": [
+      "kubectl get pods --all-namespaces -o jsonpath=\"{..image}\""
+    ]
+  },
+  {
+    "question": [
+      "Run a temporary container using this image and remove it after exit.",
+      "Image = <image>"
+    ],
+    "answer": "docker run --rm -it <image> /bin/sh",
+    "alternate_answers": [
+      "docker run -it --rm <image> /bin/sh"
+    ]
+  }
+]

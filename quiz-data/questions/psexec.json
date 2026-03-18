@@ -1,0 +1,45 @@
+[
+  {
+    "question": [
+      "What psexec command will execute whois on a remote Windows target?",
+      "IP Address = <IP>",
+      "Domain = <domain>",
+      "Username = <user>",
+      "Password = <pass>"
+    ],
+    "answer": "psexec \\\\<IP> -u <domain>\\<user> -p <pass> cmd.exe /c whois"
+  },
+  {
+    "question": [
+      "Run Impacket psexec with username/password credentials.",
+      "Target IP = <IP>",
+      "Domain = <domain>",
+      "Username = <user>",
+      "Password = <pass>"
+    ],
+    "answer": "psexec.py <domain>/<user>:<pass>@<IP>"
+  },
+  {
+    "question": [
+      "Run Impacket wmiexec with hash authentication.",
+      "Target IP = <IP>",
+      "Domain = <domain>",
+      "Username = <user>",
+      "NTLM hash = <hash>"
+    ],
+    "answer": "wmiexec.py -hashes :<hash> <domain>/<user>@<IP>",
+    "alternate_answers": [
+      "wmiexec.py <domain>/<user>@<IP> -hashes :<hash>"
+    ]
+  },
+  {
+    "question": [
+      "Run Impacket smbexec with username/password credentials.",
+      "Target IP = <IP>",
+      "Domain = <domain>",
+      "Username = <user>",
+      "Password = <pass>"
+    ],
+    "answer": "smbexec.py <domain>/<user>:<pass>@<IP>"
+  }
+]

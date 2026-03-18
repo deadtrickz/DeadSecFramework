@@ -1,0 +1,90 @@
+﻿[
+    {
+        "question":  [
+                         "What crackmapexec command will enumerate SMB shares with the following information?",
+                         "IP Address = <IP>",
+                         "Username = <user>",
+                         "Password = <pass>"
+                     ],
+        "answer":  "crackmapexec smb <IP> -u <user> -p <pass> --shares",
+        "alternate_answers":  [
+                                  "crackmapexec smb -u <user> -p <pass> --shares <IP>",
+                                  "crackmapexec smb -u <user> -p <pass> <IP> --shares"
+                              ]
+    },
+    {
+        "question":  [
+                         "What crackmapexec command will enumerate smb users on a remote Windows target?",
+                         "IP Address = <IP>",
+                         "Username = <user>",
+                         "Password = <pass>"
+                     ],
+        "answer":  "crackmapexec smb <IP> -u <user> -p <pass> --users",
+        "alternate_answers":  [
+                                  "crackmapexec smb -u <user> -p <pass> --users <IP>",
+                                  "crackmapexec smb -u <user> -p <pass> <IP> --users"
+                              ]
+    },
+    {
+        "question":  [
+                         "What crackmapexec command will authenticate, using smb, and execute the command \"net user\" on a remote Windows target?",
+                         "IP Address = <IP>",
+                         "Username = <user>",
+                         "Password = <pass>"
+                     ],
+        "answer":  "crackmapexec smb <IP> -u <user> -p <pass> -x \"net user\"",
+        "alternate_answers":  [
+                                  "crackmapexec smb -u <user> -p <pass> <IP> -x \"net user\""
+                              ]
+    },
+    {
+        "question":  [
+                         "What crackmapexec command will authenticate, using smb, on a remote Windows target?",
+                         "IP address = <IP>",
+                         "Username = <user>",
+                         "Hash = <hash>"
+        ],
+        "answer":  "crackmapexec smb <IP> -u <user> -H <hash>",
+        "alternate_answers":  [
+                                  "crackmapexec smb -u <user> -H <hash> <IP>"
+                              ]
+    },
+    {
+        "question":  [
+                         "Use crackmapexec over WinRM with password auth.",
+                         "IP Address = <IP>",
+                         "Username = <user>",
+                         "Password = <pass>"
+                     ],
+        "answer":  "crackmapexec winrm <IP> -u <user> -p <pass>",
+        "alternate_answers":  [
+                                  "crackmapexec winrm -u <user> -p <pass> <IP>"
+                              ]
+    },
+    {
+        "question":  [
+                         "Use crackmapexec SMB to enumerate logged on users.",
+                         "IP Address = <IP>",
+                         "Username = <user>",
+                         "Password = <pass>"
+                     ],
+        "answer":  "crackmapexec smb <IP> -u <user> -p <pass> --loggedon-users",
+        "alternate_answers":  [
+                                  "crackmapexec smb -u <user> -p <pass> --loggedon-users <IP>",
+                                  "crackmapexec smb -u <user> -p <pass> <IP> --loggedon-users"
+                              ]
+    },
+    {
+        "question":  [
+                         "Use crackmapexec MSSQL with username/password credentials.",
+                         "IP Address = <IP>",
+                         "Username = <user>",
+                         "Password = <pass>"
+                     ],
+        "answer":  "crackmapexec mssql <IP> -u <user> -p <pass>",
+        "alternate_answers":  [
+                                  "crackmapexec mssql -u <user> -p <pass> <IP>"
+                              ]
+    }
+]
+

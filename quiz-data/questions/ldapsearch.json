@@ -1,0 +1,24 @@
+[
+  {
+    "question": [
+      "Run an anonymous LDAP query for users.",
+      "Server = ldap://<domain>",
+      "Base DN = dc=<domain>,dc=local"
+    ],
+    "answer": "ldapsearch -x -H ldap://<domain> -b \"dc=<domain>,dc=local\" \"(objectClass=user)\"",
+    "alternate_answers": [
+      "ldapsearch -x -b \"dc=<domain>,dc=local\" -H ldap://<domain> \"(objectClass=user)\""
+    ]
+  },
+  {
+    "question": [
+      "Query one user by sAMAccountName and print memberOf plus pwdLastSet.",
+      "Server = ldap://<domain>",
+      "sAMAccountName = <user>"
+    ],
+    "answer": "ldapsearch -x -H ldap://<domain> -b \"dc=<domain>,dc=local\" \"(sAMAccountName=<user>)\" memberOf pwdLastSet",
+    "alternate_answers": [
+      "ldapsearch -x -b \"dc=<domain>,dc=local\" -H ldap://<domain> \"(sAMAccountName=<user>)\" memberOf pwdLastSet"
+    ]
+  }
+]

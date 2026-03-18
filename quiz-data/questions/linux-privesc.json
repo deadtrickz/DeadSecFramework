@@ -1,0 +1,56 @@
+[
+  {
+    "question": [
+      "List cron jobs on a Linux target by checking this path.",
+      "Path = <cron_path>"
+    ],
+    "answer": "cat <cron_path>",
+    "alternate_answers": [
+      "less <cron_path>"
+    ]
+  },
+  {
+    "question": [
+      "Find SUID binaries across the filesystem while hiding permission-denied errors."
+    ],
+    "answer": "find / -perm -4000 -type f 2>/dev/null",
+    "alternate_answers": [
+      "find / -type f -perm -4000 2>/dev/null"
+    ]
+  },
+  {
+    "question": [
+      "Check sudo permissions for the current user."
+    ],
+    "answer": "sudo -l"
+  },
+  {
+    "question": [
+      "Search for world-writable directories while hiding errors."
+    ],
+    "answer": "find / -type d -perm -0002 2>/dev/null",
+    "alternate_answers": [
+      "find / -perm -0002 -type d 2>/dev/null"
+    ]
+  },
+  {
+    "question": [
+      "Show mounted filesystems and filter for this mount point.",
+      "Mount = <mount>"
+    ],
+    "answer": "mount | grep <mount>",
+    "alternate_answers": [
+      "cat /proc/mounts | grep <mount>"
+    ]
+  },
+  {
+    "question": [
+      "Display all processes for this Linux user.",
+      "User = <linux_user>"
+    ],
+    "answer": "ps -u <linux_user> -f",
+    "alternate_answers": [
+      "ps -f -u <linux_user>"
+    ]
+  }
+]

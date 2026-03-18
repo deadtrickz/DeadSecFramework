@@ -1,0 +1,63 @@
+[
+  {
+    "question": [
+      "Create a local SSH port forward for RDP through a jump host.",
+      "Jump host IP = <IP>",
+      "Username = <user>",
+      "Local port = 13389",
+      "Remote target = 127.0.0.1:3389"
+    ],
+    "answer": "ssh -L 13389:127.0.0.1:3389 <user>@<IP>"
+  },
+  {
+    "question": [
+      "Create a SOCKS proxy via SSH dynamic forwarding.",
+      "Jump host IP = <IP>",
+      "Username = <user>",
+      "SOCKS port = 1080"
+    ],
+    "answer": "ssh -D 1080 <user>@<IP>"
+  },
+  {
+    "question": [
+      "Start a Chisel server that supports reverse tunneling.",
+      "Listen port = <port>"
+    ],
+    "answer": "chisel server -p <port> --reverse",
+    "alternate_answers": [
+      "chisel server --reverse -p <port>"
+    ]
+  },
+  {
+    "question": [
+      "Start a Chisel client and expose a reverse SOCKS tunnel.",
+      "Server IP = <IP>",
+      "Server port = <port>"
+    ],
+    "answer": "chisel client <IP>:<port> R:1080:socks"
+  },
+  {
+    "question": [
+      "Use Proxychains to run an Nmap TCP connect scan through a proxy. Remember that ping and proxies do not mix.",
+      "Target IP = <IP>",
+      "Ports = 80,443"
+    ],
+    "answer": "proxychains nmap -sT -Pn -p80,443 <IP>",
+    "alternate_answers": [
+      "proxychains nmap -Pn -sT -p80,443 <IP>",
+      "proxychains nmap -sT -Pn -p 80,443 <IP>"
+    ]
+  },
+  {
+    "question": [
+      "Create a background local tunnel with SSH (no remote command).",
+      "Jump host = <hostname>",
+      "Username = <user>",
+      "Forward local 8443 to remote 127.0.0.1:443"
+    ],
+    "answer": "ssh -f -N -L 8443:127.0.0.1:443 <user>@<hostname>",
+    "alternate_answers": [
+      "ssh -N -f -L 8443:127.0.0.1:443 <user>@<hostname>"
+    ]
+  }
+]
